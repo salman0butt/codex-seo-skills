@@ -94,3 +94,12 @@ If DataForSEO MCP tools are available, use `serp_organic_live_advanced` for real
 | URL unreachable (DNS failure, connection refused) | Report the error clearly. Do not guess page content. Suggest the user verify the URL and try again. |
 | Page requires authentication (401/403) | Report that the page is behind authentication. Suggest the user provide the rendered HTML directly or a publicly accessible URL. |
 | JavaScript-rendered content (empty body in HTML) | Note that key content may be rendered client-side. Analyze the available HTML and flag that results may be incomplete. Suggest using a browser-rendered snapshot if available. |
+
+
+## Bounded first-pass evidence (Codex v0.3)
+
+For an explicitly requested, read-only check of **one public page**, use the packaged CLI:
+
+`"${HOME}/.agents/skills/seo/scripts/codex-seo" run quick_audit.py https://example.com/ --markdown`
+
+The output is raw HTML evidence only, has no aggregate SEO score, makes one bounded GET (plus redirects), and does not fetch private API or ranking data. Escalate to rendered-browser audits only with supported tools, and never infer full-site health from this first pass.

@@ -26,10 +26,10 @@ flowchart TD
 
 ## Coverage and meanings
 
-- **523** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
+- **526** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
 - **30** core skill manifests; **19** specialist agent guides; **0** guide-only specialties.
 - **9** optional extension bundles, **7** unique additional skill names that can be registered.
-- **62** Python scripts and **73** Python test/fixture sources; **802** explicit graph relationships.
+- **63** Python scripts and **74** Python test/fixture sources; **808** explicit graph relationships.
 - **Launcher-dispatches-to** and **runtime-allowlisted-script** represent source-verified CLI plumbing; they do not assert dependencies are installed. **Static-python-import** means an actual import of a local Python module. **Owns-support-file** means packaged under that skill folder. **Mentions-script** means a literal script filename appears in instructions (not a verified invocation). **Test-source-mentions-script** does not establish test coverage.
 - Claude agent guides are reference checklists unless the running Codex harness supports delegation; agent-only guides do not represent installable skills.
 
@@ -37,7 +37,7 @@ flowchart TD
 
 | Codex skill | Agent guide | Script names mentioned in skill/guide | Support files |
 |---|---|---|---:|
-| [`skills/get-started/SKILL.md`](../skills/get-started/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 1 |
+| [`skills/get-started/SKILL.md`](../skills/get-started/SKILL.md) | — (skill-only) | `quick_audit.py` | 1 |
 | [`skills/seo/SKILL.md`](../skills/seo/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `install_codex.py`, `matomo_auth.py`, `seo_updates.py` | 39 |
 | [`skills/seo-agentic/SKILL.md`](../skills/seo-agentic/SKILL.md) | [`agents/seo-agentic.md`](../agents/seo-agentic.md) | `agent_ux_check.py`, `agentic_check.py`, `agentic_fix.py`, `lighthouse_agentic.py`, `render_page.py`, `ucp_check.py` | 8 |
 | [`skills/seo-audit/SKILL.md`](../skills/seo-audit/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `matomo_auth.py`, `render_page.py`, `seo_updates.py` | 2 |
@@ -58,7 +58,7 @@ flowchart TD
 | [`skills/seo-images/SKILL.md`](../skills/seo-images/SKILL.md) | — (skill-only) | `iptc_ai_label.py`, `parse_html.py` | 2 |
 | [`skills/seo-local/SKILL.md`](../skills/seo-local/SKILL.md) | [`agents/seo-local.md`](../agents/seo-local.md) | `render_page.py`, `url_safety.py` | 2 |
 | [`skills/seo-maps/SKILL.md`](../skills/seo-maps/SKILL.md) | [`agents/seo-maps.md`](../agents/seo-maps.md) | — (content/API/tool-based) | 2 |
-| [`skills/seo-page/SKILL.md`](../skills/seo-page/SKILL.md) | — (skill-only) | `metadata_template.py` | 2 |
+| [`skills/seo-page/SKILL.md`](../skills/seo-page/SKILL.md) | — (skill-only) | `metadata_template.py`, `quick_audit.py` | 2 |
 | [`skills/seo-performance/SKILL.md`](../skills/seo-performance/SKILL.md) | [`agents/seo-performance.md`](../agents/seo-performance.md) | `crux_history.py`, `pagespeed_check.py`, `render_page.py` | 1 |
 | [`skills/seo-plan/SKILL.md`](../skills/seo-plan/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 8 |
 | [`skills/seo-programmatic/SKILL.md`](../skills/seo-programmatic/SKILL.md) | — (skill-only) | `metadata_template.py` | 2 |
@@ -138,6 +138,7 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/parse_html.py`](../scripts/parse_html.py) | `seo-ecommerce`, `seo-sxo`, `seo-drift`, `seo-ecommerce`, `seo-images`, `seo-schema`, `seo-sxo` | `test_agent_untrusted_content.py`, `test_drift_portability.py`, `test_fetch_page_decoding.py`, `test_lazy_detection.py`, `test_parse_html_rel_case.py` |
 | [`scripts/portability_check.py`](../scripts/portability_check.py) | — (utility/internal/unreferenced) | `test_portability.py` |
 | [`scripts/preload_check.py`](../scripts/preload_check.py) | — (utility/internal/unreferenced) | `test_fetch_page_decoding.py`, `test_technical_depth.py` |
+| [`scripts/quick_audit.py`](../scripts/quick_audit.py) | `get-started`, `seo-page` | `test_quick_audit.py` |
 | [`scripts/release_sign.py`](../scripts/release_sign.py) | — (utility/internal/unreferenced) | — |
 | [`scripts/render_page.py`](../scripts/render_page.py) | `seo-agentic`, `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-performance`, `seo-schema`, `seo-sxo`, `seo-technical`, `seo-visual`, `seo-audit`, `seo-cluster`, `seo-ecommerce`, `seo-sxo`, `seo-technical` | `test_agent_untrusted_content.py`, `test_agentic.py`, `test_audit_instructions.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_phase_j_executable.py`, `test_render_page.py`, `test_runtime.py` |
 | [`scripts/runtime.py`](../scripts/runtime.py) | — (utility/internal/unreferenced) | `test_agentic.py`, `test_codex_runtime_contract.py`, `test_hosted_plugin_layout.py`, `test_manual_install_layout.py`, `test_runtime.py`, `test_runtime_installers.py`, `test_schema_hook_detection.py` |

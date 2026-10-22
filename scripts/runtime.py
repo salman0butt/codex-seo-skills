@@ -42,7 +42,7 @@ ALLOWED_CORE_SCRIPTS = frozenset(
         "keywordseverywhere_api.py",
         "lcp_subparts.py", "lighthouse_agentic.py", "matomo_auth.py", "matomo_report.py", "metadata_template.py",
         "moz_api.py", "nlp_analyze.py", "pagespeed_check.py",
-        "parasite_risk.py", "parse_html.py", "preload_check.py", "render_page.py",
+        "parasite_risk.py", "parse_html.py", "preload_check.py", "quick_audit.py", "render_page.py",
         "portability_check.py", "consistency_check.py",
         "schema_ecommerce_validate.py", "schema_generate.py", "seo_updates.py",
         "sitemap_discovery.py", "sync_flow.py", "ucp_check.py", "unlighthouse_run.py",

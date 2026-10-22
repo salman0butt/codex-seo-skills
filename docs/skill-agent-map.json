@@ -3,29 +3,41 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 509,
-    "core_skills": 26,
+    "total_repo_files": 522,
+    "core_skills": 30,
     "specialist_guides": 19,
-    "agent_only_guides": 2,
+    "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
     "python_scripts": 62,
-    "test_python_files": 71,
-    "graph_edges": 763
+    "test_python_files": 73,
+    "graph_edges": 802
   },
-  "agent_only": [
-    {
-      "name": "seo-performance",
-      "path": "agents/seo-performance.md",
-      "codex_skill": false
-    },
-    {
-      "name": "seo-visual",
-      "path": "agents/seo-visual.md",
-      "codex_skill": false
-    }
-  ],
+  "agent_only": [],
   "skills": [
+    {
+      "name": "get-started",
+      "manifest": "skills/get-started/SKILL.md",
+      "agent_guide": null,
+      "reference_guide_mirror": null,
+      "mentioned_scripts_skill": [],
+      "mentioned_scripts_agent": [],
+      "related_skill_mentions": [
+        "seo-audit",
+        "seo-content",
+        "seo-geo",
+        "seo-google",
+        "seo-handoff",
+        "seo-local",
+        "seo-performance",
+        "seo-schema",
+        "seo-technical",
+        "seo-visual"
+      ],
+      "owned_support_files": [
+        "skills/get-started/agents/openai.yaml"
+      ]
+    },
     {
       "name": "seo",
       "manifest": "skills/seo/SKILL.md",
@@ -42,9 +54,14 @@
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [
+        "seo-audit",
         "seo-geo",
+        "seo-handoff",
         "seo-local",
-        "seo-technical"
+        "seo-performance",
+        "seo-sxo",
+        "seo-technical",
+        "seo-visual"
       ],
       "owned_support_files": [
         "skills/seo/LICENSE.txt",
@@ -135,7 +152,10 @@
         "seo_updates.py"
       ],
       "mentioned_scripts_agent": [],
-      "related_skill_mentions": [],
+      "related_skill_mentions": [
+        "seo-performance",
+        "seo-visual"
+      ],
       "owned_support_files": [
         "skills/seo-audit/LICENSE.txt",
         "skills/seo-audit/agents/openai.yaml"
@@ -455,6 +475,18 @@
       ]
     },
     {
+      "name": "seo-handoff",
+      "manifest": "skills/seo-handoff/SKILL.md",
+      "agent_guide": null,
+      "reference_guide_mirror": null,
+      "mentioned_scripts_skill": [],
+      "mentioned_scripts_agent": [],
+      "related_skill_mentions": [],
+      "owned_support_files": [
+        "skills/seo-handoff/agents/openai.yaml"
+      ]
+    },
+    {
       "name": "seo-hreflang",
       "manifest": "skills/seo-hreflang/SKILL.md",
       "agent_guide": null,
@@ -561,6 +593,24 @@
       "owned_support_files": [
         "skills/seo-page/LICENSE.txt",
         "skills/seo-page/agents/openai.yaml"
+      ]
+    },
+    {
+      "name": "seo-performance",
+      "manifest": "skills/seo-performance/SKILL.md",
+      "agent_guide": "agents/seo-performance.md",
+      "reference_guide_mirror": "skills/seo/references/agent-guides/seo-performance.md",
+      "mentioned_scripts_skill": [
+        "pagespeed_check.py"
+      ],
+      "mentioned_scripts_agent": [
+        "crux_history.py",
+        "pagespeed_check.py",
+        "render_page.py"
+      ],
+      "related_skill_mentions": [],
+      "owned_support_files": [
+        "skills/seo-performance/agents/openai.yaml"
       ]
     },
     {
@@ -685,6 +735,21 @@
         "skills/seo-technical/LICENSE.txt",
         "skills/seo-technical/agents/openai.yaml",
         "skills/seo-technical/references/stack-cve-exposure.md"
+      ]
+    },
+    {
+      "name": "seo-visual",
+      "manifest": "skills/seo-visual/SKILL.md",
+      "agent_guide": "agents/seo-visual.md",
+      "reference_guide_mirror": "skills/seo/references/agent-guides/seo-visual.md",
+      "mentioned_scripts_skill": [],
+      "mentioned_scripts_agent": [
+        "capture_screenshot.py",
+        "render_page.py"
+      ],
+      "related_skill_mentions": [],
+      "owned_support_files": [
+        "skills/seo-visual/agents/openai.yaml"
       ]
     }
   ],
@@ -1273,6 +1338,7 @@
         "skills/seo-programmatic/SKILL.md"
       ],
       "test_sources_mentioning": [
+        "tests/test_codex_runtime_contract.py",
         "tests/test_metadata_template.py",
         "tests/test_no_em_dash.py"
       ]
@@ -1308,6 +1374,7 @@
         "agents/seo-performance.md",
         "skills/seo-drift/SKILL.md",
         "skills/seo-google/SKILL.md",
+        "skills/seo-performance/SKILL.md",
         "skills/seo-technical/SKILL.md"
       ],
       "test_sources_mentioning": [
@@ -1405,6 +1472,7 @@
       "mentioned_by": [],
       "test_sources_mentioning": [
         "tests/test_agentic.py",
+        "tests/test_codex_runtime_contract.py",
         "tests/test_hosted_plugin_layout.py",
         "tests/test_manual_install_layout.py",
         "tests/test_runtime.py",
@@ -1425,6 +1493,7 @@
       "path": "scripts/schema_generate.py",
       "mentioned_by": [],
       "test_sources_mentioning": [
+        "tests/test_codex_runtime_contract.py",
         "tests/test_schema_v2.py"
       ]
     },
@@ -1758,6 +1827,10 @@
       "owner": "seo-content",
       "incoming": [
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
           "path": "skills/seo-audit/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
         },
@@ -1971,6 +2044,10 @@
       "owner": "seo-geo",
       "incoming": [
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
           "path": "skills/seo-agentic/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
         },
@@ -2027,6 +2104,10 @@
       "kind": "specialist-agent-guide",
       "owner": "seo-google",
       "incoming": [
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
         {
           "path": "skills/seo-audit/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
@@ -2110,6 +2191,10 @@
       "owner": "seo-local",
       "incoming": [
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
           "path": "skills/seo-audit/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
         },
@@ -2172,12 +2257,20 @@
       "owner": "seo-performance",
       "incoming": [
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
           "path": "skills/seo-audit/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
         },
         {
           "path": "skills/seo-google/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "skills/seo-performance/SKILL.md",
+          "relation": "specialist-guide"
         },
         {
           "path": "skills/seo/SKILL.md",
@@ -2208,6 +2301,10 @@
       "kind": "specialist-agent-guide",
       "owner": "seo-schema",
       "incoming": [
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
         {
           "path": "skills/seo-audit/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
@@ -2332,6 +2429,10 @@
       "owner": "seo-technical",
       "incoming": [
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
           "path": "skills/seo-agentic/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
         },
@@ -2389,8 +2490,16 @@
       "owner": "seo-visual",
       "incoming": [
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
           "path": "skills/seo-audit/SKILL.md",
           "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "skills/seo-visual/SKILL.md",
+          "relation": "specialist-guide"
         },
         {
           "path": "skills/seo/SKILL.md",
@@ -2497,6 +2606,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/LEGACY_CODEX_COMPARISON.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/MCP-INTEGRATION.md",
       "kind": "documentation",
       "owner": "documentation",
@@ -2512,6 +2628,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES_v0.1.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/RELEASE_NOTES_v0.2.0.md",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],
@@ -3844,6 +3967,13 @@
       "outgoing": []
     },
     {
+      "path": "plugin.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "plugins/seo-cockpit/.claude-plugin/plugin.json",
       "kind": "upstream-claude-plugin-compatibility",
       "owner": "legacy-plugin",
@@ -5089,6 +5219,10 @@
           "relation": "installer-registers-optional-extension"
         },
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "installer-registers-core-skill"
+        },
+        {
           "path": "skills/seo-agentic/SKILL.md",
           "relation": "installer-registers-core-skill"
         },
@@ -5141,6 +5275,10 @@
           "relation": "installer-registers-core-skill"
         },
         {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "installer-registers-core-skill"
+        },
+        {
           "path": "skills/seo-hreflang/SKILL.md",
           "relation": "installer-registers-core-skill"
         },
@@ -5165,6 +5303,10 @@
           "relation": "installer-registers-core-skill"
         },
         {
+          "path": "skills/seo-performance/SKILL.md",
+          "relation": "installer-registers-core-skill"
+        },
+        {
           "path": "skills/seo-plan/SKILL.md",
           "relation": "installer-registers-core-skill"
         },
@@ -5186,6 +5328,10 @@
         },
         {
           "path": "skills/seo-technical/SKILL.md",
+          "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/seo-visual/SKILL.md",
           "relation": "installer-registers-core-skill"
         },
         {
@@ -5414,6 +5560,10 @@
           "relation": "mentions-script"
         },
         {
+          "path": "tests/test_codex_runtime_contract.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_metadata_template.py",
           "relation": "test-source-mentions-script"
         },
@@ -5517,6 +5667,10 @@
         },
         {
           "path": "skills/seo-google/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-performance/SKILL.md",
           "relation": "mentions-script"
         },
         {
@@ -5816,6 +5970,10 @@
           "relation": "test-source-mentions-script"
         },
         {
+          "path": "tests/test_codex_runtime_contract.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_hosted_plugin_layout.py",
           "relation": "test-source-mentions-script"
         },
@@ -6091,6 +6249,10 @@
         {
           "path": "scripts/runtime.py",
           "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "tests/test_codex_runtime_contract.py",
+          "relation": "test-source-mentions-script"
         },
         {
           "path": "tests/test_schema_v2.py",
@@ -6520,6 +6682,107 @@
       ]
     },
     {
+      "path": "skills/get-started/SKILL.md",
+      "kind": "skill-entrypoint",
+      "owner": "get-started",
+      "incoming": [
+        {
+          "path": "scripts/install_codex.py",
+          "relation": "installer-registers-core-skill"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "agents/seo-content.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-geo.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-google.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-local.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-performance.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-schema.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-technical.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "agents/seo-visual.md",
+          "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "skills/get-started/agents/openai.yaml",
+          "relation": "owns-support-file"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-content/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-geo/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-google/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-local/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-performance/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-schema/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-technical/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-visual/SKILL.md",
+          "relation": "references-codex-skill"
+        }
+      ]
+    },
+    {
+      "path": "skills/get-started/agents/openai.yaml",
+      "kind": "codex-skill-metadata",
+      "owner": "get-started",
+      "incoming": [
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "owns-support-file"
+        }
+      ],
+      "outgoing": []
+    },
+    {
       "path": "skills/seo-agentic/LICENSE.txt",
       "kind": "skill-support-file",
       "owner": "seo-agentic",
@@ -6720,6 +6983,14 @@
         {
           "path": "scripts/install_codex.py",
           "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo/SKILL.md",
+          "relation": "references-codex-skill"
         }
       ],
       "outgoing": [
@@ -6826,6 +7097,14 @@
         {
           "path": "skills/seo-audit/agents/openai.yaml",
           "relation": "owns-support-file"
+        },
+        {
+          "path": "skills/seo-performance/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-visual/SKILL.md",
+          "relation": "references-codex-skill"
         }
       ]
     },
@@ -7205,6 +7484,10 @@
         {
           "path": "scripts/install_codex.py",
           "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
         }
       ],
       "outgoing": [
@@ -8336,6 +8619,10 @@
           "relation": "installer-registers-core-skill"
         },
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
           "path": "skills/seo/SKILL.md",
           "relation": "references-codex-skill"
         }
@@ -8431,6 +8718,10 @@
         {
           "path": "scripts/install_codex.py",
           "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
         }
       ],
       "outgoing": [
@@ -8747,6 +9038,43 @@
       "incoming": [
         {
           "path": "skills/seo-google/SKILL.md",
+          "relation": "owns-support-file"
+        }
+      ],
+      "outgoing": []
+    },
+    {
+      "path": "skills/seo-handoff/SKILL.md",
+      "kind": "skill-entrypoint",
+      "owner": "seo-handoff",
+      "incoming": [
+        {
+          "path": "scripts/install_codex.py",
+          "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo/SKILL.md",
+          "relation": "references-codex-skill"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "skills/seo-handoff/agents/openai.yaml",
+          "relation": "owns-support-file"
+        }
+      ]
+    },
+    {
+      "path": "skills/seo-handoff/agents/openai.yaml",
+      "kind": "codex-skill-metadata",
+      "owner": "seo-handoff",
+      "incoming": [
+        {
+          "path": "skills/seo-handoff/SKILL.md",
           "relation": "owns-support-file"
         }
       ],
@@ -9153,6 +9481,10 @@
           "relation": "installer-registers-core-skill"
         },
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
           "path": "skills/seo/SKILL.md",
           "relation": "references-codex-skill"
         }
@@ -9293,6 +9625,55 @@
       "incoming": [
         {
           "path": "skills/seo-page/SKILL.md",
+          "relation": "owns-support-file"
+        }
+      ],
+      "outgoing": []
+    },
+    {
+      "path": "skills/seo-performance/SKILL.md",
+      "kind": "skill-entrypoint",
+      "owner": "seo-performance",
+      "incoming": [
+        {
+          "path": "scripts/install_codex.py",
+          "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo/SKILL.md",
+          "relation": "references-codex-skill"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "agents/seo-performance.md",
+          "relation": "specialist-guide"
+        },
+        {
+          "path": "scripts/pagespeed_check.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-performance/agents/openai.yaml",
+          "relation": "owns-support-file"
+        }
+      ]
+    },
+    {
+      "path": "skills/seo-performance/agents/openai.yaml",
+      "kind": "codex-skill-metadata",
+      "owner": "seo-performance",
+      "incoming": [
+        {
+          "path": "skills/seo-performance/SKILL.md",
           "relation": "owns-support-file"
         }
       ],
@@ -9512,6 +9893,10 @@
         {
           "path": "scripts/install_codex.py",
           "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
         }
       ],
       "outgoing": [
@@ -9622,6 +10007,10 @@
         {
           "path": "scripts/install_codex.py",
           "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/seo/SKILL.md",
+          "relation": "references-codex-skill"
         }
       ],
       "outgoing": [
@@ -9745,6 +10134,10 @@
           "relation": "installer-registers-core-skill"
         },
         {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
           "path": "skills/seo/SKILL.md",
           "relation": "references-codex-skill"
         }
@@ -9835,6 +10228,51 @@
       "incoming": [
         {
           "path": "skills/seo-technical/SKILL.md",
+          "relation": "owns-support-file"
+        }
+      ],
+      "outgoing": []
+    },
+    {
+      "path": "skills/seo-visual/SKILL.md",
+      "kind": "skill-entrypoint",
+      "owner": "seo-visual",
+      "incoming": [
+        {
+          "path": "scripts/install_codex.py",
+          "relation": "installer-registers-core-skill"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo/SKILL.md",
+          "relation": "references-codex-skill"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "agents/seo-visual.md",
+          "relation": "specialist-guide"
+        },
+        {
+          "path": "skills/seo-visual/agents/openai.yaml",
+          "relation": "owns-support-file"
+        }
+      ]
+    },
+    {
+      "path": "skills/seo-visual/agents/openai.yaml",
+      "kind": "codex-skill-metadata",
+      "owner": "seo-visual",
+      "incoming": [
+        {
+          "path": "skills/seo-visual/SKILL.md",
           "relation": "owns-support-file"
         }
       ],
@@ -10036,7 +10474,15 @@
           "relation": "mentions-script"
         },
         {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
           "path": "skills/seo-geo/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-handoff/SKILL.md",
           "relation": "references-codex-skill"
         },
         {
@@ -10044,7 +10490,19 @@
           "relation": "references-codex-skill"
         },
         {
+          "path": "skills/seo-performance/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-sxo/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
           "path": "skills/seo-technical/SKILL.md",
+          "relation": "references-codex-skill"
+        },
+        {
+          "path": "skills/seo-visual/SKILL.md",
           "relation": "references-codex-skill"
         },
         {
@@ -10952,6 +11410,33 @@
       "outgoing": [
         {
           "path": "scripts/install_codex.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_codex_manifest.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "tests/test_codex_runtime_contract.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/metadata_template.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/runtime.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/schema_generate.py",
           "relation": "test-source-mentions-script"
         }
       ]
@@ -12638,6 +13123,11 @@
     },
     {
       "from": "scripts/install_codex.py",
+      "to": "skills/get-started/SKILL.md",
+      "relation": "installer-registers-core-skill"
+    },
+    {
+      "from": "scripts/install_codex.py",
       "to": "skills/seo-agentic/SKILL.md",
       "relation": "installer-registers-core-skill"
     },
@@ -12703,6 +13193,11 @@
     },
     {
       "from": "scripts/install_codex.py",
+      "to": "skills/seo-handoff/SKILL.md",
+      "relation": "installer-registers-core-skill"
+    },
+    {
+      "from": "scripts/install_codex.py",
       "to": "skills/seo-hreflang/SKILL.md",
       "relation": "installer-registers-core-skill"
     },
@@ -12733,6 +13228,11 @@
     },
     {
       "from": "scripts/install_codex.py",
+      "to": "skills/seo-performance/SKILL.md",
+      "relation": "installer-registers-core-skill"
+    },
+    {
+      "from": "scripts/install_codex.py",
       "to": "skills/seo-plan/SKILL.md",
       "relation": "installer-registers-core-skill"
     },
@@ -12759,6 +13259,11 @@
     {
       "from": "scripts/install_codex.py",
       "to": "skills/seo-technical/SKILL.md",
+      "relation": "installer-registers-core-skill"
+    },
+    {
+      "from": "scripts/install_codex.py",
+      "to": "skills/seo-visual/SKILL.md",
       "relation": "installer-registers-core-skill"
     },
     {
@@ -13182,6 +13687,101 @@
       "relation": "static-python-import"
     },
     {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-content.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-geo.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-google.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-local.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-performance.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-schema.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-technical.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "agents/seo-visual.md",
+      "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/get-started/agents/openai.yaml",
+      "relation": "owns-support-file"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-audit/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-content/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-geo/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-google/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-handoff/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-local/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-performance/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-schema/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-technical/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "skills/seo-visual/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
       "from": "skills/seo-agentic/SKILL.md",
       "to": "agents/seo-agentic.md",
       "relation": "specialist-guide"
@@ -13400,6 +14000,16 @@
       "from": "skills/seo-audit/SKILL.md",
       "to": "skills/seo-audit/agents/openai.yaml",
       "relation": "owns-support-file"
+    },
+    {
+      "from": "skills/seo-audit/SKILL.md",
+      "to": "skills/seo-performance/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo-audit/SKILL.md",
+      "to": "skills/seo-visual/SKILL.md",
+      "relation": "references-codex-skill"
     },
     {
       "from": "skills/seo-backlinks/SKILL.md",
@@ -14242,6 +14852,11 @@
       "relation": "references-codex-skill"
     },
     {
+      "from": "skills/seo-handoff/SKILL.md",
+      "to": "skills/seo-handoff/agents/openai.yaml",
+      "relation": "owns-support-file"
+    },
+    {
       "from": "skills/seo-hreflang/SKILL.md",
       "to": "skills/seo-hreflang/LICENSE.txt",
       "relation": "owns-support-file"
@@ -14444,6 +15059,21 @@
     {
       "from": "skills/seo-page/SKILL.md",
       "to": "skills/seo-page/agents/openai.yaml",
+      "relation": "owns-support-file"
+    },
+    {
+      "from": "skills/seo-performance/SKILL.md",
+      "to": "agents/seo-performance.md",
+      "relation": "specialist-guide"
+    },
+    {
+      "from": "skills/seo-performance/SKILL.md",
+      "to": "scripts/pagespeed_check.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-performance/SKILL.md",
+      "to": "skills/seo-performance/agents/openai.yaml",
       "relation": "owns-support-file"
     },
     {
@@ -14677,6 +15307,16 @@
       "relation": "references-codex-skill"
     },
     {
+      "from": "skills/seo-visual/SKILL.md",
+      "to": "agents/seo-visual.md",
+      "relation": "specialist-guide"
+    },
+    {
+      "from": "skills/seo-visual/SKILL.md",
+      "to": "skills/seo-visual/agents/openai.yaml",
+      "relation": "owns-support-file"
+    },
+    {
       "from": "skills/seo/SKILL.md",
       "to": "agents/seo-agentic.md",
       "relation": "mentions-specialist-agent-guide"
@@ -14808,7 +15448,17 @@
     },
     {
       "from": "skills/seo/SKILL.md",
+      "to": "skills/seo-audit/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo/SKILL.md",
       "to": "skills/seo-geo/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo/SKILL.md",
+      "to": "skills/seo-handoff/SKILL.md",
       "relation": "references-codex-skill"
     },
     {
@@ -14818,7 +15468,22 @@
     },
     {
       "from": "skills/seo/SKILL.md",
+      "to": "skills/seo-performance/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo/SKILL.md",
+      "to": "skills/seo-sxo/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo/SKILL.md",
       "to": "skills/seo-technical/SKILL.md",
+      "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo/SKILL.md",
+      "to": "skills/seo-visual/SKILL.md",
       "relation": "references-codex-skill"
     },
     {
@@ -15119,6 +15784,21 @@
     {
       "from": "tests/test_codex_installer.py",
       "to": "scripts/install_codex.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_codex_runtime_contract.py",
+      "to": "scripts/metadata_template.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_codex_runtime_contract.py",
+      "to": "scripts/runtime.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_codex_runtime_contract.py",
+      "to": "scripts/schema_generate.py",
       "relation": "test-source-mentions-script"
     },
     {

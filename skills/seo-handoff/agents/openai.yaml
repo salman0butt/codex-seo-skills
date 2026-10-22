@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Handoff"
+  short_description: "Translate evidence-backed SEO findings into implementation tickets, acceptance criteria, validation commands, and ownership decisions."
+  default_prompt: "Use $seo-handoff for this SEO task. Follow evidence and permission requirements."

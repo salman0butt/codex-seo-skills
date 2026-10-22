@@ -17,8 +17,8 @@ COMPONENT_DIRS = ('skills', 'agents', 'scripts', 'extensions', 'data', 'docs', '
 
 def skill_sources(with_extensions: bool) -> tuple[list[tuple[str, Path]], list[str]]:
     core = sorted((p.parent.name, p.parent) for p in (REPO / 'skills').glob('*/SKILL.md'))
-    if len(core) != 26:
-        raise RuntimeError(f'Expected 26 bundled core SEO skills; found {len(core)}')
+    if len(core) != 30:
+        raise RuntimeError(f'Expected 30 bundled core SEO skills; found {len(core)}')
     result = list(core)
     skipped: list[str] = []
     if with_extensions:
@@ -78,7 +78,7 @@ def install(with_extensions: bool, dry_run: bool) -> int:
             source = REPO / dirname
             if source.exists():
                 shutil.copytree(source, tmp / dirname, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.pytest_cache', '.venv'))
-        for file in ('LICENSE', 'requirements.txt', 'pyproject.toml', 'PRIVACY.md', 'README.md'):
+        for file in ('LICENSE', 'requirements.txt', 'pyproject.toml', 'PRIVACY.md', 'README.md', 'plugin.json'):
             source = REPO / file
             if source.is_file():
                 shutil.copy2(source, tmp / file)

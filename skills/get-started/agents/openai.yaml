@@ -1,0 +1,4 @@
+interface:
+  display_name: "Get Started"
+  short_description: "Start a scoped SEO task by asking for the target and evidence, selecting the appropriate specialist, and explaining unavailable integrations."
+  default_prompt: "Use $get-started for this SEO task. Follow evidence and permission requirements."

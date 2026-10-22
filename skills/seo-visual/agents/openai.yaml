@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Visual"
+  short_description: "Inspect rendered desktop and mobile pages for SEO-relevant visual issues, content visibility, interaction problems, and layout shifts."
+  default_prompt: "Use $seo-visual for this SEO task. Follow evidence and permission requirements."

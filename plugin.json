@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-seo-skills",
+  "version": "0.2.0",
+  "description": "Codex-first, evidence-led SEO skills for technical audits, content, schema, local SEO, Core Web Vitals and generative search optimization.",
+  "author": {
+    "name": "salman0butt",
+    "url": "https://github.com/salman0butt"
+  },
+  "homepage": "https://github.com/salman0butt/codex-seo-skills",
+  "repository": "https://github.com/salman0butt/codex-seo-skills",
+  "license": "MIT",
+  "keywords": ["seo", "codex", "technical-seo", "geo", "core-web-vitals", "structured-data"],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/get-started/SKILL.md"
+    }
+  }
+}

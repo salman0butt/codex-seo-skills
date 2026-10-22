@@ -21,3 +21,43 @@ jobs:
         run: python scripts/generate_skill_map.py --check
       - name: Validate mapping graph, ownership and agent mirrors
         run: python -m unittest discover -s tests -p test_skill_map.py -v
+      - name: Verify runtime failure handling and offline execution
+        run: python -m unittest discover -s tests -p test_codex_runtime_contract.py -v
+      - name: Verify portable plugin manifest
+        run: python -m unittest discover -s tests -p test_codex_manifest.py -v
+  upstream-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install bounded unit-test prerequisites
+        run: python -m pip install --disable-pip-version-check pytest requests beautifulsoup4 lxml lxml-html-clean
+      - name: Run independent upstream runtime and SEO security contracts
+        run: |
+          python -m pytest -q \
+            tests/test_runtime.py \
+            tests/test_url_safety.py \
+            tests/test_metadata_template.py \
+            tests/test_schema_v2.py \
+            tests/test_sitemap_discovery.py \
+            tests/test_gsc_query.py
+  managed-runtime-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install managed runtime and Chromium in isolated CI data directory
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/codex-seo-smoke
+        run: |
+          ./scripts/codex-seo setup
+          ./scripts/codex-seo doctor --json > "$RUNNER_TEMP/codex-seo-doctor.json"
+          python -c 'import json,os,pathlib; status=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"codex-seo-doctor.json").read_text()); assert status["ready"], status; assert status["browser_ready"], status'
+          ./scripts/codex-seo run metadata_template.py --title "Example Studio | Pricing" --description "Example Studio | Pricing. Get started now!" --json > "$RUNNER_TEMP/metadata-audit.json"
+          ./scripts/codex-seo run schema_generate.py profile --name "Example Studio" --url https://example.com/about > "$RUNNER_TEMP/schema-profile.json"
+          python -c 'import json,os,pathlib; root=pathlib.Path(os.environ["RUNNER_TEMP"]); assert json.loads((root/"metadata-audit.json").read_text())["pages_checked"]==1; assert json.loads((root/"schema-profile.json").read_text())["@context"]=="https://schema.org"'

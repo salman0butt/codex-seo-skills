@@ -64,9 +64,9 @@ Load on-demand:
 
 ## Cross-Skill Delegation
 
-- Do NOT duplicate seo-local on-page analysis. Recommend `/seo local <url>` for website-level checks.
-- Do NOT duplicate seo-geo AI visibility analysis. Recommend `/seo geo <url>` for full GEO audit.
-- Do NOT duplicate seo-schema validation. Recommend `/seo schema <url>` for schema fixes.
+- Do NOT duplicate seo-local on-page analysis. Recommend `$seo-local <url>` for website-level checks.
+- Do NOT duplicate seo-geo AI visibility analysis. Recommend `$seo-geo <url>` for full GEO audit.
+- Do NOT duplicate seo-schema validation. Recommend `$seo-schema <url>` for schema fixes.
 
 ## Output Format
 

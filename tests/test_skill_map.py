@@ -29,9 +29,9 @@ class SkillMapTests(unittest.TestCase):
         self.assertTrue(all(r['kind'] and r['owner'] for r in self.files.values()))
 
     def test_skill_and_agent_roots(self):
-        self.assertEqual(len(self.graph['skills']), 26)
+        self.assertEqual(len(self.graph['skills']), 30)
         self.assertEqual(len([r for r in self.files.values() if r['kind']=='specialist-agent-guide']), 19)
-        self.assertEqual({x['name'] for x in self.graph['agent_only']}, {'seo-performance','seo-visual'})
+        self.assertEqual({x['name'] for x in self.graph['agent_only']}, set())
         for skill in self.graph['skills']:
             name=skill['name']
             self.assertEqual(skill['manifest'], f'skills/{name}/SKILL.md')

@@ -25,20 +25,20 @@ class InstallerTests(unittest.TestCase):
 
     def test_dry_run_does_not_write(self):
         p=self.run_installer('--dry-run')
-        self.assertEqual(json.loads(p.stdout)['skills_to_register'], 26)
+        self.assertEqual(json.loads(p.stdout)['skills_to_register'], 30)
         self.assertFalse((self.home/'.agents').exists())
 
     def test_global_install_and_extension_registration(self):
         self.run_installer()
         hub=self.home/'.agents'/'skills'/'seo'
         self.assertTrue((hub/'SKILL.md').is_file())
-        self.assertEqual(len(list((self.home/'.agents'/'skills').iterdir())), 26)
+        self.assertEqual(len(list((self.home/'.agents'/'skills').iterdir())), 30)
         cmd=hub/'scripts'/'codex-seo'
         p=subprocess.run(['bash',str(cmd),'doctor','--json'],capture_output=True,text=True,env=self.env)
         self.assertIn(p.returncode, (0, 3), p.stderr)  # doctor returns 3 if dependencies are not yet set up
         self.assertIn('ready', json.loads(p.stdout))
         self.run_installer('--with-extensions')
-        self.assertEqual(len(list((self.home/'.agents'/'skills').iterdir())), 33)
+        self.assertEqual(len(list((self.home/'.agents'/'skills').iterdir())), 37)
         self.assertTrue((self.home/'.agents'/'skills'/'seo-firecrawl'/'SKILL.md').is_file())
         self.run_installer('--with-extensions')  # idempotent re-install
 

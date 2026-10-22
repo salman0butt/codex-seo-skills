@@ -67,19 +67,19 @@ required, suggest `$seo setup` and do not improvise a `pip install`.
 
 ## Orchestration Logic
 
-When the user invokes `$seo audit`, delegate to subagents in parallel:
+When the user requests `$seo audit`, follow the specialist skills. Delegate in parallel only when the Codex runtime supports it; otherwise run them sequentially:
 1. Detect business type (SaaS, local, ecommerce, publisher, agency, other)
-2. Spawn subagents: seo-technical, seo-content, seo-schema, seo-sitemap, seo-performance, seo-visual, seo-geo, seo-agentic
-3. If Google API credentials detected (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run google_auth.py --check`), also spawn seo-google agent
-4. If Matomo credentials detected (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run matomo_auth.py --check`), also spawn seo-matomo agent (alternative or complement to seo-google's GA4 reports)
-5. If local business detected, also spawn seo-local agent
-6. If local business detected AND DataForSEO MCP available, also spawn seo-maps agent
-7. If backlink APIs detected (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run backlinks_auth.py --check`), also spawn seo-backlinks agent
+2. Run specialist skills: seo-technical, seo-content, seo-schema, seo-sitemap, seo-performance, seo-visual, seo-geo, seo-agentic
+3. If Google API credentials detected (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run google_auth.py --check`), also run seo-google agent
+4. If Matomo credentials detected (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run matomo_auth.py --check`), also run seo-matomo agent (alternative or complement to seo-google's GA4 reports)
+5. If local business detected, also run seo-local agent
+6. If local business detected AND DataForSEO MCP available, also run seo-maps agent
+7. If backlink APIs detected (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run backlinks_auth.py --check`), also run seo-backlinks agent
 8. If Firecrawl MCP available, use `firecrawl_map` to discover all site URLs before analysis
-9. If content strategy signals detected (blog, pillar pages, topic clusters), also spawn seo-cluster agent
-10. If e-commerce detected, also spawn seo-ecommerce agent
-11. If drift baseline exists for this URL (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run drift_history.py <url>`), also spawn seo-drift agent
-12. Always include seo-sxo in full audits (search experience applies to all sites)
+9. If content strategy signals detected (blog, pillar pages, topic clusters), also run seo-cluster agent
+10. If e-commerce detected, also run seo-ecommerce agent
+11. If drift baseline exists for this URL (`"${HOME}/.agents/skills/seo/scripts/codex-seo" run drift_history.py <url>`), also run seo-drift agent
+12. Always include $seo-sxo in full audits (search experience applies to all sites)
 13. Collect results and generate unified report with SEO Health Score (0-100)
 14. **Synthesize via the 10-principle framework** (see "Synthesis Methodology" below), walk PERCEIVE → ANALYZE → VALIDATE → ACT before bucketing findings into Critical / High / Medium / Low
 15. Create prioritized action plan with dependency sequencing + falsifiability per recommendation
@@ -269,7 +269,7 @@ auto-routes to their descriptions without the `$seo` prefix.
   alternative or complement. Install via
   `extensions/matomo/install.sh` (Unix) or `extensions/matomo/install.ps1`
   (Windows). Once installed, invoke via `$seo matomo <command>` or rely
-  on the audit orchestrator to spawn the seo-matomo agent automatically
+  on the audit orchestrator to run the seo-matomo agent automatically
   when credentials are present.
 
 ## Subagents
@@ -283,15 +283,15 @@ For parallel analysis during audits:
 - `seo-visual` -- Screenshots, mobile testing, above-fold
 - `seo-geo` -- AI crawler access, llms.txt, citability, brand mention signals
 - `seo-agentic` -- Lighthouse Agentic Browsing fraction, accessibility tree for agents, AI agent access policy, Markdown, discovery files, WebMCP (always in full audits)
-- `seo-local` -- GBP signals, NAP consistency, reviews, local schema, industry-specific local factors (conditional: spawned when Local Service detected)
-- `seo-maps` -- Geo-grid rank tracking, GBP audit, review intelligence, competitor radius mapping (conditional: spawned when Local Service detected AND DataForSEO MCP available)
-- `seo-google` -- CWV field data, URL indexation status, organic traffic trends (conditional: spawned when Google API credentials detected)
-- `seo-backlinks` -- Backlink profile data: DA/PA, referring domains, anchor text, toxic links (conditional: spawned when Moz/Bing API keys detected or always for CC domain-level metrics)
+- `seo-local` -- GBP signals, NAP consistency, reviews, local schema, industry-specific local factors (conditional: run when Local Service detected)
+- `seo-maps` -- Geo-grid rank tracking, GBP audit, review intelligence, competitor radius mapping (conditional: run when Local Service detected AND DataForSEO MCP available)
+- `seo-google` -- CWV field data, URL indexation status, organic traffic trends (conditional: run when Google API credentials detected)
+- `seo-backlinks` -- Backlink profile data: DA/PA, referring domains, anchor text, toxic links (conditional: run when Moz/Bing API keys detected or always for CC domain-level metrics)
 - `seo-cluster` -- Semantic clustering analysis (conditional: content strategy detected)
 - `seo-sxo` -- Page-type mismatch, user stories, persona scoring (always in full audits)
 - `seo-drift` -- Baseline comparison (conditional: drift baseline exists for URL)
 - `seo-ecommerce` -- Product schema, marketplace intel (conditional: e-commerce detected)
-- `seo-flow` -- FLOW framework prompts (conditional: spawned for content strategy workflows)
+- `seo-flow` -- FLOW framework prompts (conditional: run for content strategy workflows)
 - `seo-dataforseo` -- Live SERP, keyword, backlink, local SEO data (extension, optional)
 - `seo-image-gen` -- SEO image audit and generation plan (extension, optional)
 
@@ -308,3 +308,9 @@ For parallel analysis during audits:
 ## Codex implementation notes
 
 Invoke `$seo audit https://example.com`, or invoke a matching specialist such as `$seo-technical https://example.com`. These are **Codex skill mentions**, not terminal commands. The helper CLI is available as `"${HOME}/.agents/skills/seo/scripts/codex-seo"`. Claude slash commands, hooks and agent registration do not work automatically in Codex. Read the relevant specialist skill and `references/agent-guides/seo-*.md` for audit checklists, and only delegate when the current Codex runtime supports it. Do not configure credentials, install optional dependencies, call paid services, or modify live sites without the user's authorization.
+
+## Codex v0.2 routing updates
+
+- Start ambiguous requests with `$get-started`. For full audits use `$seo-audit`, and for implementation tickets use `$seo-handoff`.
+- `$seo-performance` and `$seo-visual` are now standalone skills, backed by the original MIT specialist guides.
+- Never treat `spawn`, legacy Claude slash commands or unauthenticated provider integrations as native Codex tools. Parallel delegation is an optional runtime capability, not a requirement.

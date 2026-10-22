@@ -3,7 +3,7 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 522,
+    "total_repo_files": 523,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
@@ -2635,6 +2635,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES_v0.2.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/RELEASE_NOTES_v0.2.1.md",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],

@@ -1,94 +1,38 @@
-# Codex SEO Skills
+# Codex SEO Skills v0.3.1 — Stable managed Python selection
 
-An MIT-licensed Codex-compatible adaptation of [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo). **30 core SEO skills**, **19 specialist guides**, and **9 optional extension skill bundles** are retained from upstream. Two extensions (`seo-dataforseo` and `seo-image-gen`) share names with core skills. The installer skips these duplicates; both original extension bundles remain available under `extensions/`.
+This patch release retains v0.3.0's 30 core Codex SEO skills, 19 specialist guide references, bounded public-page audit runner, portable plugin manifest, and MIT upstream attribution.
 
-Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitemaps, backlink research, content audits, Core Web Vitals, and Google Search Console/GA4 workflows are included. Optional integrations require appropriate credentials and may have usage costs.
+## Fixes
 
-## End-to-end mappings and traceability
+- The `scripts/codex-seo` launcher now selects the exact Python minor version recorded by a successfully installed managed runtime. For example, a Mac with `python3` pointing at 3.14 correctly reuses a working Python 3.11 environment, rather than reporting it outdated or rebuilding dependencies.
+- An explicit `CLAUDE_SEO_PYTHON` still takes priority. Absent, corrupt, or non-allowlisted runtime state values are ignored safely.
+- Adds four launcher regression tests for saved Python selection, explicit override, invalid state, and absent state.
+- Improves release CI: hosted macOS validates managed setup, bundled script execution, and fail-closed private-URL rejection without assuming a third-party public site always responds. Ubuntu retains live page fetching and headless Chromium smoke checks.
 
-- [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
-- [File-by-file repository inventory](docs/FILE_INVENTORY.md)
-- [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.3.1 release notes](docs/RELEASE_NOTES_v0.3.1.md)
+## Verified evidence
 
-Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
+- The connected Mac successfully installed all 30 core skills and a managed Python 3.11/Chromium runtime. With this new launcher, `doctor --json` reported `ready: true` and `browser_ready: true` **without an interpreter environment override**.
+- The installed Mac tool ran a read-only `https://example.com/` quick audit (HTTP 200), and previously ran both raw-HTML and mobile Chromium tests for `https://digitalmx.no/` (HTTP 200). Those findings are page-specific and do not imply search ranking outcomes.
+- Codex CLI 0.163.0 loaded `$get-started` in a read-only ephemeral session and routed an example public-page request to `$seo-page`; no remote changes were made.
+- GitHub Actions on the release commit must pass Python 3.11/3.12 structural checks, upstream security contracts, macOS core runtime checks, and Linux Chromium/live audit smoke tests.
 
-This repository also has an optional portable [Agent Plugins manifest](plugin.json) with a `$get-started` onboarding skill. It does not bundle an MCP server or preconfigured external accounts. See [comparison with the historical Codex project](docs/LEGACY_CODEX_COMPARISON.md); its proprietary code is not redistributed here.
-
-## Install (macOS/Linux, Python 3.10+)
+## Installation
 
 ```bash
-git clone https://github.com/salman0butt/codex-seo-skills.git
+git clone --branch v0.3.1 https://github.com/salman0butt/codex-seo-skills.git
 cd codex-seo-skills
 python3 scripts/install_codex.py --dry-run
 python3 scripts/install_codex.py
 ```
 
-Skills are registered in `~/.agents/skills` as links to a shared package in `~/.local/share/codex-seo` (or `$XDG_DATA_HOME/codex-seo`). Existing unrelated skill folders are never overwritten. On filesystems where symlinks are unavailable, the installer copies the skill folder instead. Run `python3 scripts/install_codex.py --with-extensions` to opt in to the 7 unique optional extension skills; extensions require separate tools and accounts. Windows users should use WSL.
-
-Restart your Codex session if the new skills do not appear immediately.
-
-## Use in Codex
-
-Mention skills in your request:
-
-```text
-$seo audit https://example.com
-$seo-technical https://example.com
-$seo-geo https://example.com
-$seo-local https://example.com
-$seo-google pagespeed https://example.com
-```
-
-These are **skill mentions**, not commands to paste into a shell.
-
-## Runtime readiness
-
-```bash
-"$HOME/.agents/skills/seo/scripts/codex-seo" doctor --json
-```
-
-The SEO scripts have a managed Python environment. Setup and Chromium are **not automatic**; review dependencies and invoke `"$HOME/.agents/skills/seo/scripts/codex-seo" setup` if you choose to install them. Some skills need API keys or services (GSC, GA4, DataForSEO, Firecrawl, etc.). No account or data connection is supplied by this repository.
-
-## Compatibility notes
-
-- Native Codex skill discovery via `SKILL.md` and optional `agents/openai.yaml`.
-- Legacy Claude slash commands mapped to Codex skill invocations.
-- Claude plugin-root runtime paths replaced with a Codex-managed SEO launcher.
-- Specialist agent prompts preserved as reference checklists; Claude hooks/MCP tool names do not automatically become native Codex tools.
-- This is a compatibility adaptation, not a guarantee that every paid integration or website-specific workflow works without setup.
-
-## License and attribution
-
-Derived from **[AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo)** (upstream commit `23a2a811f874361d228fc2681acfc0ad66272736`, version 2.4.2). The original MIT license and individual license notices remain in this repository. See `docs/UPSTREAM_README.md` for upstream documentation. Changes for Codex compatibility maintained by [salman0butt](https://github.com/salman0butt).
-
-## Test and readiness gates
-
-- CI checks the 39 skill manifests (30 core + 9 extension manifests), deterministic skill graph, and protected isolated installation.
-- CI also runs selected upstream runtime, URL-safety, metadata, schema, GSC and sitemap contracts, plus managed runtime/Chromium smoke on Ubuntu and core-runtime smoke on macOS.
-- Local setup requires a stable Python package download connection: interrupted downloads must not result in a `ready: true` status.
-- No provider integration is assumed available until the corresponding credentials, external MCP server and consent are configured.
-- The historical Codex implementation linked in `docs/LEGACY_CODEX_COMPARISON.md` is proprietary; **do not copy its code into this MIT project**.
-
-## One-page evidence-based audit (v0.3.0)
-
-For a **read-only, single-page** check that does not require a Google account or third-party SEO API:
-
-```bash
-"$HOME/.agents/skills/seo/scripts/codex-seo" doctor --json
-"$HOME/.agents/skills/seo/scripts/codex-seo" run quick_audit.py https://example.com/ --markdown
-"$HOME/.agents/skills/seo/scripts/codex-seo" run quick_audit.py https://example.com/ --json --output quick-audit.json
-```
-
-This sends one bounded public-URL GET (and up to three redirects) using DNS-validated, pinned requests. It evaluates static HTML, includes explicit unknowns, and never generates an imaginary ranking, indexation claim, Lighthouse score or health score. `--max-bytes` can lower the 2 MiB cap; non-HTML or blocked URLs return a nonzero exit status. For rendered DOM, Core Web Vitals, private GSC/GA4 or site-wide audit, use the corresponding specialist workflows with the necessary setup and permission.
-
-## Interpreter selection after runtime setup
-
-If macOS's default `python3` is much newer than Python 3.11 and a dependency package needs compilation, set up the managed runtime with an available Python 3.11:
+For macOS hosts with a newer default Python and Python 3.11 available, bootstrap once using:
 
 ```bash
 CLAUDE_SEO_PYTHON="$(command -v python3.11)" "$HOME/.agents/skills/seo/scripts/codex-seo" setup
 "$HOME/.agents/skills/seo/scripts/codex-seo" doctor --json
+"$HOME/.agents/skills/seo/scripts/codex-seo" run quick_audit.py https://example.com/ --markdown
 ```
 
-On subsequent bare `codex-seo` launches, the wrapper selects the exact Python minor version recorded by successful setup, when an executable with that version is available. An explicit `CLAUDE_SEO_PYTHON` always wins. Re-run setup only if `doctor` reports a genuine requirements or interpreter mismatch.
+After setup the wrapper automatically reuses the recorded Python minor. Optional GSC, GA4, DataForSEO, Firecrawl, and other provider integrations still require separately configured credentials and consent. Full-site crawling, private Analytics verification and ranking measurements are not claimed in this release.
+
+Historical `codex-seo-final` source was marked proprietary and was **not copied** into this repository.

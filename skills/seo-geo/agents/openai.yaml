@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Geo"
+  short_description: "SEO workflow: seo geo"
+  default_prompt: "Use $seo-geo for this SEO request and support every finding with evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Hreflang"
+  short_description: "SEO workflow: seo hreflang"
+  default_prompt: "Use $seo-hreflang for this SEO request and support every finding with evidence."

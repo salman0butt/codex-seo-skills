@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Ecommerce"
+  short_description: "SEO workflow: seo ecommerce"
+  default_prompt: "Use $seo-ecommerce for this SEO request and support every finding with evidence."

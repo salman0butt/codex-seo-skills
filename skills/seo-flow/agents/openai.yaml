@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Flow"
+  short_description: "SEO workflow: seo flow"
+  default_prompt: "Use $seo-flow for this SEO request and support every finding with evidence."

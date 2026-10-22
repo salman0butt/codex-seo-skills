@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Cluster"
+  short_description: "SEO workflow: seo cluster"
+  default_prompt: "Use $seo-cluster for this SEO request and support every finding with evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Page"
+  short_description: "SEO workflow: seo page"
+  default_prompt: "Use $seo-page for this SEO request and support every finding with evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Bing"
+  short_description: "Bing Webmaster Tools + IndexNow extension. Microsoft Copilot citations are fed by the Bing index; this skill makes Bing visibility, link data, and I"
+  default_prompt: "Use $seo-bing for this SEO request and support every finding with evidence."

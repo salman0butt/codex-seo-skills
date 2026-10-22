@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Plan"
+  short_description: "SEO workflow: seo plan"
+  default_prompt: "Use $seo-plan for this SEO request and support every finding with evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Image Gen"
+  short_description: "AI image generation for SEO assets: OG/social preview images, blog hero images, schema images, product photography, infographics. Powered by Gemini "
+  default_prompt: "Use $seo-image-gen for this SEO request and support every finding with evidence."

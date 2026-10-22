@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Competitor Pages"
+  short_description: "SEO workflow: seo competitor pages"
+  default_prompt: "Use $seo-competitor-pages for this SEO request and support every finding with evidence."

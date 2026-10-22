@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Images"
+  short_description: "SEO workflow: seo images"
+  default_prompt: "Use $seo-images for this SEO request and support every finding with evidence."

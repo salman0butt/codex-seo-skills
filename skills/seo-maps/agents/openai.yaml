@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Maps"
+  short_description: "SEO workflow: seo maps"
+  default_prompt: "Use $seo-maps for this SEO request and support every finding with evidence."

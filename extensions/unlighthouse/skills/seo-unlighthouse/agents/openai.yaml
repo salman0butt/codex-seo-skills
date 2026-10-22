@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Unlighthouse"
+  short_description: "Multi-page Lighthouse audit via the MIT-licensed Unlighthouse CLI. Free-tier alternative to running PageSpeed against every URL on a site, no API qu"
+  default_prompt: "Use $seo-unlighthouse for this SEO request and support every finding with evidence."

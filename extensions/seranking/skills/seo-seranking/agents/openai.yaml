@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Seranking"
+  short_description: "SE Ranking AI visibility analyst (extension). Tracks AI Share-of-Voice across ChatGPT, Gemini, Perplexity, AI Overviews, and AI Mode in a single que"
+  default_prompt: "Use $seo-seranking for this SEO request and support every finding with evidence."

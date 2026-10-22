@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Content Brief"
+  short_description: "SEO workflow: seo content brief"
+  default_prompt: "Use $seo-content-brief for this SEO request and support every finding with evidence."

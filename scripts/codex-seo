@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+script_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+export CLAUDE_SEO_DATA_DIR="${CLAUDE_SEO_DATA_DIR:-${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo-runtime}"
+exec "${script_dir}/claude-seo" "$@"

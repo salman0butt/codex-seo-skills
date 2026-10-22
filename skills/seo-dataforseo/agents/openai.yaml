@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Dataforseo"
+  short_description: "SEO workflow: seo dataforseo"
+  default_prompt: "Use $seo-dataforseo for this SEO request and support every finding with evidence."

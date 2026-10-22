@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Audit"
+  short_description: "Run a full-site SEO audit and return a scored, prioritized report. Use only for site-wide checks; use seo-page for one URL or seo-technical for a te"
+  default_prompt: "Use $seo-audit for this SEO request and support every finding with evidence."

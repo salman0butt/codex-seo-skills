@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Sxo"
+  short_description: "SEO workflow: seo sxo"
+  default_prompt: "Use $seo-sxo for this SEO request and support every finding with evidence."

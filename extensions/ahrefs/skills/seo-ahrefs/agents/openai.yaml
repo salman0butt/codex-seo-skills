@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Ahrefs"
+  short_description: "Ahrefs API analyst (extension). Reads referring domains, backlinks, organic keywords, and content explorer data via the tested @ahrefs/mcp@0.0.11 se"
+  default_prompt: "Use $seo-ahrefs for this SEO request and support every finding with evidence."

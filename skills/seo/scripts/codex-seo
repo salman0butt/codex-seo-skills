@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+skill_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+if [[ -x "${skill_dir}/../../scripts/codex-seo" ]]; then
+  exec "${skill_dir}/../../scripts/codex-seo" "$@"
+fi
+exec "${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/scripts/codex-seo" "$@"

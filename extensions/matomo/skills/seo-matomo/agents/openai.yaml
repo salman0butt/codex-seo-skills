@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Matomo"
+  short_description: "Matomo Reporting API extension. Self-hosted or Matomo Cloud analytics as a GA4 alternative or complement. Organic traffic, landing pages, device / c"
+  default_prompt: "Use $seo-matomo for this SEO request and support every finding with evidence."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo"
+  short_description: "Comprehensive SEO analysis for any website or business type. Full site audits, single-page analysis, technical SEO (crawlability, indexability, Core"
+  default_prompt: "Use $seo for this SEO request and support every finding with evidence."

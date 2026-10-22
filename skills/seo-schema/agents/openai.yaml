@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Schema"
+  short_description: "SEO workflow: seo schema"
+  default_prompt: "Use $seo-schema for this SEO request and support every finding with evidence."

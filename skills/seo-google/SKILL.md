@@ -22,6 +22,12 @@ Chrome user metrics, real indexation status, search performance, and organic tra
 All APIs are free. Setup requires a Google Cloud project with API key and/or
 service account -- run `$seo google setup` for step-by-step instructions.
 
+## Codex integration preflight (v0.4.0)
+
+First run `"${HOME}/.agents/skills/seo/scripts/codex-seo" run integration_doctor.py --json`. This preflight checks only whether configuration exists; no network requests or token refresh are made. For provider setup and the difference between Claude MCP installers and Codex MCP configuration, see `../../docs/CODEX_INTEGRATIONS.md` in the repository (or the corresponding installed package docs).
+
+**Never claim that a credential's presence proves authenticated access.** The live API request is a separate, explicitly authorized step. Do not run Google's Indexing API on ordinary pages; it is restricted to qualifying `JobPosting` or `BroadcastEvent` embedded in a `VideoObject` pages. No indexing result is guaranteed.
+
 ## Prerequisites
 
 Before executing any command, check credentials:
@@ -175,17 +181,17 @@ specific URLs are indexed.
 
 Notify Google of a URL update.
 
-**Script:** `"${HOME}/.agents/skills/seo/scripts/codex-seo" run indexing_notify.py <url> --json`
+**Script:** `"${HOME}/.agents/skills/seo/scripts/codex-seo" run indexing_notify.py <url> --eligible-type JobPosting --confirm-publish --json`
 **Reference:** `references/indexing-api.md`
 
-The Indexing API is officially for JobPosting and BroadcastEvent/VideoObject pages.
+The Indexing API is officially for `JobPosting` or `BroadcastEvent` embedded in `VideoObject` pages. Publishing now **fails closed** without both `--eligible-type` and `--confirm-publish`. These flags are the operator's attestation, not proof of valid live markup or Google authorization. For normal content use sitemaps or GSC instead.
 Always inform the user of this restriction. Daily quota: 200 publish requests.
 
 ### `$seo google index-batch <file>`
 
 Batch submit URLs from a file. Tracks quota usage.
 
-**Script:** `"${HOME}/.agents/skills/seo/scripts/codex-seo" run indexing_notify.py --batch <file> --json`
+**Script:** `"${HOME}/.agents/skills/seo/scripts/codex-seo" run indexing_notify.py --batch <file> --eligible-type JobPosting --confirm-publish --json`
 
 ---
 

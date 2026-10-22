@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.3.1 release notes](docs/RELEASE_NOTES_v0.3.1.md)
+- [Version 0.4.0 release notes](docs/RELEASE_NOTES_v0.4.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -92,3 +92,11 @@ CLAUDE_SEO_PYTHON="$(command -v python3.11)" "$HOME/.agents/skills/seo/scripts/c
 ```
 
 On subsequent bare `codex-seo` launches, the wrapper selects the exact Python minor version recorded by successful setup, when an executable with that version is available. An explicit `CLAUDE_SEO_PYTHON` always wins. Re-run setup only if `doctor` reports a genuine requirements or interpreter mismatch.
+
+## Optional provider readiness (v0.4.0)
+
+```bash
+"$HOME/.agents/skills/seo/scripts/codex-seo" run integration_doctor.py --json
+```
+
+See [Codex integrations and private-provider setup](docs/CODEX_INTEGRATIONS.md). This offline preflight never outputs secrets, refreshes OAuth, connects paid providers, or assumes a configured account is authorized. The upstream extension installer scripts still target Claude-specific configuration and **must not** be used as Codex MCP installers.

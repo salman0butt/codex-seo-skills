@@ -24,3 +24,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - For untrusted live sites, use explicit user-approved scopes, DNS-pinned URL checks, and read-only access. Do not pay for external provider queries without an agreed budget.
 
 - For a read-only first-pass of **one public page**, prefer `codex-seo run quick_audit.py <url> --markdown`; this is not a browser-based full-site crawl or Google API measurement. Do not infer rankings or aggregate SEO scores.
+
+## Google and paid SEO integrations
+- Run the offline `codex-seo run integration_doctor.py --json` before deciding what providers are configured. Never treat `configured_unverified` as successful authentication.
+- Do not invoke `extensions/*/install.sh` as Codex MCP installers; upstream scripts primarily write Claude configuration. Follow `docs/CODEX_INTEGRATIONS.md` for reviewed, manual Codex MCP configuration.
+- Do not auto-run Google's Indexing API on ordinary pages; Google restricts it to specific structured-data page types. Do not make paid DataForSEO or Firecrawl requests without explicit consent and cost budget.

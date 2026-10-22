@@ -265,8 +265,26 @@ def main():
         help="Delay between batch requests in seconds (default: 0.5)",
     )
     parser.add_argument("--json", "-j", action="store_true", help="Output as JSON")
+    parser.add_argument(
+        "--eligible-type", choices=["JobPosting", "BroadcastEvent"],
+        help="Required for publishing: assert the target pages have Google-supported markup",
+    )
+    parser.add_argument(
+        "--confirm-publish", action="store_true",
+        help="Required for publishing: acknowledge this sends indexing notifications to Google",
+    )
 
     args = parser.parse_args()
+
+    # Unlike URL Inspection, publishing is an external mutation. Fail closed
+    # before loading credentials or sending any network request. A flag is
+    # operator attestation, NOT automatic markup or site ownership proof.
+    if (args.url or args.batch) and not args.status:
+        if not args.eligible_type or not args.confirm_publish:
+            parser.error(
+                "publishing requires --eligible-type JobPosting|BroadcastEvent "
+                "and --confirm-publish (eligible schema and authorization must be verified)"
+            )
 
     if args.status:
         result = get_notification_metadata(args.status)

@@ -88,5 +88,16 @@ jobs:
           ./scripts/codex-seo setup --skip-browser
           ./scripts/codex-seo doctor --json > "$RUNNER_TEMP/doctor-macos.json"
           python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"doctor-macos.json").read_text()); assert d["ready"], d'
-          ./scripts/codex-seo run quick_audit.py https://example.com/ --json > "$RUNNER_TEMP/quick-macos.json"
-          python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"quick-macos.json").read_text()); assert d["http_status"]==200, d; assert d["scope"]=="single-page-raw-html"'
+          # Public network fetches are exercised on Ubuntu; macOS verifies
+          # real runtime dispatch and fail-closed URL safety without relying
+          # on a third-party site responding successfully in every CI run.
+          ./scripts/codex-seo run schema_generate.py profile --name "Example Studio" --url https://example.com/about > "$RUNNER_TEMP/schema-macos.json"
+          python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"schema-macos.json").read_text()); assert d["@context"]=="https://schema.org"'
+          if ./scripts/codex-seo run quick_audit.py 'http://127.0.0.1/?secret=redacted' --json > "$RUNNER_TEMP/blocked-macos.json"; then
+            echo "Expected private-host audit to be blocked" >&2
+            exit 1
+          else
+            rc=$?
+            test "$rc" -eq 2
+          fi
+          python -c 'import json,os,pathlib; t=(pathlib.Path(os.environ["RUNNER_TEMP"])/"blocked-macos.json").read_text(); d=json.loads(t); assert d["outcome"]=="blocked",d; assert "secret=" not in t'

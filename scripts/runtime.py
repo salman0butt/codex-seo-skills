@@ -338,7 +338,9 @@ def command_setup(args: argparse.Namespace) -> int:
             temp_state.replace(_state_path(data_dir))
             committed = True
             shutil.rmtree(backup, ignore_errors=True)
-    except (OSError, RuntimeError) as exc:
+    except (OSError, RuntimeError, KeyboardInterrupt) as exc:
+        # SIGINT/Ctrl-C must use the same rollback path as a failed download.
+        # Otherwise a cancelled pip process can leave a staged venv behind.
         shutil.rmtree(staged, ignore_errors=True)
         temp_state.unlink(missing_ok=True)
         if not committed:
@@ -346,6 +348,9 @@ def command_setup(args: argparse.Namespace) -> int:
                 shutil.rmtree(final_venv, ignore_errors=True)
             if previous_moved and had_previous and backup.exists():
                 backup.replace(final_venv)
+        if isinstance(exc, KeyboardInterrupt):
+            print("Codex SEO setup interrupted; staged environment rolled back.", file=sys.stderr)
+            return 130
         print(f"Codex SEO setup failed: {_redact(str(exc))}", file=sys.stderr)
         return 1
     if browser_ready or args.skip_browser:

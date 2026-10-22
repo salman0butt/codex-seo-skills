@@ -45,6 +45,27 @@ class RuntimeContracts(unittest.TestCase):
             self.assertFalse((base/'runtime-data'/'.setup.lock').exists())
             self.assertIsNotNone(original)
 
+    def test_interrupted_setup_rolls_back_staged_environment(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            (root/'requirements.txt').write_text('requests>=2\n',encoding='utf-8')
+            (root/'scripts').mkdir()
+            data=root/'runtime-data'
+            def interrupted(argv, *, env, stage):
+                if stage=='virtual environment creation':
+                    Path(argv[-1]).mkdir(parents=True,exist_ok=True)
+                    return SimpleNamespace(returncode=0)
+                if stage=='pip bootstrap':
+                    raise KeyboardInterrupt()
+                return SimpleNamespace(returncode=0)
+            with patch.dict(os.environ, {'CLAUDE_SEO_DATA_DIR':str(data)}), patch.object(runtime,'_root',return_value=root), patch.object(runtime,'_run_checked',side_effect=interrupted):
+                result=runtime.command_setup(SimpleNamespace(skip_browser=True))
+            self.assertEqual(result,130)
+            self.assertFalse(list(data.glob('.venv.next-*')))
+            self.assertFalse((data/'.setup.lock').exists())
+            self.assertFalse((data/'runtime-state.json').exists())
+            self.assertFalse((data/'.venv').exists())
+
     def test_public_cli_doctor_and_restricted_run(self):
         with tempfile.TemporaryDirectory() as folder:
             env={**os.environ,'CLAUDE_SEO_DATA_DIR':str(Path(folder)/'data')}

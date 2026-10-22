@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-seo-skills",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Codex-first, evidence-led SEO skills for technical audits, content, schema, local SEO, Core Web Vitals and generative search optimization.",
   "author": {
     "name": "salman0butt",

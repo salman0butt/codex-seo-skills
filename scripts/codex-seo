@@ -2,4 +2,14 @@
 set -euo pipefail
 script_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 export CLAUDE_SEO_DATA_DIR="${CLAUDE_SEO_DATA_DIR:-${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo-runtime}"
+
+# Once setup succeeds, honor the interpreter version in its persisted state.
+# Example: the default `python3` may be 3.14 while setup was performed with
+# 3.11 for dependency-wheel compatibility. Never override an explicit choice.
+if [[ -z "${CLAUDE_SEO_PYTHON:-}" && -f "${CLAUDE_SEO_DATA_DIR}/runtime-state.json" ]]; then
+    desired="$(python3 -c 'import json,sys; p=json.load(open(sys.argv[1],encoding="utf-8")); v=p.get("python"); print(v if isinstance(v,str) and v in ("3.10","3.11","3.12","3.13","3.14","3.15") else "")' "${CLAUDE_SEO_DATA_DIR}/runtime-state.json" 2>/dev/null || true)"
+    if [[ -n "${desired}" ]] && command -v "python${desired}" >/dev/null 2>&1; then
+        export CLAUDE_SEO_PYTHON="$(command -v "python${desired}")"
+    fi
+fi
 exec "${script_dir}/claude-seo" "$@"

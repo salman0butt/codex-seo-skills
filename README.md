@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.3.0 release notes](docs/RELEASE_NOTES_v0.3.0.md)
+- [Version 0.3.1 release notes](docs/RELEASE_NOTES_v0.3.1.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -81,3 +81,14 @@ For a **read-only, single-page** check that does not require a Google account or
 ```
 
 This sends one bounded public-URL GET (and up to three redirects) using DNS-validated, pinned requests. It evaluates static HTML, includes explicit unknowns, and never generates an imaginary ranking, indexation claim, Lighthouse score or health score. `--max-bytes` can lower the 2 MiB cap; non-HTML or blocked URLs return a nonzero exit status. For rendered DOM, Core Web Vitals, private GSC/GA4 or site-wide audit, use the corresponding specialist workflows with the necessary setup and permission.
+
+## Interpreter selection after runtime setup
+
+If macOS's default `python3` is much newer than Python 3.11 and a dependency package needs compilation, set up the managed runtime with an available Python 3.11:
+
+```bash
+CLAUDE_SEO_PYTHON="$(command -v python3.11)" "$HOME/.agents/skills/seo/scripts/codex-seo" setup
+"$HOME/.agents/skills/seo/scripts/codex-seo" doctor --json
+```
+
+On subsequent bare `codex-seo` launches, the wrapper selects the exact Python minor version recorded by successful setup, when an executable with that version is available. An explicit `CLAUDE_SEO_PYTHON` always wins. Re-run setup only if `doctor` reports a genuine requirements or interpreter mismatch.

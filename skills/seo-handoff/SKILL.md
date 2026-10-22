@@ -1,0 +1,26 @@
+---
+name: seo-handoff
+description: Translate evidence-backed SEO findings into implementation tickets, acceptance criteria, validation commands, and ownership decisions.
+license: MIT
+metadata:
+  author: salman0butt
+  version: "0.2.0"
+  category: seo
+---
+# SEO implementation handoff for Codex
+
+Translate SEO findings into a practical implementation brief for a developer or site owner. Work only from supplied/verifiable facts. This is an original Codex-specific workflow, not a copy of the proprietary legacy Codex implementation.
+
+## Inputs
+Use a report, source code inspection, page observations, diagnostics, or user-provided exports. Document the data source, timestamp, scope, unknowns, and whether the finding was measured or inferred.
+
+## Steps
+1. Group each verified finding by affected URL/template/system, and deduplicate root causes.
+2. Prioritize by observed impact, confidence, affected scope, effort, and risk. Put speculative opportunities in a separate validation backlog.
+3. For each issue provide **finding**, **evidence**, **recommended change**, **owner**, **files or systems affected**, **acceptance criteria**, **verification method**, and **rollback**.
+4. Include code-level paths and example patches only when the codebase is available. Never invent exact filenames in another system.
+5. Separate advisory recommendations from authorized code changes; never deploy, submit indexing APIs, or modify external properties without a clearly authorized task.
+6. Report any blocked Google Search Console/GA4/API data as unavailable rather than asserting success.
+
+## Output
+A concise prioritized issue table, a release or sprint plan, and a post-deploy checklist: crawlable status, expected canonicals, index directives, relevant JSON-LD validation, mobile experience, Lighthouse lab and CrUX field checks when available, and Google Search Console monitoring when authorized. Explicitly state that no ranking outcome is guaranteed.

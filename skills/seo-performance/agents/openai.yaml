@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seo Performance"
+  short_description: "Evaluate performance using Core Web Vitals, page-load evidence and mobile diagnostics, distinguishing lab metrics from CrUX field data."
+  default_prompt: "Use $seo-performance for this SEO task. Follow evidence and permission requirements."

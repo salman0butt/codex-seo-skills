@@ -26,10 +26,10 @@ flowchart TD
 
 ## Coverage and meanings
 
-- **509** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
-- **26** core skill manifests; **19** specialist agent guides; **2** guide-only specialties.
+- **522** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
+- **30** core skill manifests; **19** specialist agent guides; **0** guide-only specialties.
 - **9** optional extension bundles, **7** unique additional skill names that can be registered.
-- **62** Python scripts and **71** Python test/fixture sources; **763** explicit graph relationships.
+- **62** Python scripts and **73** Python test/fixture sources; **802** explicit graph relationships.
 - **Launcher-dispatches-to** and **runtime-allowlisted-script** represent source-verified CLI plumbing; they do not assert dependencies are installed. **Static-python-import** means an actual import of a local Python module. **Owns-support-file** means packaged under that skill folder. **Mentions-script** means a literal script filename appears in instructions (not a verified invocation). **Test-source-mentions-script** does not establish test coverage.
 - Claude agent guides are reference checklists unless the running Codex harness supports delegation; agent-only guides do not represent installable skills.
 
@@ -37,6 +37,7 @@ flowchart TD
 
 | Codex skill | Agent guide | Script names mentioned in skill/guide | Support files |
 |---|---|---|---:|
+| [`skills/get-started/SKILL.md`](../skills/get-started/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 1 |
 | [`skills/seo/SKILL.md`](../skills/seo/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `install_codex.py`, `matomo_auth.py`, `seo_updates.py` | 39 |
 | [`skills/seo-agentic/SKILL.md`](../skills/seo-agentic/SKILL.md) | [`agents/seo-agentic.md`](../agents/seo-agentic.md) | `agent_ux_check.py`, `agentic_check.py`, `agentic_fix.py`, `lighthouse_agentic.py`, `render_page.py`, `ucp_check.py` | 8 |
 | [`skills/seo-audit/SKILL.md`](../skills/seo-audit/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `matomo_auth.py`, `render_page.py`, `seo_updates.py` | 2 |
@@ -51,23 +52,24 @@ flowchart TD
 | [`skills/seo-flow/SKILL.md`](../skills/seo-flow/SKILL.md) | [`agents/seo-flow.md`](../agents/seo-flow.md) | `sync_flow.py` | 46 |
 | [`skills/seo-geo/SKILL.md`](../skills/seo-geo/SKILL.md) | [`agents/seo-geo.md`](../agents/seo-geo.md) | `render_page.py`, `seo_updates.py`, `url_safety.py` | 4 |
 | [`skills/seo-google/SKILL.md`](../skills/seo-google/SKILL.md) | [`agents/seo-google.md`](../agents/seo-google.md) | `crux_history.py`, `ga4_report.py`, `google_auth.py`, `google_report.py`, `gsc_inspect.py`, `gsc_query.py`, `indexing_notify.py`, `keyword_planner.py`, `nlp_analyze.py`, `pagespeed_check.py`, `youtube_search.py` | 16 |
+| [`skills/seo-handoff/SKILL.md`](../skills/seo-handoff/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 1 |
 | [`skills/seo-hreflang/SKILL.md`](../skills/seo-hreflang/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 6 |
 | [`skills/seo-image-gen/SKILL.md`](../skills/seo-image-gen/SKILL.md) | [`agents/seo-image-gen.md`](../agents/seo-image-gen.md) | — (content/API/tool-based) | 11 |
 | [`skills/seo-images/SKILL.md`](../skills/seo-images/SKILL.md) | — (skill-only) | `iptc_ai_label.py`, `parse_html.py` | 2 |
 | [`skills/seo-local/SKILL.md`](../skills/seo-local/SKILL.md) | [`agents/seo-local.md`](../agents/seo-local.md) | `render_page.py`, `url_safety.py` | 2 |
 | [`skills/seo-maps/SKILL.md`](../skills/seo-maps/SKILL.md) | [`agents/seo-maps.md`](../agents/seo-maps.md) | — (content/API/tool-based) | 2 |
 | [`skills/seo-page/SKILL.md`](../skills/seo-page/SKILL.md) | — (skill-only) | `metadata_template.py` | 2 |
+| [`skills/seo-performance/SKILL.md`](../skills/seo-performance/SKILL.md) | [`agents/seo-performance.md`](../agents/seo-performance.md) | `crux_history.py`, `pagespeed_check.py`, `render_page.py` | 1 |
 | [`skills/seo-plan/SKILL.md`](../skills/seo-plan/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 8 |
 | [`skills/seo-programmatic/SKILL.md`](../skills/seo-programmatic/SKILL.md) | — (skill-only) | `metadata_template.py` | 2 |
 | [`skills/seo-schema/SKILL.md`](../skills/seo-schema/SKILL.md) | [`agents/seo-schema.md`](../agents/seo-schema.md) | `parse_html.py`, `render_page.py`, `url_safety.py` | 3 |
 | [`skills/seo-sitemap/SKILL.md`](../skills/seo-sitemap/SKILL.md) | [`agents/seo-sitemap.md`](../agents/seo-sitemap.md) | `sitemap_discovery.py` | 2 |
 | [`skills/seo-sxo/SKILL.md`](../skills/seo-sxo/SKILL.md) | [`agents/seo-sxo.md`](../agents/seo-sxo.md) | `parse_html.py`, `render_page.py`, `url_safety.py` | 5 |
 | [`skills/seo-technical/SKILL.md`](../skills/seo-technical/SKILL.md) | [`agents/seo-technical.md`](../agents/seo-technical.md) | `agent_ux_check.py`, `agentic_check.py`, `crux_history.py`, `fetch_page.py`, `gsc_inspect.py`, `pagespeed_check.py`, `render_page.py`, `sitemap_discovery.py`, `url_safety.py` | 3 |
+| [`skills/seo-visual/SKILL.md`](../skills/seo-visual/SKILL.md) | [`agents/seo-visual.md`](../agents/seo-visual.md) | `capture_screenshot.py`, `render_page.py` | 1 |
 
 ## Agent-only guides (not separate `$...` skills)
 
-- **`seo-performance`** — [`agents/seo-performance.md`](../agents/seo-performance.md); usable as an orchestrator checklist (no native `skills/seo-performance/SKILL.md`).
-- **`seo-visual`** — [`agents/seo-visual.md`](../agents/seo-visual.md); usable as an orchestrator checklist (no native `skills/seo-visual/SKILL.md`).
 
 ## Optional extensions
 
@@ -128,19 +130,19 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/lighthouse_agentic.py`](../scripts/lighthouse_agentic.py) | `seo-agentic`, `seo-agentic` | `test_agentic.py`, `test_hostile_inputs.py` |
 | [`scripts/matomo_auth.py`](../scripts/matomo_auth.py) | `seo-audit`, `seo` | `test_matomo_report.py` |
 | [`scripts/matomo_report.py`](../scripts/matomo_report.py) | — (utility/internal/unreferenced) | `test_matomo_report.py` |
-| [`scripts/metadata_template.py`](../scripts/metadata_template.py) | `seo-content`, `seo-page`, `seo-programmatic` | `test_metadata_template.py`, `test_no_em_dash.py` |
+| [`scripts/metadata_template.py`](../scripts/metadata_template.py) | `seo-content`, `seo-page`, `seo-programmatic` | `test_codex_runtime_contract.py`, `test_metadata_template.py`, `test_no_em_dash.py` |
 | [`scripts/moz_api.py`](../scripts/moz_api.py) | `seo-backlinks`, `seo-backlinks` | `test_moz_api.py` |
 | [`scripts/nlp_analyze.py`](../scripts/nlp_analyze.py) | `seo-google` | `test_fetch_page_decoding.py`, `test_google_api_key_safety.py`, `test_nlp_analyze.py` |
-| [`scripts/pagespeed_check.py`](../scripts/pagespeed_check.py) | `seo-google`, `seo-performance`, `seo-drift`, `seo-google`, `seo-technical` | `test_google_api_key_safety.py`, `test_pagespeed_null_category_score.py` |
+| [`scripts/pagespeed_check.py`](../scripts/pagespeed_check.py) | `seo-google`, `seo-performance`, `seo-drift`, `seo-google`, `seo-performance`, `seo-technical` | `test_google_api_key_safety.py`, `test_pagespeed_null_category_score.py` |
 | [`scripts/parasite_risk.py`](../scripts/parasite_risk.py) | — (utility/internal/unreferenced) | `test_fetch_page_decoding.py`, `test_parasite_risk_and_extensions.py` |
 | [`scripts/parse_html.py`](../scripts/parse_html.py) | `seo-ecommerce`, `seo-sxo`, `seo-drift`, `seo-ecommerce`, `seo-images`, `seo-schema`, `seo-sxo` | `test_agent_untrusted_content.py`, `test_drift_portability.py`, `test_fetch_page_decoding.py`, `test_lazy_detection.py`, `test_parse_html_rel_case.py` |
 | [`scripts/portability_check.py`](../scripts/portability_check.py) | — (utility/internal/unreferenced) | `test_portability.py` |
 | [`scripts/preload_check.py`](../scripts/preload_check.py) | — (utility/internal/unreferenced) | `test_fetch_page_decoding.py`, `test_technical_depth.py` |
 | [`scripts/release_sign.py`](../scripts/release_sign.py) | — (utility/internal/unreferenced) | — |
 | [`scripts/render_page.py`](../scripts/render_page.py) | `seo-agentic`, `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-performance`, `seo-schema`, `seo-sxo`, `seo-technical`, `seo-visual`, `seo-audit`, `seo-cluster`, `seo-ecommerce`, `seo-sxo`, `seo-technical` | `test_agent_untrusted_content.py`, `test_agentic.py`, `test_audit_instructions.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_phase_j_executable.py`, `test_render_page.py`, `test_runtime.py` |
-| [`scripts/runtime.py`](../scripts/runtime.py) | — (utility/internal/unreferenced) | `test_agentic.py`, `test_hosted_plugin_layout.py`, `test_manual_install_layout.py`, `test_runtime.py`, `test_runtime_installers.py`, `test_schema_hook_detection.py` |
+| [`scripts/runtime.py`](../scripts/runtime.py) | — (utility/internal/unreferenced) | `test_agentic.py`, `test_codex_runtime_contract.py`, `test_hosted_plugin_layout.py`, `test_manual_install_layout.py`, `test_runtime.py`, `test_runtime_installers.py`, `test_schema_hook_detection.py` |
 | [`scripts/schema_ecommerce_validate.py`](../scripts/schema_ecommerce_validate.py) | — (utility/internal/unreferenced) | `test_schema_v2.py` |
-| [`scripts/schema_generate.py`](../scripts/schema_generate.py) | — (utility/internal/unreferenced) | `test_schema_v2.py` |
+| [`scripts/schema_generate.py`](../scripts/schema_generate.py) | — (utility/internal/unreferenced) | `test_codex_runtime_contract.py`, `test_schema_v2.py` |
 | [`scripts/seo_updates.py`](../scripts/seo_updates.py) | `seo-audit`, `seo-content`, `seo-geo`, `seo` | `test_content_quality.py`, `test_manual_install_layout.py` |
 | [`scripts/sitemap_discovery.py`](../scripts/sitemap_discovery.py) | `seo-sitemap`, `seo-technical`, `seo-sitemap`, `seo-technical` | `test_sitemap_discovery.py` |
 | [`scripts/sync_flow.py`](../scripts/sync_flow.py) | `seo-flow` | `test_no_em_dash.py`, `test_sync_flow.py` |

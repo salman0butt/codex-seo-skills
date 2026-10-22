@@ -93,7 +93,7 @@ def build():
     for p in paths:
         if p.startswith('extensions/'):
             extensions[Path(p).parts[1]].append(p)
-    if len(core) != 26 or len(agents) != 19 or len(extensions) != 9:
+    if len(core) != 30 or len(agents) != 19 or len(extensions) != 9:
         raise RuntimeError(f'unexpected source manifest counts: {len(core)} core, {len(agents)} agents, {len(extensions)} extension bundles')
 
     file_records = []

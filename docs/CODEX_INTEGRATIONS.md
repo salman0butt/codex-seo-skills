@@ -50,3 +50,23 @@ Treat DataForSEO cost estimates as approximate, never guaranteed charges. Use th
 ## Step 4 — What remains blocked without actual access
 
 Actual search clicks, impressions, GA4 sessions, indexing details, CrUX data availability and paid-provider responses are **not available from local configuration inspection alone**. To verify those, the user must supply an authorized property and an appropriate service connection. Use one low-impact, clearly identified read-only query per provider, record the date and API response, and stop on authentication, permission, quota or billing errors. Never mislabel an empty API response as a healthy SEO outcome.
+
+## Step 5 — Explicit live verification (v0.5.0)
+
+The offline `integration_doctor.py` does **not** authorize live calls. To test actual API connectivity, use `live_integration_verify.py`. Without `--live` it exits nonzero and makes **zero HTTP requests**. Live probes make one read-only call to the selected Google API; an OAuth-backed property check can also refresh a Google token (consent implied only when passing `--allow-account-read`).
+
+```bash
+# Public, anonymous PageSpeed Lighthouse SEO-category, mobile device only
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py pagespeed --url https://example.com/ --live
+
+# Public CrUX field data (must have a configured key)
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py crux --url https://example.com/ --live
+
+# Only for properties you can legally access and have configured credentials for
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py gsc --property sc-domain:example.com --live --allow-account-read
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py ga4 --property 123456789 --live --allow-account-read
+```
+
+Responses intentionally omit token contents, service-account paths, queried account identities, raw HTTP response bodies, GSC ownership roles, GA4 business data and detailed provider exception strings. `verified` means **this specific API endpoint returned the expected structure**, not that any other permission, property, Google ranking, Core Web Vitals field dataset, or report is available. GSC and GA4 probes check only **metadata**, not Search Analytics or sessions. HTTP 429 is `rate_limited` with no score; 404 from CrUX is `field_data_unavailable`, not a performance failure. The tool does not retry. Timeouts are bounded; targets containing embedded authentication or query-string tokens are rejected.
+
+An anonymous PageSpeed mobile SEO-category probe returned **HTTP 429** from the checked Mac on 2026-10-22. That result proves the endpoint was reached but **does not confirm Lighthouse execution**. A configured API key may be appropriate; don't hardcode or paste it into prompts. Never interpret API denial as a low SEO score. Paid providers remain outside this verifier and require explicit separate approval.

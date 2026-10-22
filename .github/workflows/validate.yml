@@ -33,6 +33,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_integration_doctor.py -v
       - name: Verify Indexing API publish restrictions
         run: python -m unittest discover -s tests -p test_indexing_publish_guard.py -v
+      - name: Verify bounded Google API connectivity contracts (mocked)
+        run: python -m unittest discover -s tests -p test_live_integration_verify.py -v
   upstream-contracts:
     runs-on: ubuntu-latest
     steps:
@@ -72,6 +74,13 @@ jobs:
           PLAYWRIGHT_BROWSERS_PATH="$XDG_DATA_HOME/codex-seo-runtime/ms-playwright" "$XDG_DATA_HOME/codex-seo-runtime/.venv/bin/python" -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); page=b.new_page(); page.set_content("<title>Codex SEO smoke</title><h1>Smoke</h1>"); assert page.title()=="Codex SEO smoke"; b.close(); p.stop()'
           ./scripts/codex-seo run render_page.py https://example.com/ --mode always --viewport mobile --timeout-ms 20000 --json --max-text 10000 > "$RUNNER_TEMP/live-render.json"
           python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-render.json").read_text()); assert r["error"] is None, r["error"]; assert r["status_code"]==200, r["status_code"]; assert "Example Domain" in (r.get("content") or r.get("raw_content") or ""), r.keys()'
+          if ./scripts/codex-seo run live_integration_verify.py pagespeed --url https://example.com/ > "$RUNNER_TEMP/live-blocked.json"; then
+            echo "Live verifier unexpectedly succeeded without --live" >&2
+            exit 1
+          else
+            test "$?" -eq 2
+          fi
+          python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-blocked.json").read_text()); assert r["network_requests"]==0; assert not r["live_verified"]'
           ./scripts/codex-seo run integration_doctor.py --json > "$RUNNER_TEMP/integrations.json"
           python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"integrations.json").read_text()); assert d["network_requests"]==0; assert not any(x["live_verified"] for x in d["services"].values())'
           ./scripts/codex-seo run quick_audit.py https://example.com/ --json > "$RUNNER_TEMP/quick-audit.json"

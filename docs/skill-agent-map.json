@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 526,
+    "total_repo_files": 528,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
     "python_scripts": 63,
-    "test_python_files": 74,
-    "graph_edges": 808
+    "test_python_files": 75,
+    "graph_edges": 809
   },
   "agent_only": [],
   "skills": [
@@ -1486,6 +1486,7 @@
       "mentioned_by": [],
       "test_sources_mentioning": [
         "tests/test_agentic.py",
+        "tests/test_codex_launcher.py",
         "tests/test_codex_runtime_contract.py",
         "tests/test_hosted_plugin_layout.py",
         "tests/test_manual_install_layout.py",
@@ -2663,6 +2664,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES_v0.3.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/RELEASE_NOTES_v0.3.1.md",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],
@@ -6032,6 +6040,10 @@
         },
         {
           "path": "tests/test_agentic.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_codex_launcher.py",
           "relation": "test-source-mentions-script"
         },
         {
@@ -11496,6 +11508,18 @@
       ]
     },
     {
+      "path": "tests/test_codex_launcher.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_codex_manifest.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -15902,6 +15926,11 @@
     {
       "from": "tests/test_codex_installer.py",
       "to": "scripts/install_codex.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_codex_launcher.py",
+      "to": "scripts/runtime.py",
       "relation": "test-source-mentions-script"
     },
     {

@@ -25,6 +25,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_codex_runtime_contract.py -v
       - name: Verify portable plugin manifest
         run: python -m unittest discover -s tests -p test_codex_manifest.py -v
+      - name: Verify persisted runtime Python selection
+        run: python -m unittest discover -s tests -p test_codex_launcher.py -v
       - name: Verify bounded public-page audit contracts
         run: python -m unittest discover -s tests -p test_quick_audit.py -v
   upstream-contracts:

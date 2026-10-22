@@ -26,10 +26,10 @@ flowchart TD
 
 ## Coverage and meanings
 
-- **536** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
+- **539** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
 - **30** core skill manifests; **19** specialist agent guides; **0** guide-only specialties.
 - **9** optional extension bundles, **7** unique additional skill names that can be registered.
-- **65** Python scripts and **78** Python test/fixture sources; **824** explicit graph relationships.
+- **66** Python scripts and **79** Python test/fixture sources; **831** explicit graph relationships.
 - **Launcher-dispatches-to** and **runtime-allowlisted-script** represent source-verified CLI plumbing; they do not assert dependencies are installed. **Static-python-import** means an actual import of a local Python module. **Owns-support-file** means packaged under that skill folder. **Mentions-script** means a literal script filename appears in instructions (not a verified invocation). **Test-source-mentions-script** does not establish test coverage.
 - Claude agent guides are reference checklists unless the running Codex harness supports delegation; agent-only guides do not represent installable skills.
 
@@ -51,8 +51,8 @@ flowchart TD
 | [`skills/seo-ecommerce/SKILL.md`](../skills/seo-ecommerce/SKILL.md) | [`agents/seo-ecommerce.md`](../agents/seo-ecommerce.md) | `dataforseo_costs.py`, `dataforseo_merchant.py`, `dataforseo_normalize.py`, `parse_html.py`, `render_page.py`, `ucp_check.py`, `url_safety.py` | 3 |
 | [`skills/seo-flow/SKILL.md`](../skills/seo-flow/SKILL.md) | [`agents/seo-flow.md`](../agents/seo-flow.md) | `sync_flow.py` | 46 |
 | [`skills/seo-geo/SKILL.md`](../skills/seo-geo/SKILL.md) | [`agents/seo-geo.md`](../agents/seo-geo.md) | `render_page.py`, `seo_updates.py`, `url_safety.py` | 4 |
-| [`skills/seo-google/SKILL.md`](../skills/seo-google/SKILL.md) | [`agents/seo-google.md`](../agents/seo-google.md) | `crux_history.py`, `ga4_report.py`, `google_auth.py`, `google_report.py`, `gsc_inspect.py`, `gsc_query.py`, `indexing_notify.py`, `integration_doctor.py`, `keyword_planner.py`, `live_integration_verify.py`, `nlp_analyze.py`, `pagespeed_check.py`, `youtube_search.py` | 16 |
-| [`skills/seo-handoff/SKILL.md`](../skills/seo-handoff/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 1 |
+| [`skills/seo-google/SKILL.md`](../skills/seo-google/SKILL.md) | [`agents/seo-google.md`](../agents/seo-google.md) | `crux_history.py`, `ga4_report.py`, `google_auth.py`, `google_report.py`, `gsc_inspect.py`, `gsc_query.py`, `indexing_notify.py`, `integration_doctor.py`, `keyword_planner.py`, `live_integration_verify.py`, `nlp_analyze.py`, `pagespeed_check.py`, `private_seo_report.py`, `youtube_search.py` | 16 |
+| [`skills/seo-handoff/SKILL.md`](../skills/seo-handoff/SKILL.md) | — (skill-only) | `private_seo_report.py` | 1 |
 | [`skills/seo-hreflang/SKILL.md`](../skills/seo-hreflang/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 6 |
 | [`skills/seo-image-gen/SKILL.md`](../skills/seo-image-gen/SKILL.md) | [`agents/seo-image-gen.md`](../agents/seo-image-gen.md) | — (content/API/tool-based) | 11 |
 | [`skills/seo-images/SKILL.md`](../skills/seo-images/SKILL.md) | — (skill-only) | `iptc_ai_label.py`, `parse_html.py` | 2 |
@@ -129,7 +129,7 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/keywordseverywhere_api.py`](../scripts/keywordseverywhere_api.py) | `seo-backlinks` | `test_hostile_inputs.py`, `test_keywordseverywhere_api.py`, `test_runtime.py` |
 | [`scripts/lcp_subparts.py`](../scripts/lcp_subparts.py) | — (utility/internal/unreferenced) | `test_google_api_key_safety.py`, `test_technical_depth.py` |
 | [`scripts/lighthouse_agentic.py`](../scripts/lighthouse_agentic.py) | `seo-agentic`, `seo-agentic` | `test_agentic.py`, `test_hostile_inputs.py` |
-| [`scripts/live_integration_verify.py`](../scripts/live_integration_verify.py) | `seo-google`, `seo-performance` | `test_live_integration_verify.py` |
+| [`scripts/live_integration_verify.py`](../scripts/live_integration_verify.py) | `seo-google`, `seo-performance` | `test_live_integration_verify.py`, `test_private_seo_report.py` |
 | [`scripts/matomo_auth.py`](../scripts/matomo_auth.py) | `seo-audit`, `seo` | `test_matomo_report.py` |
 | [`scripts/matomo_report.py`](../scripts/matomo_report.py) | — (utility/internal/unreferenced) | `test_matomo_report.py` |
 | [`scripts/metadata_template.py`](../scripts/metadata_template.py) | `seo-content`, `seo-page`, `seo-programmatic` | `test_codex_runtime_contract.py`, `test_metadata_template.py`, `test_no_em_dash.py` |
@@ -140,6 +140,7 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/parse_html.py`](../scripts/parse_html.py) | `seo-ecommerce`, `seo-sxo`, `seo-drift`, `seo-ecommerce`, `seo-images`, `seo-schema`, `seo-sxo` | `test_agent_untrusted_content.py`, `test_drift_portability.py`, `test_fetch_page_decoding.py`, `test_lazy_detection.py`, `test_parse_html_rel_case.py` |
 | [`scripts/portability_check.py`](../scripts/portability_check.py) | — (utility/internal/unreferenced) | `test_portability.py` |
 | [`scripts/preload_check.py`](../scripts/preload_check.py) | — (utility/internal/unreferenced) | `test_fetch_page_decoding.py`, `test_technical_depth.py` |
+| [`scripts/private_seo_report.py`](../scripts/private_seo_report.py) | `seo-google`, `seo-handoff` | `test_private_seo_report.py` |
 | [`scripts/quick_audit.py`](../scripts/quick_audit.py) | `get-started`, `seo-page` | `test_quick_audit.py` |
 | [`scripts/release_sign.py`](../scripts/release_sign.py) | — (utility/internal/unreferenced) | — |
 | [`scripts/render_page.py`](../scripts/render_page.py) | `seo-agentic`, `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-performance`, `seo-schema`, `seo-sxo`, `seo-technical`, `seo-visual`, `seo-audit`, `seo-cluster`, `seo-ecommerce`, `seo-sxo`, `seo-technical` | `test_agent_untrusted_content.py`, `test_agentic.py`, `test_audit_instructions.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_phase_j_executable.py`, `test_render_page.py`, `test_runtime.py` |

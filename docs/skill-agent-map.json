@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 536,
+    "total_repo_files": 539,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
-    "python_scripts": 65,
-    "test_python_files": 78,
-    "graph_edges": 824
+    "python_scripts": 66,
+    "test_python_files": 79,
+    "graph_edges": 831
   },
   "agent_only": [],
   "skills": [
@@ -446,6 +446,7 @@
         "live_integration_verify.py",
         "nlp_analyze.py",
         "pagespeed_check.py",
+        "private_seo_report.py",
         "youtube_search.py"
       ],
       "mentioned_scripts_agent": [
@@ -484,7 +485,9 @@
       "manifest": "skills/seo-handoff/SKILL.md",
       "agent_guide": null,
       "reference_guide_mirror": null,
-      "mentioned_scripts_skill": [],
+      "mentioned_scripts_skill": [
+        "private_seo_report.py"
+      ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [],
       "owned_support_files": [
@@ -1342,7 +1345,8 @@
         "skills/seo-performance/SKILL.md"
       ],
       "test_sources_mentioning": [
-        "tests/test_live_integration_verify.py"
+        "tests/test_live_integration_verify.py",
+        "tests/test_private_seo_report.py"
       ]
     },
     {
@@ -1461,6 +1465,17 @@
       "test_sources_mentioning": [
         "tests/test_fetch_page_decoding.py",
         "tests/test_technical_depth.py"
+      ]
+    },
+    {
+      "script": "private_seo_report.py",
+      "path": "scripts/private_seo_report.py",
+      "mentioned_by": [
+        "skills/seo-google/SKILL.md",
+        "skills/seo-handoff/SKILL.md"
+      ],
+      "test_sources_mentioning": [
+        "tests/test_private_seo_report.py"
       ]
     },
     {
@@ -2725,6 +2740,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES_v0.5.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/RELEASE_NOTES_v0.6.0.md",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],
@@ -5082,6 +5104,10 @@
           "relation": "static-python-import"
         },
         {
+          "path": "scripts/private_seo_report.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/runtime.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -5620,6 +5646,10 @@
       "owner": "runtime",
       "incoming": [
         {
+          "path": "scripts/private_seo_report.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/runtime.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -5633,6 +5663,10 @@
         },
         {
           "path": "tests/test_live_integration_verify.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_private_seo_report.py",
           "relation": "test-source-mentions-script"
         }
       ],
@@ -5995,6 +6029,39 @@
       "outgoing": [
         {
           "path": "scripts/url_safety.py",
+          "relation": "static-python-import"
+        }
+      ]
+    },
+    {
+      "path": "scripts/private_seo_report.py",
+      "kind": "execution-script-or-launcher",
+      "owner": "runtime",
+      "incoming": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "skills/seo-google/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_private_seo_report.py",
+          "relation": "test-source-mentions-script"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "scripts/google_auth.py",
+          "relation": "static-python-import"
+        },
+        {
+          "path": "scripts/live_integration_verify.py",
           "relation": "static-python-import"
         }
       ]
@@ -6389,6 +6456,10 @@
         },
         {
           "path": "scripts/preload_check.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "scripts/private_seo_report.py",
           "relation": "runtime-allowlisted-script"
         },
         {
@@ -9038,6 +9109,10 @@
           "relation": "mentions-script"
         },
         {
+          "path": "scripts/private_seo_report.py",
+          "relation": "mentions-script"
+        },
+        {
           "path": "scripts/youtube_search.py",
           "relation": "mentions-script"
         },
@@ -9310,6 +9385,10 @@
         }
       ],
       "outgoing": [
+        {
+          "path": "scripts/private_seo_report.py",
+          "relation": "mentions-script"
+        },
         {
           "path": "skills/seo-handoff/agents/openai.yaml",
           "relation": "owns-support-file"
@@ -12331,6 +12410,22 @@
       "outgoing": []
     },
     {
+      "path": "tests/test_private_seo_report.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/live_integration_verify.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/private_seo_report.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_pyproject_metadata.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -13699,6 +13794,16 @@
       "relation": "static-python-import"
     },
     {
+      "from": "scripts/private_seo_report.py",
+      "to": "scripts/google_auth.py",
+      "relation": "static-python-import"
+    },
+    {
+      "from": "scripts/private_seo_report.py",
+      "to": "scripts/live_integration_verify.py",
+      "relation": "static-python-import"
+    },
+    {
       "from": "scripts/quick_audit.py",
       "to": "scripts/parse_html.py",
       "relation": "static-python-import"
@@ -13946,6 +14051,11 @@
     {
       "from": "scripts/runtime.py",
       "to": "scripts/preload_check.py",
+      "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/runtime.py",
+      "to": "scripts/private_seo_report.py",
       "relation": "runtime-allowlisted-script"
     },
     {
@@ -15150,6 +15260,11 @@
     },
     {
       "from": "skills/seo-google/SKILL.md",
+      "to": "scripts/private_seo_report.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-google/SKILL.md",
       "to": "scripts/youtube_search.py",
       "relation": "mentions-script"
     },
@@ -15237,6 +15352,11 @@
       "from": "skills/seo-google/SKILL.md",
       "to": "skills/seo/SKILL.md",
       "relation": "references-codex-skill"
+    },
+    {
+      "from": "skills/seo-handoff/SKILL.md",
+      "to": "scripts/private_seo_report.py",
+      "relation": "mentions-script"
     },
     {
       "from": "skills/seo-handoff/SKILL.md",
@@ -16566,6 +16686,16 @@
     {
       "from": "tests/test_portability.py",
       "to": "scripts/portability_check.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_private_seo_report.py",
+      "to": "scripts/live_integration_verify.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_private_seo_report.py",
+      "to": "scripts/private_seo_report.py",
       "relation": "test-source-mentions-script"
     },
     {

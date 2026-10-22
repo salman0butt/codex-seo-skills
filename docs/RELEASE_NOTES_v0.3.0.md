@@ -13,7 +13,7 @@
 
 - On the connected Mac: all 30 core skills installed at `~/.agents/skills/`; a Python 3.11 managed runtime reported both `ready: true` and `browser_ready: true`; the runner made a successful HTTP 200 read-only audit of `https://digitalmx.no/` on 2026-10-22, finding 3/35 images lacking an alt attribute in raw HTML. A separate Playwright Chromium mobile render succeeded (HTTP 200, `mode_used=rendered`, no error). This is a **review item**, not a demonstrated SEO ranking issue.
 - CI must pass on the exact release commit: portability, isolated installation, mapping, upstream contracts, Ubuntu Chromium rendering, macOS managed-core setup, and the new bounded public-page audit.
-- Codex CLI 0.163.0 was launched on the connected Mac; its `debug prompt-input` showed registered SEO skill names including `seo-page`, `seo-geo`, `get-started`, and `seo-handoff`. This verifies discovery metadata, not model-driven skill execution. The CLI reports a signed-in ChatGPT session; no autonomous edits were performed by Codex.
+- Codex CLI 0.163.0 was launched on the connected Mac; `debug prompt-input` included `seo-page`, `seo-geo`, `get-started`, and `seo-handoff`. A separate **read-only ephemeral Codex model invocation** used `$get-started` to route the supplied no-network, no-edit single-page request to `$seo-page`. No commands or network requests were performed in that validation; therefore it verifies skill routing but not the Codex model executing the audit itself.
 - Third-party account API integrations are separately tracked; this release is not a promise of GSC/GA4 authentication or full-site crawling.
 
 ## Install

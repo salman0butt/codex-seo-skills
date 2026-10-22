@@ -290,7 +290,7 @@ def test_faqpage_guidance_does_not_claim_unconfirmed_benefits() -> None:
 
     root = Path(__file__).resolve().parents[1]
     targets = [
-        root / "hooks" / "validate-schema.py",
+        root / "skills" / "seo-schema" / "SKILL.md",
         root / "docs" / "TROUBLESHOOTING.md",
         root / "skills" / "seo-content-brief" / "references"
         / "page-type-templates.md",

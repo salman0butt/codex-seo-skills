@@ -21,3 +21,7 @@ Use this skill to route an SEO request safely. This is an original Codex-specifi
 
 ## Completion contract
 Provide a specific skill route, stated inputs, blocked dependencies, and the first actionable step. Never pretend that a reference to a skill executed a tool or approved external changes.
+
+## Optional bounded public-page check
+
+When a user wants an initial single-page SEO check and the managed runtime is ready, run `"${HOME}/.agents/skills/seo/scripts/codex-seo" run quick_audit.py <public-url> --markdown`. This one-request static audit is not a substitute for an authenticated, rendered, multi-page audit.

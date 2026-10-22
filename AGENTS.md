@@ -22,3 +22,5 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - The portable `plugin.json` is optional packaging metadata; it does not connect any MCP providers or install Python dependencies.
 - Check `python3 scripts/generate_skill_map.py --check`, `python3 scripts/portability_check.py --strict`, and the `test_codex_*.py` smoke tests before publishing.
 - For untrusted live sites, use explicit user-approved scopes, DNS-pinned URL checks, and read-only access. Do not pay for external provider queries without an agreed budget.
+
+- For a read-only first-pass of **one public page**, prefer `codex-seo run quick_audit.py <url> --markdown`; this is not a browser-based full-site crawl or Google API measurement. Do not infer rankings or aggregate SEO scores.

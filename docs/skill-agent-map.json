@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 523,
+    "total_repo_files": 526,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
-    "python_scripts": 62,
-    "test_python_files": 73,
-    "graph_edges": 802
+    "python_scripts": 63,
+    "test_python_files": 74,
+    "graph_edges": 808
   },
   "agent_only": [],
   "skills": [
@@ -20,7 +20,9 @@
       "manifest": "skills/get-started/SKILL.md",
       "agent_guide": null,
       "reference_guide_mirror": null,
-      "mentioned_scripts_skill": [],
+      "mentioned_scripts_skill": [
+        "quick_audit.py"
+      ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [
         "seo-audit",
@@ -586,7 +588,8 @@
       "agent_guide": null,
       "reference_guide_mirror": null,
       "mentioned_scripts_skill": [
-        "metadata_template.py"
+        "metadata_template.py",
+        "quick_audit.py"
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [],
@@ -1426,6 +1429,17 @@
       "test_sources_mentioning": [
         "tests/test_fetch_page_decoding.py",
         "tests/test_technical_depth.py"
+      ]
+    },
+    {
+      "script": "quick_audit.py",
+      "path": "scripts/quick_audit.py",
+      "mentioned_by": [
+        "skills/get-started/SKILL.md",
+        "skills/seo-page/SKILL.md"
+      ],
+      "test_sources_mentioning": [
+        "tests/test_quick_audit.py"
       ]
     },
     {
@@ -2642,6 +2656,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES_v0.2.1.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/RELEASE_NOTES_v0.3.0.md",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],
@@ -5739,6 +5760,10 @@
           "relation": "mentions-script"
         },
         {
+          "path": "scripts/quick_audit.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/runtime.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -5829,6 +5854,39 @@
         }
       ],
       "outgoing": [
+        {
+          "path": "scripts/url_safety.py",
+          "relation": "static-python-import"
+        }
+      ]
+    },
+    {
+      "path": "scripts/quick_audit.py",
+      "kind": "execution-script-or-launcher",
+      "owner": "runtime",
+      "incoming": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-page/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_quick_audit.py",
+          "relation": "test-source-mentions-script"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "scripts/parse_html.py",
+          "relation": "static-python-import"
+        },
         {
           "path": "scripts/url_safety.py",
           "relation": "static-python-import"
@@ -6183,6 +6241,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/quick_audit.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
           "path": "scripts/render_page.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -6529,6 +6591,10 @@
           "relation": "static-python-import"
         },
         {
+          "path": "scripts/quick_audit.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/render_page.py",
           "relation": "static-python-import"
         },
@@ -6730,6 +6796,10 @@
         {
           "path": "agents/seo-visual.md",
           "relation": "mentions-specialist-agent-guide"
+        },
+        {
+          "path": "scripts/quick_audit.py",
+          "relation": "mentions-script"
         },
         {
           "path": "skills/get-started/agents/openai.yaml",
@@ -9616,6 +9686,10 @@
           "relation": "mentions-script"
         },
         {
+          "path": "scripts/quick_audit.py",
+          "relation": "mentions-script"
+        },
+        {
           "path": "skills/seo-page/LICENSE.txt",
           "relation": "owns-support-file"
         },
@@ -12025,6 +12099,18 @@
       "outgoing": []
     },
     {
+      "path": "tests/test_quick_audit.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/quick_audit.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_render_page.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -13364,6 +13450,16 @@
       "relation": "static-python-import"
     },
     {
+      "from": "scripts/quick_audit.py",
+      "to": "scripts/parse_html.py",
+      "relation": "static-python-import"
+    },
+    {
+      "from": "scripts/quick_audit.py",
+      "to": "scripts/url_safety.py",
+      "relation": "static-python-import"
+    },
+    {
       "from": "scripts/render_page.py",
       "to": "scripts/url_safety.py",
       "relation": "static-python-import"
@@ -13595,6 +13691,11 @@
     },
     {
       "from": "scripts/runtime.py",
+      "to": "scripts/quick_audit.py",
+      "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/runtime.py",
       "to": "scripts/render_page.py",
       "relation": "runtime-allowlisted-script"
     },
@@ -13732,6 +13833,11 @@
       "from": "skills/get-started/SKILL.md",
       "to": "agents/seo-visual.md",
       "relation": "mentions-specialist-agent-guide"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "scripts/quick_audit.py",
+      "relation": "mentions-script"
     },
     {
       "from": "skills/get-started/SKILL.md",
@@ -15060,6 +15166,11 @@
     },
     {
       "from": "skills/seo-page/SKILL.md",
+      "to": "scripts/quick_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-page/SKILL.md",
       "to": "skills/seo-page/LICENSE.txt",
       "relation": "owns-support-file"
     },
@@ -16136,6 +16247,11 @@
     {
       "from": "tests/test_portability.py",
       "to": "scripts/portability_check.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_quick_audit.py",
+      "to": "scripts/quick_audit.py",
       "relation": "test-source-mentions-script"
     },
     {

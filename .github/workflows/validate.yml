@@ -25,6 +25,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_codex_runtime_contract.py -v
       - name: Verify portable plugin manifest
         run: python -m unittest discover -s tests -p test_codex_manifest.py -v
+      - name: Verify bounded public-page audit contracts
+        run: python -m unittest discover -s tests -p test_quick_audit.py -v
   upstream-contracts:
     runs-on: ubuntu-latest
     steps:
@@ -64,3 +66,25 @@ jobs:
           PLAYWRIGHT_BROWSERS_PATH="$XDG_DATA_HOME/codex-seo-runtime/ms-playwright" "$XDG_DATA_HOME/codex-seo-runtime/.venv/bin/python" -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); page=b.new_page(); page.set_content("<title>Codex SEO smoke</title><h1>Smoke</h1>"); assert page.title()=="Codex SEO smoke"; b.close(); p.stop()'
           ./scripts/codex-seo run render_page.py https://example.com/ --mode always --viewport mobile --timeout-ms 20000 --json --max-text 10000 > "$RUNNER_TEMP/live-render.json"
           python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-render.json").read_text()); assert r["error"] is None, r["error"]; assert r["status_code"]==200, r["status_code"]; assert "Example Domain" in (r.get("content") or r.get("raw_content") or ""), r.keys()'
+          ./scripts/codex-seo run quick_audit.py https://example.com/ --json > "$RUNNER_TEMP/quick-audit.json"
+          python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"quick-audit.json").read_text()); assert r["http_status"]==200, r; assert r["observations"]["title"]=="Example Domain"; assert r["seo_score"] is None; assert r["scope"]=="single-page-raw-html"'
+  macos-runtime-smoke:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check macOS managed Python environment and public audit
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/codex-seo-macos
+          PIP_TIMEOUT: '30'
+          PIP_RETRIES: '3'
+          PIP_RESUME_RETRIES: '3'
+        run: |
+          ./scripts/codex-seo setup --skip-browser
+          ./scripts/codex-seo doctor --json > "$RUNNER_TEMP/doctor-macos.json"
+          python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"doctor-macos.json").read_text()); assert d["ready"], d'
+          ./scripts/codex-seo run quick_audit.py https://example.com/ --json > "$RUNNER_TEMP/quick-macos.json"
+          python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"quick-macos.json").read_text()); assert d["http_status"]==200, d; assert d["scope"]=="single-page-raw-html"'

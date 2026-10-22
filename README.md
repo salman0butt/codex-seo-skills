@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.6.0 release notes](docs/RELEASE_NOTES_v0.6.0.md)
+- [Version 0.7.0 release notes](docs/RELEASE_NOTES_v0.7.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -135,3 +135,15 @@ After ensuring that the Google property is yours or you are authorized to read i
 ```
 
 Only aggregate GSC web-search clicks, impressions, CTR and mean position; or GA4 **Organic Search** sessions, total users and engaged sessions are reported. No query strings, page rows, visitor identifiers, property IDs, raw API responses, credentials or paid services. Date windows are 1–90 days, with a finalized-data lag for GSC. Missing data is explicitly **unavailable**, not silently reported as zero. Legacy Google OAuth credentials are accessed only behind both authorization flags; refresh may occur. Refer to [the integration guide](docs/CODEX_INTEGRATIONS.md).
+
+## Evidence reports and historical comparison (v0.7.0)
+
+Generate a **local, offline Markdown/JSON report** from earlier saved `private_seo_report.py` and `quick_audit.py` JSON, without opening Google accounts or making any provider calls:
+
+```bash
+"$HOME/.agents/skills/seo/scripts/codex-seo" run seo_report_builder.py \
+  --gsc-current gsc-current.json --ga4-current ga4-current.json \
+  --quick-audit page-audit.json --format markdown --output seo-report.md
+```
+
+For historical comparisons add `--gsc-previous`, `--ga4-previous` and **only after independently verifying the same property**, `--confirm-same-property`. Periods must be adjacent and equally long. The builder excludes query text, page paths and private identifiers, refuses unexpected sources, and turns reviewed raw-HTML findings into *suggested* developer tasks with acceptance tests. Existing output files are never replaced without `--overwrite`. **Historical comparisons are descriptive, not evidence of causality.** See [evidence reporting guide](docs/EVIDENCE_REPORTING.md) and the [clearly synthetic example dataset](examples/synthetic/README.md).

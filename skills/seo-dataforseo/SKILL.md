@@ -25,7 +25,8 @@ across 9 API modules with 79+ MCP tools.
 
 This skill requires the DataForSEO extension to be installed:
 ```bash
-./extensions/dataforseo/install.sh
+# Do not run the upstream Claude installer for Codex.
+# See docs/CODEX_INTEGRATIONS.md for Codex config.toml and opt-in MCP setup.
 ```
 
 **Check availability:** Before using any DataForSEO tool, verify the MCP server
@@ -388,7 +389,8 @@ When DataForSEO MCP tools are available, other claude-seo skills can leverage li
 
 ## Error Handling
 
-- **MCP server not connected**: Report that DataForSEO extension is not installed or MCP server is unreachable. Suggest running `./extensions/dataforseo/install.sh`
+- **MCP server not connected**: Report that DataForSEO extension is not installed or MCP server is unreachable. Suggest running `# Do not run the upstream Claude installer for Codex.
+# See docs/CODEX_INTEGRATIONS.md for Codex config.toml and opt-in MCP setup.`
 - **API authentication failed**: Report invalid credentials. Suggest checking DataForSEO API login/password in MCP config
 - **Rate limit exceeded**: Report the limit hit and suggest waiting before retrying
 - **No results returned**: Report "no data found" for the query rather than guessing. Suggest broadening the query or checking location/language codes
@@ -402,3 +404,7 @@ Match existing claude-seo output patterns:
 - Include specific, actionable recommendations
 - Show scores as XX/100 where applicable
 - Note data source as "DataForSEO (live)" to distinguish from static analysis
+
+## Codex-specific warning
+
+`extensions/dataforseo/install.sh` targets Claude's `~/.claude.json` and does not register a Codex MCP server. For Codex, use the **manual, opt-in, secret-free** MCP configuration documented in `docs/CODEX_INTEGRATIONS.md` and check with `integration_doctor.py --json`. No provider call should execute automatically. Budget estimates must be reviewed and paid calls require explicit approval.

@@ -53,12 +53,12 @@ You are a Local SEO specialist. When given a URL:
 
 ## Industry-Specific Checks
 
-Load `${HOME}/.local/share/codex-seo/skills/seo/references/local-schema-types.md` for:
+Load `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/local-schema-types.md` for:
 - Correct schema subtype per vertical (e.g., `Restaurant` not `LocalBusiness`, `LegalService` not deprecated `Attorney`)
 - Industry-specific citation source recommendations
 - Schema pattern templates (Menu for restaurants, Physician for healthcare, etc.)
 
-Load `${HOME}/.local/share/codex-seo/skills/seo/references/local-schema-multilocation.md` for multi-location
+Load `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/local-schema-multilocation.md` for multi-location
 `@id`/`branchOf` patterns and the deprecated or invalid local types to flag.
 
 ## DataForSEO Integration (Optional)

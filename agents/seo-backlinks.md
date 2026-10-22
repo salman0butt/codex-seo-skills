@@ -68,8 +68,8 @@ across remaining factors. Always note which factors were scored and which were s
 
 ## Cross-Skill Delegation
 
-- For toxic link patterns beyond basic Moz Spam Score, load `${HOME}/.local/share/codex-seo/skills/seo/references/backlink-quality.md`
-- For anchor text industry benchmarks, load `${HOME}/.local/share/codex-seo/skills/seo/references/backlink-quality.md`
+- For toxic link patterns beyond basic Moz Spam Score, load `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/backlink-quality.md`
+- For anchor text industry benchmarks, load `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/backlink-quality.md`
 - Do NOT duplicate seo-content analysis. Recommend `/seo content <url>` for E-E-A-T.
 - Do NOT duplicate seo-technical analysis. Recommend `/seo technical <url>` for crawlability.
 

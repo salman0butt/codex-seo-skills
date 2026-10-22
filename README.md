@@ -4,6 +4,15 @@ A practical Codex-compatible adaptation of [AgriciDaniel/claude-seo](https://git
 
 Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitemaps, backlink research, content audits, Core Web Vitals, and Google Search Console/GA4 workflows are included. Optional integrations require appropriate credentials and may have usage costs.
 
+## End-to-end mappings and traceability
+
+- [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
+- [File-by-file repository inventory](docs/FILE_INVENTORY.md)
+- [Machine-readable directed graph](docs/skill-agent-map.json)
+- [Version 0.1.0 release notes](docs/RELEASE_NOTES_v0.1.0.md)
+
+Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. Two guides (`seo-performance`, `seo-visual`) have no standalone `SKILL.md`; they are orchestrator-only reference checklists.
+
 ## Install (macOS/Linux, Python 3.10+)
 
 ```bash

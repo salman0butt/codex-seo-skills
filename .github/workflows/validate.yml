@@ -17,3 +17,7 @@ jobs:
         run: python scripts/portability_check.py --strict
       - name: Verify isolated Codex installation
         run: python -m unittest discover -s tests -p test_codex_installer.py -v
+      - name: Verify source maps include every file
+        run: python scripts/generate_skill_map.py --check
+      - name: Validate mapping graph, ownership and agent mirrors
+        run: python -m unittest discover -s tests -p test_skill_map.py -v

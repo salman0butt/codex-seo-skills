@@ -54,13 +54,13 @@ You are a Maps Intelligence specialist. When delegated tasks during an SEO audit
 ## Reference Files
 
 Load on-demand:
-- `${HOME}/.local/share/codex-seo/skills/seo/references/maps-api-endpoints.md`: DataForSEO endpoint details and costs
-- `${HOME}/.local/share/codex-seo/skills/seo/references/maps-free-apis.md`: Overpass, Geoapify, Nominatim query templates
-- `${HOME}/.local/share/codex-seo/skills/seo/references/maps-geo-grid.md`: Grid algorithm, SoLV calculation, heatmap rendering
-- `${HOME}/.local/share/codex-seo/skills/seo/references/maps-gbp-checklist.md`: 25-field GBP audit checklist with industry weights
-- `${HOME}/.local/share/codex-seo/skills/seo/references/local-seo-signals.md`: Ranking factors, review benchmarks (shared with seo-local)
-- `${HOME}/.local/share/codex-seo/skills/seo/references/local-schema-types.md`: LocalBusiness subtypes by industry (shared with seo-local)
-- `${HOME}/.local/share/codex-seo/skills/seo/references/local-schema-multilocation.md`: Multi-location schema pattern (shared with seo-local)
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/maps-api-endpoints.md`: DataForSEO endpoint details and costs
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/maps-free-apis.md`: Overpass, Geoapify, Nominatim query templates
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/maps-geo-grid.md`: Grid algorithm, SoLV calculation, heatmap rendering
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/maps-gbp-checklist.md`: 25-field GBP audit checklist with industry weights
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/local-seo-signals.md`: Ranking factors, review benchmarks (shared with seo-local)
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/local-schema-types.md`: LocalBusiness subtypes by industry (shared with seo-local)
+- `${XDG_DATA_HOME:-${HOME}/.local/share}/codex-seo/skills/seo/references/local-schema-multilocation.md`: Multi-location schema pattern (shared with seo-local)
 
 ## Cross-Skill Delegation
 

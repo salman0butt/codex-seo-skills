@@ -34,3 +34,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - `integration_doctor.py` is entirely offline. `live_integration_verify.py` is **also offline unless `--live` is specified**; one targeted read-only Google API request is the limit for each invocation.
 - Private GSC and GA4 property access checks additionally require `--allow-account-read --property <property>`; authenticating may refresh an OAuth token. Never infer clicks, impressions, sessions or indexing from metadata access.
 - Report `rate_limited`, `field_data_unavailable`, `credentials_unavailable`, 403, and other blocked statuses as missing evidence; do not fabricate score/traffic metrics or repeat calls automatically. Paid-provider calls remain unapproved until a separate authorization and budget.
+
+## Safe aggregate Search Console and GA4 reporting
+- `private_seo_report.py` defaults to zero network access. Require `--live --allow-account-read --property <exact-id>` for a single, authorized, aggregate-only read of GSC or GA4. Both flags are mandatory. OAuth refresh may occur after authorization.
+- The report is limited to 1–90 days and must not include properties, queries, landing pages, visitor identifiers, raw provider responses or secrets. Missing rows are `no_data`, not zero.
+- Never treat GSC clicks and GA4 sessions as matching metrics, sum daily GA4 users, or infer ranking improvements. For complete row-level output, request separate authorization and use upstream helpers intentionally.

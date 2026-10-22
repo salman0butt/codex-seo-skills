@@ -376,3 +376,7 @@ Generate a professional PDF report with charts and analytics.
 | GA4 property not found | Report error. Show how to find property ID in GA4 Admin > Property Details. |
 | Indexing API quota exceeded | Report 200/day limit. Suggest prioritizing most important URLs. |
 | Rate limit (429) | Wait and retry with exponential backoff. Report which API hit the limit. |
+
+## Aggregate-only private reporting (Codex v0.6)
+
+With verified property permission and explicit consent, run `"${HOME}/.agents/skills/seo/scripts/codex-seo" run private_seo_report.py gsc --property sc-domain:example.com --days 28 --live --allow-account-read` for one *finalized, dimensionless* Search Analytics property aggregate. GA4 uses `private_seo_report.py ga4 --property 123456789 --days 28 --live --allow-account-read` and returns only **Organic Search** aggregate sessions, total users and engaged sessions. These are independent metrics and must not be equated. The caller must have permission to read the selected property; no credential migration, API account setup or permission bypass is performed.

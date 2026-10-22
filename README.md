@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.5.0 release notes](docs/RELEASE_NOTES_v0.5.0.md)
+- [Version 0.6.0 release notes](docs/RELEASE_NOTES_v0.6.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -117,3 +117,21 @@ Run `integration_doctor.py` first for an offline, secret-free overview. Then cho
 ```
 
 For private property checks, use `gsc --property sc-domain:example.com` or `ga4 --property 123456789` with **both** `--live` and `--allow-account-read`. They inspect **property access metadata only**, never clicks, user data, rankings, or GA4 traffic, and OAuth may refresh its stored token. There is no automatic auth or paid provider call. See [live integration setup](docs/CODEX_INTEGRATIONS.md).
+
+## Aggregate-only GSC and GA4 reports (v0.6.0)
+
+After ensuring that the Google property is yours or you are authorized to read it, use this **explicit opt-in** reporting interface:
+
+```bash
+# Offline by default — this makes zero network requests and exits nonzero.
+"$HOME/.agents/skills/seo/scripts/codex-seo" run private_seo_report.py gsc
+
+# These commands make exactly ONE authorized API report request each.
+"$HOME/.agents/skills/seo/scripts/codex-seo" run private_seo_report.py gsc \
+  --property sc-domain:example.com --days 28 --live --allow-account-read
+
+"$HOME/.agents/skills/seo/scripts/codex-seo" run private_seo_report.py ga4 \
+  --property 123456789 --days 28 --live --allow-account-read
+```
+
+Only aggregate GSC web-search clicks, impressions, CTR and mean position; or GA4 **Organic Search** sessions, total users and engaged sessions are reported. No query strings, page rows, visitor identifiers, property IDs, raw API responses, credentials or paid services. Date windows are 1–90 days, with a finalized-data lag for GSC. Missing data is explicitly **unavailable**, not silently reported as zero. Legacy Google OAuth credentials are accessed only behind both authorization flags; refresh may occur. Refer to [the integration guide](docs/CODEX_INTEGRATIONS.md).

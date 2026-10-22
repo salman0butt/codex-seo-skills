@@ -12,7 +12,7 @@
 
 ## Verification / limitations
 
-- Verified local structural checks and smoke contracts; release must have green CI on exact tag commit; the Linux job also launches headless Chromium and runs real bundled scripts.
+- Verified local structural checks and smoke contracts; release must have green CI on exact tag commit; the Linux job also launches headless Chromium, reads the public `https://example.com/` test page through the browser, and runs bundled scripts.
 - Managed runtime installation and Chromium setup **passed on a fresh GitHub Actions Ubuntu runner**; a separate macOS check is still blocked. A Playwright wheel failed mid-download due to interrupted package-host connectivity. The macOS failure left no successful state marker; the runtime correctly reports `ready=false` until dependencies are installed.
 - The installed Codex CLI itself was not present in the checked shell, so live Codex skill invocation is not yet host-verified; API account/paid-provider integrations are not tested without credentials.
 - No live SEO measurements, ranking claims, automated indexing, paid API results or unattended site modifications are claimed.

@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.4.0 release notes](docs/RELEASE_NOTES_v0.4.0.md)
+- [Version 0.5.0 release notes](docs/RELEASE_NOTES_v0.5.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -100,3 +100,20 @@ On subsequent bare `codex-seo` launches, the wrapper selects the exact Python mi
 ```
 
 See [Codex integrations and private-provider setup](docs/CODEX_INTEGRATIONS.md). This offline preflight never outputs secrets, refreshes OAuth, connects paid providers, or assumes a configured account is authorized. The upstream extension installer scripts still target Claude-specific configuration and **must not** be used as Codex MCP installers.
+
+## Explicit live Google provider checks (v0.5.0)
+
+Run `integration_doctor.py` first for an offline, secret-free overview. Then choose **one** service for a bounded, read-only probe:
+
+```bash
+# Offline by default; this will decline network access without --live.
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py pagespeed --url https://example.com/
+
+# Explicit single public Google API call (PageSpeed accepts anonymous calls; may rate-limit).
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py pagespeed --url https://example.com/ --live
+
+# CrUX requires a configured Google API key. No field data does not mean zero.
+"$HOME/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py crux --url https://example.com/ --live
+```
+
+For private property checks, use `gsc --property sc-domain:example.com` or `ga4 --property 123456789` with **both** `--live` and `--allow-account-read`. They inspect **property access metadata only**, never clicks, user data, rankings, or GA4 traffic, and OAuth may refresh its stored token. There is no automatic auth or paid provider call. See [live integration setup](docs/CODEX_INTEGRATIONS.md).

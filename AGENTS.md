@@ -29,3 +29,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - Run the offline `codex-seo run integration_doctor.py --json` before deciding what providers are configured. Never treat `configured_unverified` as successful authentication.
 - Do not invoke `extensions/*/install.sh` as Codex MCP installers; upstream scripts primarily write Claude configuration. Follow `docs/CODEX_INTEGRATIONS.md` for reviewed, manual Codex MCP configuration.
 - Do not auto-run Google's Indexing API on ordinary pages; Google restricts it to specific structured-data page types. Do not make paid DataForSEO or Firecrawl requests without explicit consent and cost budget.
+
+## Live integration probes (v0.5)
+- `integration_doctor.py` is entirely offline. `live_integration_verify.py` is **also offline unless `--live` is specified**; one targeted read-only Google API request is the limit for each invocation.
+- Private GSC and GA4 property access checks additionally require `--allow-account-read --property <property>`; authenticating may refresh an OAuth token. Never infer clicks, impressions, sessions or indexing from metadata access.
+- Report `rate_limited`, `field_data_unavailable`, `credentials_unavailable`, 403, and other blocked statuses as missing evidence; do not fabricate score/traffic metrics or repeat calls automatically. Paid-provider calls remain unapproved until a separate authorization and budget.

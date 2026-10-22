@@ -21,3 +21,7 @@ The specialist reference checklist is at `../seo/references/agent-guides/seo-per
 
 ## Output
 Measured lab/field metric table (or an explicit `not measured` status), reproducible observations, prioritized hypotheses, code-level recommendations where source is available, and retest criteria.
+
+## Live provider connection check (Codex v0.5)
+
+Before promising PageSpeed or CrUX field metrics, run offline `integration_doctor.py`. With an authorized public URL and explicit one-call live consent, use `live_integration_verify.py pagespeed --url <public-url> --live` or `crux --url <public-url> --live`. A 429 / 404 / missing key is missing data, not performance evidence. For full Lighthouse lab detail use the existing `pagespeed_check.py` only when authorized.

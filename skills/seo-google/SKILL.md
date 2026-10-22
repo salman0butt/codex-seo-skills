@@ -22,6 +22,12 @@ Chrome user metrics, real indexation status, search performance, and organic tra
 All APIs are free. Setup requires a Google Cloud project with API key and/or
 service account -- run `$seo google setup` for step-by-step instructions.
 
+## Live read-only Google verification (v0.5.0)
+
+After `integration_doctor.py`, for one public **mobile** PageSpeed SEO-category lab check run `"${HOME}/.agents/skills/seo/scripts/codex-seo" run live_integration_verify.py pagespeed --url https://example.com/ --live`. For CrUX field data, choose `crux` and configure a Google API key. Do not pretend a 429 rate-limit or CrUX 404 is a low score. This probe runs once with a finite timeout, without retries.
+
+For private properties, require the user to identify the exact property and authorize read-only access before running `gsc --property sc-domain:example.com --live --allow-account-read` or `ga4 --property 123456789 --live --allow-account-read`. They verify **property metadata only**, not organic performance or traffic. OAuth refresh may occur only within this explicit private-access flow. No paid services are called. Full guidance: `docs/CODEX_INTEGRATIONS.md`.
+
 ## Codex integration preflight (v0.4.0)
 
 First run `"${HOME}/.agents/skills/seo/scripts/codex-seo" run integration_doctor.py --json`. This preflight checks only whether configuration exists; no network requests or token refresh are made. For provider setup and the difference between Claude MCP installers and Codex MCP configuration, see `../../docs/CODEX_INTEGRATIONS.md` in the repository (or the corresponding installed package docs).

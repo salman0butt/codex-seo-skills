@@ -39,3 +39,9 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - `private_seo_report.py` defaults to zero network access. Require `--live --allow-account-read --property <exact-id>` for a single, authorized, aggregate-only read of GSC or GA4. Both flags are mandatory. OAuth refresh may occur after authorization.
 - The report is limited to 1–90 days and must not include properties, queries, landing pages, visitor identifiers, raw provider responses or secrets. Missing rows are `no_data`, not zero.
 - Never treat GSC clicks and GA4 sessions as matching metrics, sum daily GA4 users, or infer ranking improvements. For complete row-level output, request separate authorization and use upstream helpers intentionally.
+
+## Offline report generation and implementation handoff
+- `seo_report_builder.py` is an offline, zero-provider-call composer. Use it to combine valid `private_seo_report.py` and `quick_audit.py` outputs, not as a substitute for executing an audit or obtaining Google authorization.
+- Treat supplied JSON as untrusted even if `live_verified=true`; schema checks do not authenticate data provenance. Reject malformed sources rather than invent values.
+- Calculate trends only for adjacent equal-length windows and only when the operator attests both exports are from the same Google property (`--confirm-same-property`); no causal claims or cross-source conflation.
+- Hand off only reviewed raw-HTML findings with source references and non-authorized suggested changes. Never silently deploy and never echo private property IDs, URLs with sensitive paths, search terms, or personal information. See `docs/EVIDENCE_REPORTING.md`.

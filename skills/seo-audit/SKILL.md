@@ -197,3 +197,7 @@ drawing conclusions. A date overlap is a hypothesis, never proof of cause.
 | Rate limiting (429 responses) | Back off and reduce concurrent requests. Report partial results with a note on which sections could not be completed. |
 | Timeout on large sites (500+ pages) | Cap the crawl at the timeout limit. Report findings for pages crawled and estimate total site scope. |
 | Subagent hits its `maxTurns` budget on a large site | Findings are not lost: every audit subagent writes a partial `output_dir/findings/*.md` after its first analysis pass and overwrites it with the complete findings before finishing. Read whatever findings file exists and merge it into the report, noting it may be partial. |
+
+## Offline report composition (Codex v0.7)
+
+For pre-existing, authorized GSC/GA4 aggregate exports and saved single-page HTML audits, use `seo_report_builder.py` as an offline evidence reporting step. It makes no API request, never claims ranking causality, and produces proposed tickets without making changes. User-supplied JSON provenance is not independently authenticated; never treat synthetic example fixtures as actual client evidence. Full workflow: `docs/EVIDENCE_REPORTING.md`.

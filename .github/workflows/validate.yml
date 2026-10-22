@@ -37,6 +37,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_live_integration_verify.py -v
       - name: Verify private aggregate report authorization and safe response semantics
         run: python -m unittest discover -s tests -p test_private_seo_report.py -v
+      - name: Verify historical comparisons, provenance and offline implementation handoff
+        run: python -m unittest discover -s tests -p test_seo_report_builder.py -v
   upstream-contracts:
     runs-on: ubuntu-latest
     steps:
@@ -90,6 +92,14 @@ jobs:
             test "$?" -eq 2
           fi
           python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-blocked.json").read_text()); assert r["network_requests"]==0; assert not r["live_verified"]'
+          ./scripts/codex-seo run seo_report_builder.py \
+            --gsc-current examples/synthetic/gsc-current.json \
+            --gsc-previous examples/synthetic/gsc-previous.json \
+            --ga4-current examples/synthetic/ga4-current.json \
+            --ga4-previous examples/synthetic/ga4-previous.json \
+            --quick-audit examples/synthetic/quick-audit.json \
+            --confirm-same-property --format json > "$RUNNER_TEMP/seo-evidence.json"
+          python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"seo-evidence.json").read_text()); assert r["network_requests"]==0; assert len(r["handoff_tasks"])==2; assert r["provider_reports"]["gsc"]["comparison"]["status"]=="compared_with_operator_attestation"; assert r["provider_reports"]["ga4"]["current"]["metrics"]["organic_search_sessions"]==100; assert "SECRET" not in json.dumps(r)'
           ./scripts/codex-seo run integration_doctor.py --json > "$RUNNER_TEMP/integrations.json"
           python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"integrations.json").read_text()); assert d["network_requests"]==0; assert not any(x["live_verified"] for x in d["services"].values())'
           ./scripts/codex-seo run quick_audit.py https://example.com/ --json > "$RUNNER_TEMP/quick-audit.json"

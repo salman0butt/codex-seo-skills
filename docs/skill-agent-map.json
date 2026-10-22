@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 539,
+    "total_repo_files": 549,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
-    "python_scripts": 66,
-    "test_python_files": 79,
-    "graph_edges": 831
+    "python_scripts": 67,
+    "test_python_files": 80,
+    "graph_edges": 836
   },
   "agent_only": [],
   "skills": [
@@ -151,6 +151,7 @@
         "google_report.py",
         "matomo_auth.py",
         "render_page.py",
+        "seo_report_builder.py",
         "seo_updates.py"
       ],
       "mentioned_scripts_agent": [],
@@ -486,7 +487,9 @@
       "agent_guide": null,
       "reference_guide_mirror": null,
       "mentioned_scripts_skill": [
-        "private_seo_report.py"
+        "private_seo_report.py",
+        "quick_audit.py",
+        "seo_report_builder.py"
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [],
@@ -1483,6 +1486,7 @@
       "path": "scripts/quick_audit.py",
       "mentioned_by": [
         "skills/get-started/SKILL.md",
+        "skills/seo-handoff/SKILL.md",
         "skills/seo-page/SKILL.md"
       ],
       "test_sources_mentioning": [
@@ -1557,6 +1561,17 @@
       "test_sources_mentioning": [
         "tests/test_codex_runtime_contract.py",
         "tests/test_schema_v2.py"
+      ]
+    },
+    {
+      "script": "seo_report_builder.py",
+      "path": "scripts/seo_report_builder.py",
+      "mentioned_by": [
+        "skills/seo-audit/SKILL.md",
+        "skills/seo-handoff/SKILL.md"
+      ],
+      "test_sources_mentioning": [
+        "tests/test_seo_report_builder.py"
       ]
     },
     {
@@ -2655,6 +2670,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/EVIDENCE_REPORTING.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/FILE_INVENTORY.md",
       "kind": "generated-map",
       "owner": "repository",
@@ -2753,6 +2775,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/RELEASE_NOTES_v0.7.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/SKILL_AGENT_MAP.md",
       "kind": "generated-map",
       "owner": "repository",
@@ -2783,6 +2812,48 @@
     {
       "path": "docs/skill-agent-map.json",
       "kind": "generated-map",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/README.md",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/ga4-current.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/ga4-previous.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/gsc-current.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/gsc-previous.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/quick-audit.json",
+      "kind": "top-level-project-file",
       "owner": "repository",
       "incoming": [],
       "outgoing": []
@@ -6080,6 +6151,10 @@
           "relation": "mentions-script"
         },
         {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
           "path": "skills/seo-page/SKILL.md",
           "relation": "mentions-script"
         },
@@ -6479,6 +6554,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/seo_report_builder.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
           "path": "scripts/seo_updates.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -6547,6 +6626,30 @@
         },
         {
           "path": "tests/test_schema_v2.py",
+          "relation": "test-source-mentions-script"
+        }
+      ],
+      "outgoing": []
+    },
+    {
+      "path": "scripts/seo_report_builder.py",
+      "kind": "execution-script-or-launcher",
+      "owner": "runtime",
+      "incoming": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_seo_report_builder.py",
           "relation": "test-source-mentions-script"
         }
       ],
@@ -7391,6 +7494,10 @@
         },
         {
           "path": "scripts/render_page.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/seo_report_builder.py",
           "relation": "mentions-script"
         },
         {
@@ -9387,6 +9494,14 @@
       "outgoing": [
         {
           "path": "scripts/private_seo_report.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/quick_audit.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/seo_report_builder.py",
           "relation": "mentions-script"
         },
         {
@@ -12535,6 +12650,18 @@
       ]
     },
     {
+      "path": "tests/test_seo_report_builder.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/seo_report_builder.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_sitemap_discovery.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -14080,6 +14207,11 @@
     },
     {
       "from": "scripts/runtime.py",
+      "to": "scripts/seo_report_builder.py",
+      "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/runtime.py",
       "to": "scripts/seo_updates.py",
       "relation": "runtime-allowlisted-script"
     },
@@ -14466,6 +14598,11 @@
     {
       "from": "skills/seo-audit/SKILL.md",
       "to": "scripts/render_page.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-audit/SKILL.md",
+      "to": "scripts/seo_report_builder.py",
       "relation": "mentions-script"
     },
     {
@@ -15356,6 +15493,16 @@
     {
       "from": "skills/seo-handoff/SKILL.md",
       "to": "scripts/private_seo_report.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-handoff/SKILL.md",
+      "to": "scripts/quick_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-handoff/SKILL.md",
+      "to": "scripts/seo_report_builder.py",
       "relation": "mentions-script"
     },
     {
@@ -16746,6 +16893,11 @@
     {
       "from": "tests/test_schema_v2.py",
       "to": "scripts/schema_generate.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_seo_report_builder.py",
+      "to": "scripts/seo_report_builder.py",
       "relation": "test-source-mentions-script"
     },
     {

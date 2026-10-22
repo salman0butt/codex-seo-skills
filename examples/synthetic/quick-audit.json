@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "scope": "single-page-raw-html",
+  "http_status": 200,
+  "url": "https://example.com/services/",
+  "observed_at_utc": "2026-10-22T10:00:00+00:00",
+  "outcome": "observations-only; no SEO rankings or indexation claim",
+  "findings": [
+    {
+      "id": "missing-meta-description",
+      "priority": "medium",
+      "evidence": "No meta description found",
+      "recommendation": "Write a summary"
+    },
+    {
+      "id": "image-alt-missing",
+      "priority": "review",
+      "evidence": "2 of 7 images lack an alt attribute",
+      "recommendation": "Review informative images"
+    }
+  ],
+  "seo_score": null,
+  "synthetic_example": true
+}

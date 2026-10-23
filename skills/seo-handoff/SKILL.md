@@ -38,3 +38,7 @@ For prior/current exports, require the operator to verify matching property iden
 ## Local history and optional replay templates (Codex v0.8)
 
 For user-provided saved exports, run the offline `seo_history.py record --gsc-current <saved.json> --export-markdown` to preserve an idempotent private snapshot and handoff report. `seo_history.py list`, `show` and explicitly confirmed `prune` manage local history. The `seo_schedule_template.py` tool can **print** reviewed weekly cron/launchd examples, but never install them or make them fetch fresh Google data. See `docs/OFFLINE_HISTORY.md`. History compares private properties or ordered page audits only with explicit user/operator identity attestation; absence of a finding is not proof of correction.
+
+## Offline quality checks and alerts (Codex v0.9)
+
+For user-authorized saved history, run `seo_evidence_alerts.py --history-dir <private-dir> --format markdown` to review source freshness/unavailability without making provider calls. Only after the user/operator independently confirms same GSC/GA4 property and/or exact page identity may `--confirm-history-same-property` or `--confirm-same-page-set` enable bounded comparative alerts. These are **advisory** and are never automatically sent, deployed or scheduled. Missing or resolved issue claims require manual validation. See `docs/EVIDENCE_ALERTS.md`.

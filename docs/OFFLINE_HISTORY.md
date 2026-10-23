@@ -72,3 +72,7 @@ python3 scripts/portability_check.py --strict
 ```
 
 All tests use temporary local data, simulate concurrent history writes, validate no-clobber exports, reject symlink outputs, exercise retention gates and ensure schedule generation is **not installation**. Any sample numbers under `examples/synthetic/` are fabricated, not client results.
+
+## Optional local evidence alerts (v0.9.0)
+
+After creating at least one saved snapshot, run `seo_evidence_alerts.py` to inspect freshness, unavailable providers and optional change candidates. It only **reads** the private history DB; it never installs a schedule, writes acknowledgements or sends notifications. Every alert is a review item, not a verified incident. Operator identity attestation is required before trend checks. See [Evidence alerts](EVIDENCE_ALERTS.md).

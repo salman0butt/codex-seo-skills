@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 555,
+    "total_repo_files": 560,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
-    "python_scripts": 69,
-    "test_python_files": 82,
-    "graph_edges": 848
+    "python_scripts": 70,
+    "test_python_files": 83,
+    "graph_edges": 856
   },
   "agent_only": [],
   "skills": [
@@ -153,6 +153,7 @@
         "private_seo_report.py",
         "quick_audit.py",
         "render_page.py",
+        "seo_evidence_alerts.py",
         "seo_history.py",
         "seo_report_builder.py",
         "seo_schedule_template.py",
@@ -493,6 +494,7 @@
       "mentioned_scripts_skill": [
         "private_seo_report.py",
         "quick_audit.py",
+        "seo_evidence_alerts.py",
         "seo_history.py",
         "seo_report_builder.py",
         "seo_schedule_template.py"
@@ -1572,6 +1574,17 @@
       ]
     },
     {
+      "script": "seo_evidence_alerts.py",
+      "path": "scripts/seo_evidence_alerts.py",
+      "mentioned_by": [
+        "skills/seo-audit/SKILL.md",
+        "skills/seo-handoff/SKILL.md"
+      ],
+      "test_sources_mentioning": [
+        "tests/test_seo_evidence_alerts.py"
+      ]
+    },
+    {
       "script": "seo_history.py",
       "path": "scripts/seo_history.py",
       "mentioned_by": [
@@ -1579,6 +1592,7 @@
         "skills/seo-handoff/SKILL.md"
       ],
       "test_sources_mentioning": [
+        "tests/test_seo_evidence_alerts.py",
         "tests/test_seo_history.py",
         "tests/test_seo_schedule_template.py"
       ]
@@ -1591,6 +1605,7 @@
         "skills/seo-handoff/SKILL.md"
       ],
       "test_sources_mentioning": [
+        "tests/test_seo_evidence_alerts.py",
         "tests/test_seo_report_builder.py"
       ]
     },
@@ -2701,6 +2716,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/EVIDENCE_ALERTS.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/EVIDENCE_REPORTING.md",
       "kind": "documentation",
       "owner": "documentation",
@@ -2827,6 +2849,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/RELEASE_NOTES_v0.9.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/SKILL_AGENT_MAP.md",
       "kind": "generated-map",
       "owner": "repository",
@@ -2877,6 +2906,13 @@
     },
     {
       "path": "examples/synthetic/ga4-previous.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/gsc-current-drop-example.json",
       "kind": "top-level-project-file",
       "owner": "repository",
       "incoming": [],
@@ -6607,6 +6643,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/seo_evidence_alerts.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
           "path": "scripts/seo_history.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -6693,7 +6733,7 @@
       "outgoing": []
     },
     {
-      "path": "scripts/seo_history.py",
+      "path": "scripts/seo_evidence_alerts.py",
       "kind": "execution-script-or-launcher",
       "owner": "runtime",
       "incoming": [
@@ -6708,6 +6748,47 @@
         {
           "path": "skills/seo-handoff/SKILL.md",
           "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_seo_evidence_alerts.py",
+          "relation": "test-source-mentions-script"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "scripts/seo_history.py",
+          "relation": "static-python-import"
+        },
+        {
+          "path": "scripts/seo_report_builder.py",
+          "relation": "static-python-import"
+        }
+      ]
+    },
+    {
+      "path": "scripts/seo_history.py",
+      "kind": "execution-script-or-launcher",
+      "owner": "runtime",
+      "incoming": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "scripts/seo_evidence_alerts.py",
+          "relation": "static-python-import"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_seo_evidence_alerts.py",
+          "relation": "test-source-mentions-script"
         },
         {
           "path": "tests/test_seo_history.py",
@@ -6735,6 +6816,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/seo_evidence_alerts.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/seo_history.py",
           "relation": "static-python-import"
         },
@@ -6745,6 +6830,10 @@
         {
           "path": "skills/seo-handoff/SKILL.md",
           "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_seo_evidence_alerts.py",
+          "relation": "test-source-mentions-script"
         },
         {
           "path": "tests/test_seo_report_builder.py",
@@ -7624,6 +7713,10 @@
         },
         {
           "path": "scripts/render_page.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/seo_evidence_alerts.py",
           "relation": "mentions-script"
         },
         {
@@ -9636,6 +9729,10 @@
         },
         {
           "path": "scripts/quick_audit.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/seo_evidence_alerts.py",
           "relation": "mentions-script"
         },
         {
@@ -12796,6 +12893,26 @@
       ]
     },
     {
+      "path": "tests/test_seo_evidence_alerts.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/seo_evidence_alerts.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/seo_history.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/seo_report_builder.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_seo_history.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -14381,6 +14498,11 @@
     },
     {
       "from": "scripts/runtime.py",
+      "to": "scripts/seo_evidence_alerts.py",
+      "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/runtime.py",
       "to": "scripts/seo_history.py",
       "relation": "runtime-allowlisted-script"
     },
@@ -14438,6 +14560,16 @@
       "from": "scripts/runtime.py",
       "to": "scripts/youtube_search.py",
       "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/seo_evidence_alerts.py",
+      "to": "scripts/seo_history.py",
+      "relation": "static-python-import"
+    },
+    {
+      "from": "scripts/seo_evidence_alerts.py",
+      "to": "scripts/seo_report_builder.py",
+      "relation": "static-python-import"
     },
     {
       "from": "scripts/seo_history.py",
@@ -14797,6 +14929,11 @@
     {
       "from": "skills/seo-audit/SKILL.md",
       "to": "scripts/render_page.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-audit/SKILL.md",
+      "to": "scripts/seo_evidence_alerts.py",
       "relation": "mentions-script"
     },
     {
@@ -15707,6 +15844,11 @@
     {
       "from": "skills/seo-handoff/SKILL.md",
       "to": "scripts/quick_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-handoff/SKILL.md",
+      "to": "scripts/seo_evidence_alerts.py",
       "relation": "mentions-script"
     },
     {
@@ -17112,6 +17254,21 @@
     {
       "from": "tests/test_schema_v2.py",
       "to": "scripts/schema_generate.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_seo_evidence_alerts.py",
+      "to": "scripts/seo_evidence_alerts.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_seo_evidence_alerts.py",
+      "to": "scripts/seo_history.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_seo_evidence_alerts.py",
+      "to": "scripts/seo_report_builder.py",
       "relation": "test-source-mentions-script"
     },
     {

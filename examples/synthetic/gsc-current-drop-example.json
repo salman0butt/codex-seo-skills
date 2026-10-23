@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scope": "aggregate-only",
+  "read_only": true,
+  "network_requests": 1,
+  "live_verified": true,
+  "result": "verified",
+  "http_status": 200,
+  "property_identifier_redacted": true,
+  "credentials_echoed": false,
+  "synthetic_example": true,
+  "service": "gsc",
+  "date_range": {
+    "start": "2026-09-22",
+    "end": "2026-10-19",
+    "days": 28,
+    "finalization_lag_days": 3
+  },
+  "metrics": {
+    "clicks": 10,
+    "impressions": 800,
+    "ctr_percent": 1.25,
+    "average_position": 12.5
+  },
+  "synthetic_alert_fixture": true
+}

@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.8.0 release notes](docs/RELEASE_NOTES_v0.8.0.md)
+- [Version 0.9.0 release notes](docs/RELEASE_NOTES_v0.9.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -153,3 +153,18 @@ For historical comparisons add `--gsc-previous`, `--ga4-previous` and **only aft
 The new `seo_history.py` runner stores validated, sanitized reports in a private local SQLite database and can export owner-only Markdown. Duplicate replay runs create **no extra snapshots**, including under concurrent invocation. `list`, `show`, and explicit `prune --confirm-prune` support history management. Changes are descriptive, and cross-snapshot property/page identity comparisons still require independent operator attestation.
 
 `seo_schedule_template.py` prints optional macOS launchd or cron templates for weekly **offline replay of previously saved JSON**. It installs **no schedule** and does not fetch updated Google data. See [Offline history & scheduling guide](docs/OFFLINE_HISTORY.md). No credentials, provider requests, paid calls, or website edits are involved.
+
+## Evidence quality and local advisory alerts (v0.9.0)
+
+The new `seo_evidence_alerts.py` reads the latest two **existing private** history snapshots to assess source freshness, missing/unavailable metrics and threshold-qualified changes. It is **strictly read-only**: no network, notifications, message delivery, schedules, SEO edits, account access or data writes.
+
+```bash
+"$HOME/.agents/skills/seo/scripts/codex-seo" run seo_evidence_alerts.py \
+  --history-dir "$HOME/seo-private-history" --format markdown
+# Compare only after confirming both historical and current exports are from the same property:
+"$HOME/.agents/skills/seo/scripts/codex-seo" run seo_evidence_alerts.py \
+  --history-dir "$HOME/seo-private-history" --confirm-history-same-property \
+  --confirm-same-page-set --format json
+```
+
+Defaults for optional **review-only** count-drop alerts: a minimum 20-count baseline, at least 10-count absolute decline and 30% relative decline, with current evidence at most 14 days old. Traffic metrics cover **GSC clicks** and **GA4 Organic Search sessions**, never CTR/position or page rankings. Page alerts cover newly observed missing title/H1 in fresh raw HTML only after the exact ordered page set was independently verified. An alert is not proof of a technical incident or resolved issue. For restrictions, stable alert IDs, explicit thresholds, and synthetic replay instructions see [offline evidence alert guide](docs/EVIDENCE_ALERTS.md).

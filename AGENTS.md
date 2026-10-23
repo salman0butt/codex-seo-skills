@@ -51,3 +51,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - Only explicitly create Markdown copies with `--export-markdown`. Generated reports and databases may contain commercially sensitive aggregated metrics; never commit them or share without permission.
 - `seo_schedule_template.py` only generates **reviewable text** for a weekly local cron/launchd replay; never silently install/enable a schedule. It does not refresh GSC/GA4 files or imply automatic data acquisition.
 - Comparing distinct recorded snapshots requires `--confirm-history-same-property` for independently established provider identity; `--confirm-same-page-set` also requires matching actual ordered URLs. Never equate a vanished checklist finding to a deployed fix.
+
+## Evidence-quality alert discipline (v0.9.0)
+- `seo_evidence_alerts.py` is a read-only, no-provider-call local diagnostic over previously saved private history; never describe its output as a delivered notification or schedule. It does not create/modify a history snapshot.
+- Do not alert on an unverified, stale, future, missing or mismatched report. Comparisons require adjacent equal-length windows AND explicit same-property attestation. Page finding alerts require same ordered exact URLs attested, a strictly newer observation, and recent evidence.
+- Alerts are advisory anomaly candidates with clear baseline, absolute and relative gates, not proven ranking loss or a causal claim. Stable alert IDs assist an external consumer with deduplication; this tool does not persist acknowledgements. See `docs/EVIDENCE_ALERTS.md`.

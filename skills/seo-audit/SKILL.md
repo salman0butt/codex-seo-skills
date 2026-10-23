@@ -205,3 +205,7 @@ For pre-existing, authorized GSC/GA4 aggregate exports and saved single-page HTM
 ## Repeatable offline evidence history (Codex v0.8)
 
 Use `seo_history.py` for privacy-preserving snapshots of saved `private_seo_report.py` and `quick_audit.py` JSON. The runner detects changed **supplied evidence**, not autonomous fresh site measurements. It makes zero network calls, never confirms fixes from checklist disappearance, and writes owner-only local artifacts. `seo_schedule_template.py` prints opt-in local scheduler configuration without activating it.
+
+## Evidence review from local history (Codex v0.9)
+
+Use `seo_evidence_alerts.py` for offline data-quality checks, old-window warnings and conservative change review. It never fetches fresh data. Treat `quality_findings` separately from `alerts` and `suppressed_comparisons`. Require explicit matching-identity attestation before comparing counts or a supposedly new missing title/H1. Changes are descriptive, not proof of SEO penalties or fixes.

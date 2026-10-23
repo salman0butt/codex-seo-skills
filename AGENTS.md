@@ -45,3 +45,9 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - Treat supplied JSON as untrusted even if `live_verified=true`; schema checks do not authenticate data provenance. Reject malformed sources rather than invent values.
 - Calculate trends only for adjacent equal-length windows and only when the operator attests both exports are from the same Google property (`--confirm-same-property`); no causal claims or cross-source conflation.
 - Hand off only reviewed raw-HTML findings with source references and non-authorized suggested changes. Never silently deploy and never echo private property IDs, URLs with sensitive paths, search terms, or personal information. See `docs/EVIDENCE_REPORTING.md`.
+
+## Offline history & scheduled replays (v0.8.0)
+- Use `seo_history.py` only for locally saved authorized JSON inputs; record, list, show and explicitly confirmed prune do not invoke APIs. History is private (SQLite 0600; directory 0700), and successive identical inputs must be idempotent even under concurrency.
+- Only explicitly create Markdown copies with `--export-markdown`. Generated reports and databases may contain commercially sensitive aggregated metrics; never commit them or share without permission.
+- `seo_schedule_template.py` only generates **reviewable text** for a weekly local cron/launchd replay; never silently install/enable a schedule. It does not refresh GSC/GA4 files or imply automatic data acquisition.
+- Comparing distinct recorded snapshots requires `--confirm-history-same-property` for independently established provider identity; `--confirm-same-page-set` also requires matching actual ordered URLs. Never equate a vanished checklist finding to a deployed fix.

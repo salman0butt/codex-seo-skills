@@ -39,6 +39,10 @@ jobs:
         run: python -m unittest discover -s tests -p test_private_seo_report.py -v
       - name: Verify historical comparisons, provenance and offline implementation handoff
         run: python -m unittest discover -s tests -p test_seo_report_builder.py -v
+      - name: Verify offline SQLite history, concurrency and privacy
+        run: python -W error::ResourceWarning -m unittest discover -s tests -p test_seo_history.py -v
+      - name: Verify scheduler templates cannot silently install or access networks
+        run: python -m unittest discover -s tests -p test_seo_schedule_template.py -v
   upstream-contracts:
     runs-on: ubuntu-latest
     steps:
@@ -92,6 +96,17 @@ jobs:
             test "$?" -eq 2
           fi
           python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-blocked.json").read_text()); assert r["network_requests"]==0; assert not r["live_verified"]'
+          ./scripts/codex-seo run seo_history.py record \
+            --history-dir "$RUNNER_TEMP/offline-seo-history" \
+            --gsc-current examples/synthetic/gsc-current.json \
+            --quick-audit examples/synthetic/quick-audit.json \
+            --export-markdown > "$RUNNER_TEMP/history-first.json"
+          ./scripts/codex-seo run seo_history.py record \
+            --history-dir "$RUNNER_TEMP/offline-seo-history" \
+            --gsc-current examples/synthetic/gsc-current.json \
+            --quick-audit examples/synthetic/quick-audit.json \
+            --export-markdown > "$RUNNER_TEMP/history-replay.json"
+          python -c 'import json,os,pathlib; p=pathlib.Path(os.environ["RUNNER_TEMP"]); a=json.loads((p/"history-first.json").read_text()); b=json.loads((p/"history-replay.json").read_text()); assert a["status"]=="created"; assert b["status"]=="unchanged"; assert a["snapshot"]["id"]==b["snapshot"]["id"]==1; assert (p/"offline-seo-history/reports/snapshot-000001.md").is_file(); assert b["markdown_export"]=="already_exists"'
           ./scripts/codex-seo run seo_report_builder.py \
             --gsc-current examples/synthetic/gsc-current.json \
             --gsc-previous examples/synthetic/gsc-previous.json \

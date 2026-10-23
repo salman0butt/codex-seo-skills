@@ -201,3 +201,7 @@ drawing conclusions. A date overlap is a hypothesis, never proof of cause.
 ## Offline report composition (Codex v0.7)
 
 For pre-existing, authorized GSC/GA4 aggregate exports and saved single-page HTML audits, use `seo_report_builder.py` as an offline evidence reporting step. It makes no API request, never claims ranking causality, and produces proposed tickets without making changes. User-supplied JSON provenance is not independently authenticated; never treat synthetic example fixtures as actual client evidence. Full workflow: `docs/EVIDENCE_REPORTING.md`.
+
+## Repeatable offline evidence history (Codex v0.8)
+
+Use `seo_history.py` for privacy-preserving snapshots of saved `private_seo_report.py` and `quick_audit.py` JSON. The runner detects changed **supplied evidence**, not autonomous fresh site measurements. It makes zero network calls, never confirms fixes from checklist disappearance, and writes owner-only local artifacts. `seo_schedule_template.py` prints opt-in local scheduler configuration without activating it.

@@ -10,7 +10,7 @@ The first stable Codex SEO packaging and offline/public-site audit release. **Th
 - **Security backports from pinned MIT upstream [`6be93f4`](https://github.com/AgriciDaniel/claude-seo/commit/6be93f45064ffbadced572b5d5c95f55fd263af0)**: decompressed-size limits for page fetches and redirected bodies; safe browser network-guard initialization; screenshot path containment; state/PKCE/timeout protections for Google sign-in; recent dependency security floors and Python 3.11–3.14 range. Imported source hashes recorded in `docs/UPSTREAM_SECURITY_SYNC_v1.0.0.json`.
 - **Version clarity:** runtime diagnostics report Codex distribution semver instead of the embedded upstream Python package version. Installer still requires explicit runtime dependency setup; installing the skills alone makes no API call.
 - **Reproducible capability and provenance evidence:** clear matrix of covered skills, agent guides, optional extensions, public page audits, local reporting/history and private Google access boundaries; remaining gaps listed in [`docs/PRODUCTION_READINESS_v1.0.0.md`](PRODUCTION_READINESS_v1.0.0.md).
-- **Expanded CI:** newest local-only upstream SSRF, bounded HTTP, OAuth and screenshot path tests, alongside existing Linux Chromium/macOS runtime smoke and fork-specific security/installer checks.
+- **Expanded and modernized CI:** Ubuntu 24.04 runners and Node 24-compatible checkout/setup-python actions, plus newest local-only upstream SSRF, bounded HTTP, OAuth and screenshot path tests, alongside existing Linux Chromium/macOS runtime smoke and fork-specific security/installer checks.
 
 ## Verified release scope and limitations
 

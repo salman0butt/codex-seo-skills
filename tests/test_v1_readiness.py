@@ -55,6 +55,15 @@ class StableReleaseReadiness(unittest.TestCase):
         self.assertIn('proprietary',cap)
         self.assertIn('No credentials',notes)
 
+    def test_github_actions_are_pinned_to_supported_runner_and_actions(self):
+        workflow=(ROOT/'.github/workflows/validate.yml').read_text()
+        self.assertIn('runs-on: ubuntu-24.04',workflow)
+        self.assertIn('uses: actions/checkout@v5',workflow)
+        self.assertIn('uses: actions/setup-python@v6',workflow)
+        self.assertNotIn('runs-on: ubuntu-latest',workflow)
+        self.assertNotIn('uses: actions/checkout@v4',workflow)
+        self.assertNotIn('uses: actions/setup-python@v5',workflow)
+
     def test_public_installer_and_runtime_have_guards(self):
         installer=(ROOT/'scripts/install_codex.py').read_text()
         for guard in ('committed = False','backup.rename(root)','previous.rename(dest)','link_backups'):

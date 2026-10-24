@@ -209,3 +209,7 @@ Use `seo_history.py` for privacy-preserving snapshots of saved `private_seo_repo
 ## Evidence review from local history (Codex v0.9)
 
 Use `seo_evidence_alerts.py` for offline data-quality checks, old-window warnings and conservative change review. It never fetches fresh data. Treat `quality_findings` separately from `alerts` and `suppressed_comparisons`. Require explicit matching-identity attestation before comparing counts or a supposedly new missing title/H1. Changes are descriptive, not proof of SEO penalties or fixes.
+
+## Opt-in bounded public-site sample (Codex v1.1.0)
+
+For an **owner-authorized public site**, `codex-seo run site_audit.py <public-origin-url> --live --allow-public-crawl --max-pages 5 --format markdown` can inspect a small same-origin sample. Consent and robots rules are mandatory; default mode is entirely offline. The 12-page hard limit and no site-wide coverage guarantee are explained in `docs/BOUNDED_SITE_AUDIT.md`. Use `quick_audit.py` for a single page. Never treat findings as a ranking/indexing verdict.

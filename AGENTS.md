@@ -62,3 +62,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - Never break an existing installation during upgrade: staged content, skill symlinks and fallback copies must recover on any pre-commit registration error. See injected installer failure tests.
 - Browser security guard, decompressed response limits, redirect caps, SSRF exclusions and Google OAuth state/PKCE tests are release gates. No real private Google credentials, paid calls or site mutations without separate authorization.
 - Production readiness applies to verified local/public read-only paths and does not imply Windows native support, Claude-only hook parity or live provider access. Read `docs/PRODUCTION_READINESS_v1.0.0.md` before describing coverage.
+
+## Bounded public site audit (v1.1.0)
+- `site_audit.py` may run **only** after confirmation that the target site is owned/administered or independently authorized, plus explicit CLI `--live --allow-public-crawl`. Default dry mode must make zero network calls.
+- Always check robots.txt before HTML, respect disallow/Crawl-delay, keep each hop on the exact origin, and never crawl private/mapped staging networks (even if single-page local-target allowances exist). Enforce 12-page, 2MiB/body, 37-request and redirect budgets.
+- A bounded sample is not a complete crawl or indexing/ranking/traffic claim. Do not auto-submit forms, modify pages, connect paid tools or acquire Google OAuth to perform it. See `docs/BOUNDED_SITE_AUDIT.md`.

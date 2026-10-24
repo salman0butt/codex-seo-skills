@@ -13,7 +13,7 @@ class ManifestContracts(unittest.TestCase):
     def test_plugin_manifest_and_onboarding(self):
         payload=json.loads((ROOT/'plugin.json').read_text(encoding='utf-8'))
         self.assertEqual(payload['name'],'codex-seo-skills')
-        self.assertEqual(payload['version'],'1.0.0')
+        self.assertEqual(payload['version'],'1.1.0')
         self.assertEqual(payload['license'],'MIT')
         self.assertEqual(payload['$schema'],'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json')
         onboarding=payload['extensions']['com.openai']['onboardingSkill']

@@ -25,3 +25,7 @@ Provide a specific skill route, stated inputs, blocked dependencies, and the fir
 ## Optional bounded public-page check
 
 When a user wants an initial single-page SEO check and the managed runtime is ready, run `"${HOME}/.agents/skills/seo/scripts/codex-seo" run quick_audit.py <public-url> --markdown`. This one-request static audit is not a substitute for an authenticated, rendered, multi-page audit.
+
+## Opt-in bounded public-site sample (Codex v1.1.0)
+
+For an **owner-authorized public site**, `codex-seo run site_audit.py <public-origin-url> --live --allow-public-crawl --max-pages 5 --format markdown` can inspect a small same-origin sample. Consent and robots rules are mandatory; default mode is entirely offline. The 12-page hard limit and no site-wide coverage guarantee are explained in `docs/BOUNDED_SITE_AUDIT.md`. Use `quick_audit.py` for a single page. Never treat findings as a ranking/indexing verdict.

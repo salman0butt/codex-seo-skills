@@ -27,7 +27,7 @@ class StableReleaseReadiness(unittest.TestCase):
     def test_distribution_and_upstream_versions_are_distinct_and_documented(self):
         plugin=json.loads((ROOT/'plugin.json').read_text())
         self.assertEqual(plugin['name'],'codex-seo-skills')
-        self.assertEqual(plugin['version'],'1.0.0')
+        self.assertIn(plugin['version'], ('1.0.0','1.1.0'))
         project=(ROOT/'pyproject.toml').read_text()
         self.assertRegex(project,r'(?m)^version = "2\.5\.0"$')
         self.assertIn('requires-python = ">=3.11"',project)

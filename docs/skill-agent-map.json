@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 568,
+    "total_repo_files": 572,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
-    "python_scripts": 70,
-    "test_python_files": 88,
-    "graph_edges": 867
+    "python_scripts": 71,
+    "test_python_files": 89,
+    "graph_edges": 877
   },
   "agent_only": [],
   "skills": [
@@ -21,7 +21,8 @@
       "agent_guide": null,
       "reference_guide_mirror": null,
       "mentioned_scripts_skill": [
-        "quick_audit.py"
+        "quick_audit.py",
+        "site_audit.py"
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [
@@ -157,7 +158,8 @@
         "seo_history.py",
         "seo_report_builder.py",
         "seo_schedule_template.py",
-        "seo_updates.py"
+        "seo_updates.py",
+        "site_audit.py"
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [
@@ -742,7 +744,9 @@
         "fetch_page.py",
         "gsc_inspect.py",
         "pagespeed_check.py",
+        "quick_audit.py",
         "render_page.py",
+        "site_audit.py",
         "sitemap_discovery.py"
       ],
       "mentioned_scripts_agent": [
@@ -1502,7 +1506,8 @@
         "skills/get-started/SKILL.md",
         "skills/seo-audit/SKILL.md",
         "skills/seo-handoff/SKILL.md",
-        "skills/seo-page/SKILL.md"
+        "skills/seo-page/SKILL.md",
+        "skills/seo-technical/SKILL.md"
       ],
       "test_sources_mentioning": [
         "tests/test_quick_audit.py"
@@ -1642,6 +1647,18 @@
       ]
     },
     {
+      "script": "site_audit.py",
+      "path": "scripts/site_audit.py",
+      "mentioned_by": [
+        "skills/get-started/SKILL.md",
+        "skills/seo-audit/SKILL.md",
+        "skills/seo-technical/SKILL.md"
+      ],
+      "test_sources_mentioning": [
+        "tests/test_site_audit.py"
+      ]
+    },
+    {
       "script": "sitemap_discovery.py",
       "path": "scripts/sitemap_discovery.py",
       "mentioned_by": [
@@ -1713,6 +1730,7 @@
         "tests/test_matomo_report.py",
         "tests/test_redirect_body_cap.py",
         "tests/test_render_page.py",
+        "tests/test_site_audit.py",
         "tests/test_technical_depth.py",
         "tests/test_url_safety.py",
         "tests/test_v1_readiness.py"
@@ -2706,6 +2724,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/BOUNDED_SITE_AUDIT.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/CODEX_INTEGRATIONS.md",
       "kind": "documentation",
       "owner": "documentation",
@@ -2875,6 +2900,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES_v1.0.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/RELEASE_NOTES_v1.1.0.md",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],
@@ -6145,6 +6177,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/site_audit.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/verify_backlinks.py",
           "relation": "static-python-import"
         },
@@ -6284,6 +6320,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/site_audit.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "skills/get-started/SKILL.md",
           "relation": "mentions-script"
         },
@@ -6297,6 +6337,10 @@
         },
         {
           "path": "skills/seo-page/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-technical/SKILL.md",
           "relation": "mentions-script"
         },
         {
@@ -6723,6 +6767,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/site_audit.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
           "path": "scripts/sitemap_discovery.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -6961,6 +7009,47 @@
         }
       ],
       "outgoing": []
+    },
+    {
+      "path": "scripts/site_audit.py",
+      "kind": "execution-script-or-launcher",
+      "owner": "runtime",
+      "incoming": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "skills/get-started/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-technical/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_site_audit.py",
+          "relation": "test-source-mentions-script"
+        }
+      ],
+      "outgoing": [
+        {
+          "path": "scripts/parse_html.py",
+          "relation": "static-python-import"
+        },
+        {
+          "path": "scripts/quick_audit.py",
+          "relation": "static-python-import"
+        },
+        {
+          "path": "scripts/url_safety.py",
+          "relation": "static-python-import"
+        }
+      ]
     },
     {
       "path": "scripts/sitemap_discovery.py",
@@ -7203,6 +7292,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/site_audit.py",
+          "relation": "static-python-import"
+        },
+        {
           "path": "scripts/sitemap_discovery.py",
           "relation": "static-python-import"
         },
@@ -7264,6 +7357,10 @@
         },
         {
           "path": "tests/test_render_page.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_site_audit.py",
           "relation": "test-source-mentions-script"
         },
         {
@@ -7419,6 +7516,10 @@
         },
         {
           "path": "scripts/quick_audit.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/site_audit.py",
           "relation": "mentions-script"
         },
         {
@@ -7809,6 +7910,10 @@
         },
         {
           "path": "scripts/seo_updates.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/site_audit.py",
           "relation": "mentions-script"
         },
         {
@@ -10957,7 +11062,15 @@
           "relation": "mentions-script"
         },
         {
+          "path": "scripts/quick_audit.py",
+          "relation": "mentions-script"
+        },
+        {
           "path": "scripts/render_page.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/site_audit.py",
           "relation": "mentions-script"
         },
         {
@@ -13093,6 +13206,22 @@
       ]
     },
     {
+      "path": "tests/test_site_audit.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/site_audit.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/url_safety.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_sitemap_discovery.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -14683,6 +14812,11 @@
     },
     {
       "from": "scripts/runtime.py",
+      "to": "scripts/site_audit.py",
+      "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/runtime.py",
       "to": "scripts/sitemap_discovery.py",
       "relation": "runtime-allowlisted-script"
     },
@@ -14734,6 +14868,21 @@
     {
       "from": "scripts/seo_history.py",
       "to": "scripts/seo_report_builder.py",
+      "relation": "static-python-import"
+    },
+    {
+      "from": "scripts/site_audit.py",
+      "to": "scripts/parse_html.py",
+      "relation": "static-python-import"
+    },
+    {
+      "from": "scripts/site_audit.py",
+      "to": "scripts/quick_audit.py",
+      "relation": "static-python-import"
+    },
+    {
+      "from": "scripts/site_audit.py",
+      "to": "scripts/url_safety.py",
       "relation": "static-python-import"
     },
     {
@@ -14819,6 +14968,11 @@
     {
       "from": "skills/get-started/SKILL.md",
       "to": "scripts/quick_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/get-started/SKILL.md",
+      "to": "scripts/site_audit.py",
       "relation": "mentions-script"
     },
     {
@@ -15114,6 +15268,11 @@
     {
       "from": "skills/seo-audit/SKILL.md",
       "to": "scripts/seo_updates.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-audit/SKILL.md",
+      "to": "scripts/site_audit.py",
       "relation": "mentions-script"
     },
     {
@@ -16468,7 +16627,17 @@
     },
     {
       "from": "skills/seo-technical/SKILL.md",
+      "to": "scripts/quick_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-technical/SKILL.md",
       "to": "scripts/render_page.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-technical/SKILL.md",
+      "to": "scripts/site_audit.py",
       "relation": "mentions-script"
     },
     {
@@ -17489,6 +17658,16 @@
     {
       "from": "tests/test_seo_schedule_template.py",
       "to": "scripts/seo_schedule_template.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_site_audit.py",
+      "to": "scripts/site_audit.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_site_audit.py",
+      "to": "scripts/url_safety.py",
       "relation": "test-source-mentions-script"
     },
     {

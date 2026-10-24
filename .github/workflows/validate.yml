@@ -29,6 +29,15 @@ jobs:
         run: python -m unittest discover -s tests -p test_codex_launcher.py -v
       - name: Verify bounded public-page audit contracts
         run: python -m unittest discover -s tests -p test_quick_audit.py -v
+      - name: Ensure multi-page crawler remains offline without two consent flags
+        run: |
+          if python scripts/site_audit.py 'https://example.com/?token=redacted' --live > "$RUNNER_TEMP/site-blocked.json"; then
+            echo 'Crawl ran without --allow-public-crawl' >&2
+            exit 1
+          else
+            test "$?" -eq 2
+          fi
+          python -c 'import json,os,pathlib; s=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"site-blocked.json").read_text()); assert s["network_requests"]==0 and s["pages"]==[] and s["outcome"]=="blocked" and "token=" not in json.dumps(s)'
       - name: Verify offline SEO provider safety and configuration semantics
         run: python -m unittest discover -s tests -p test_integration_doctor.py -v
       - name: Verify Indexing API publish restrictions
@@ -56,6 +65,8 @@ jobs:
           python-version: '3.11'
       - name: Install bounded unit-test prerequisites
         run: python -m pip install --disable-pip-version-check pytest requests beautifulsoup4 lxml lxml-html-clean
+      - name: Verify bounded public site crawler policy and parse contracts
+        run: python -m unittest discover -s tests -p test_site_audit.py -v
       - name: Run independent upstream runtime and SEO security contracts
         run: |
           python -m pytest -q \

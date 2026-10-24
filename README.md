@@ -9,13 +9,13 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 1.0.0 release notes](docs/RELEASE_NOTES_v1.0.0.md)
+- [Version 1.1.0 release notes](docs/RELEASE_NOTES_v1.1.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
 This repository also has an optional portable [Agent Plugins manifest](plugin.json) with a `$get-started` onboarding skill. It does not bundle an MCP server or preconfigured external accounts. See [comparison with the historical Codex project](docs/LEGACY_CODEX_COMPARISON.md); its proprietary code is not redistributed here.
 
-## Install (macOS/Linux, Python 3.10+)
+## Install (macOS/Linux, Python 3.11–3.14)
 
 ```bash
 git clone https://github.com/salman0butt/codex-seo-skills.git
@@ -174,3 +174,17 @@ Defaults for optional **review-only** count-drop alerts: a minimum 20-count base
 The first stable Codex distribution is **v1.0.0** (embedded upstream Python code version **2.5.0**). Updates include guarded page fetch/render, decompression-bomb and redirect body caps, browser context/SSRF hardening, safe screenshot paths, Google OAuth PKCE/state protection, and a rollback-safe installer. Existing skills remain available for authorized SEO audits; private API and paid integration setup is still explicit, not automatic.
 
 For the pinned upstream source and an exact feature-vs.-limitation matrix, see [production readiness](docs/PRODUCTION_READINESS_v1.0.0.md). For installation/release verification see [v1.0.0 notes](docs/RELEASE_NOTES_v1.0.0.md).
+
+## Bounded, owner-authorized public-site audit (v1.1.0)
+
+`site_audit.py` extends the safe one-page check to a small sample of linked pages on the **exact same origin**, with robots.txt, crawl delay, strict per-hop URL safety and hard page/byte/request budgets. It requires **both** `--live` and `--allow-public-crawl`; without both it makes **zero network requests**. It will not scan private/staging hosts, log in, fetch query URLs, send forms, or make paid Google/provider calls. A page finding is an observation, not ranking/indexation proof.
+
+```bash
+# No-network default
+"$HOME/.agents/skills/seo/scripts/codex-seo" run site_audit.py https://example.com/
+# Only for an explicitly authorized site, after confirming crawl permission
+"$HOME/.agents/skills/seo/scripts/codex-seo" run site_audit.py \
+  https://example.com/ --live --allow-public-crawl --max-pages 5 --format markdown
+```
+
+See the [bounded small-site audit guide](docs/BOUNDED_SITE_AUDIT.md) for security boundaries, incomplete/blocked reports and known limitations.

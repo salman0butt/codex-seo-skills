@@ -278,3 +278,7 @@ What it does and does not cover:
 | robots.txt not found | Note that no robots.txt was detected at the root domain. Recommend creating one with appropriate directives. Continue audit on remaining categories. |
 | HTTPS not configured | Flag as a critical issue. Report whether HTTP is served without redirect, mixed content exists, or SSL certificate is missing/expired. |
 | Core Web Vitals data unavailable | Note that CrUX data is not available (common for low-traffic sites). Suggest using Lighthouse lab data as a proxy and recommend increasing traffic before re-testing. |
+
+## Opt-in bounded public-site sample (Codex v1.1.0)
+
+For an **owner-authorized public site**, `codex-seo run site_audit.py <public-origin-url> --live --allow-public-crawl --max-pages 5 --format markdown` can inspect a small same-origin sample. Consent and robots rules are mandatory; default mode is entirely offline. The 12-page hard limit and no site-wide coverage guarantee are explained in `docs/BOUNDED_SITE_AUDIT.md`. Use `quick_audit.py` for a single page. Never treat findings as a ranking/indexing verdict.

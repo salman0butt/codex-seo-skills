@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scope": "bounded-same-origin-static-html-crawl",
+  "started_at_utc": "2026-10-24T12:00:00+00:00",
+  "origin": "https://example.com/",
+  "seed": "https://example.com/",
+  "page_limit": 3,
+  "network_requests": 4,
+  "pages": [
+    {
+      "schema_version": 1,
+      "scope": "single-page-raw-html",
+      "outcome": "observations-only; no SEO rankings or indexation claim",
+      "seo_score": null,
+      "url": "https://example.com/",
+      "http_status": 200,
+      "observed_at_utc": "2026-10-24T12:00:00+00:00",
+      "observations": {
+        "title": "Example Studio — Services",
+        "meta_description": "Overview of Example Studio services.",
+        "canonical": "https://example.com/"
+      },
+      "findings": []
+    },
+    {
+      "schema_version": 1,
+      "scope": "single-page-raw-html",
+      "outcome": "observations-only; no SEO rankings or indexation claim",
+      "seo_score": null,
+      "url": "https://example.com/services",
+      "http_status": 200,
+      "observed_at_utc": "2026-10-24T12:00:00+00:00",
+      "observations": {
+        "title": " Example Studio — Services ",
+        "meta_description": "Overview of Example Studio services.",
+        "canonical": "https://example.com/services"
+      },
+      "findings": []
+    },
+    {
+      "schema_version": 1,
+      "scope": "single-page-raw-html",
+      "outcome": "observations-only; no SEO rankings or indexation claim",
+      "seo_score": null,
+      "url": "https://example.com/contact",
+      "http_status": 200,
+      "observed_at_utc": "2026-10-24T12:00:00+00:00",
+      "observations": {
+        "title": null,
+        "meta_description": null,
+        "canonical": "https://example.com/contact"
+      },
+      "findings": [
+        {
+          "id": "missing-title",
+          "evidence": "SECRET-EVIDENCE",
+          "recommendation": "<script>EXFILTRATE</script>"
+        },
+        {
+          "id": "missing-meta-description",
+          "evidence": "SECRET-EVIDENCE",
+          "recommendation": "<script>EXFILTRATE</script>"
+        },
+        {
+          "id": "missing-h1",
+          "evidence": "SECRET-EVIDENCE",
+          "recommendation": "<script>EXFILTRATE</script>"
+        }
+      ]
+    }
+  ],
+  "robots_status": "checked_and_seed_allowed",
+  "stop_reason": "discovery_queue_empty",
+  "outcome": "observations_only",
+  "seo_score": null,
+  "arbitrary_hostile_html": "<script>LEAK-UNTRUSTED</script>",
+  "private_source": "SECRET-PRIVATE-URL-TOKEN",
+  "synthetic_fixture": true,
+  "limitations_note": "Fabricated test data. No network access and no real website was crawled."
+}

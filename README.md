@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 1.1.0 release notes](docs/RELEASE_NOTES_v1.1.0.md)
+- [Version 1.2.0 release notes](docs/RELEASE_NOTES_v1.2.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -188,3 +188,15 @@ For the pinned upstream source and an exact feature-vs.-limitation matrix, see [
 ```
 
 See the [bounded small-site audit guide](docs/BOUNDED_SITE_AUDIT.md) for security boundaries, incomplete/blocked reports and known limitations.
+
+## Privacy-preserving multi-page developer handoff (v1.2.0)
+
+`site_audit_report.py` accepts **previously saved** bounded site crawl JSON and produces an **offline** structured or Markdown SEO handoff. It identifies repeated metadata in sampled source HTML, counts validated page findings, and gives developers suggested follow-up tasks referring to `page-1`, `page-2`, etc. No page paths, titles, descriptions, raw HTML, tokens or unsanitized evidence are copied to the report. These are review items, **not proof of a ranking issue or automatic authorization to change a website**.
+
+```bash
+# Synthetic fictional sample; no network access
+"$HOME/.agents/skills/seo/scripts/codex-seo" run site_audit_report.py \
+  --site-audit examples/synthetic/site-audit-three-pages.json --format markdown
+```
+
+The command makes **zero network requests** and only prints its output. To acquire a new site crawl, use the v1.1 explicit authorization gates on a site you own or are permitted to audit. See [offline site handoff](docs/OFFLINE_SITE_HANDOFF.md).

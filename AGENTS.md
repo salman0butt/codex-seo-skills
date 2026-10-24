@@ -56,3 +56,9 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - `seo_evidence_alerts.py` is a read-only, no-provider-call local diagnostic over previously saved private history; never describe its output as a delivered notification or schedule. It does not create/modify a history snapshot.
 - Do not alert on an unverified, stale, future, missing or mismatched report. Comparisons require adjacent equal-length windows AND explicit same-property attestation. Page finding alerts require same ordered exact URLs attested, a strictly newer observation, and recent evidence.
 - Alerts are advisory anomaly candidates with clear baseline, absolute and relative gates, not proven ranking loss or a causal claim. Stable alert IDs assist an external consumer with deduplication; this tool does not persist acknowledgements. See `docs/EVIDENCE_ALERTS.md`.
+
+## Stable v1.0.0 production gates
+- The MIT upstream security sync is pinned to `6be93f45064ffbadced572b5d5c95f55fd263af0`; verify `docs/UPSTREAM_SECURITY_SYNC_v1.0.0.json` checksums and tests before altering synchronized files. Keep Codex-specific version (1.0.0) distinct from upstream Python dependency/project metadata (2.5.0).
+- Never break an existing installation during upgrade: staged content, skill symlinks and fallback copies must recover on any pre-commit registration error. See injected installer failure tests.
+- Browser security guard, decompressed response limits, redirect caps, SSRF exclusions and Google OAuth state/PKCE tests are release gates. No real private Google credentials, paid calls or site mutations without separate authorization.
+- Production readiness applies to verified local/public read-only paths and does not imply Windows native support, Claude-only hook parity or live provider access. Read `docs/PRODUCTION_READINESS_v1.0.0.md` before describing coverage.

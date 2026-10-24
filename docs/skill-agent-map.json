@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 560,
+    "total_repo_files": 568,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
     "python_scripts": 70,
-    "test_python_files": 83,
-    "graph_edges": 856
+    "test_python_files": 88,
+    "graph_edges": 867
   },
   "agent_only": [],
   "skills": [
@@ -1018,7 +1018,8 @@
         "agents/seo-visual.md"
       ],
       "test_sources_mentioning": [
-        "tests/test_audit_instructions.py"
+        "tests/test_audit_instructions.py",
+        "tests/test_capture_screenshot_paths.py"
       ]
     },
     {
@@ -1174,6 +1175,8 @@
         "tests/test_drift_portability.py",
         "tests/test_fetch_page_cli.py",
         "tests/test_fetch_page_decoding.py",
+        "tests/test_fetch_page_size_cap.py",
+        "tests/test_redirect_body_cap.py",
         "tests/test_url_safety.py"
       ]
     },
@@ -1216,6 +1219,7 @@
         "tests/test_backlinks_auth_hardening.py",
         "tests/test_google_api_key_safety.py",
         "tests/test_google_gcloud_adc.py",
+        "tests/test_google_oauth_flow.py",
         "tests/test_indexing_publish_guard.py",
         "tests/test_live_integration_verify.py",
         "tests/test_url_safety.py"
@@ -1282,7 +1286,8 @@
         "skills/seo/SKILL.md"
       ],
       "test_sources_mentioning": [
-        "tests/test_codex_installer.py"
+        "tests/test_codex_installer.py",
+        "tests/test_v1_readiness.py"
       ]
     },
     {
@@ -1537,6 +1542,7 @@
         "tests/test_fetch_page_cli.py",
         "tests/test_fetch_page_decoding.py",
         "tests/test_phase_j_executable.py",
+        "tests/test_redirect_body_cap.py",
         "tests/test_render_page.py",
         "tests/test_runtime.py"
       ]
@@ -1553,7 +1559,8 @@
         "tests/test_manual_install_layout.py",
         "tests/test_runtime.py",
         "tests/test_runtime_installers.py",
-        "tests/test_schema_hook_detection.py"
+        "tests/test_schema_hook_detection.py",
+        "tests/test_v1_readiness.py"
       ]
     },
     {
@@ -1698,13 +1705,17 @@
         "tests/test_backlinks_auth_hardening.py",
         "tests/test_domain_history.py",
         "tests/test_fetch_page_decoding.py",
+        "tests/test_fetch_page_size_cap.py",
+        "tests/test_hostile_inputs.py",
         "tests/test_keywordseverywhere_api.py",
         "tests/test_lazy_detection.py",
         "tests/test_live_integration_verify.py",
         "tests/test_matomo_report.py",
+        "tests/test_redirect_body_cap.py",
         "tests/test_render_page.py",
         "tests/test_technical_depth.py",
-        "tests/test_url_safety.py"
+        "tests/test_url_safety.py",
+        "tests/test_v1_readiness.py"
       ]
     },
     {
@@ -2779,6 +2790,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/PRODUCTION_READINESS_v1.0.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/RELEASE_NOTES_v0.1.0.md",
       "kind": "documentation",
       "owner": "documentation",
@@ -2856,6 +2874,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/RELEASE_NOTES_v1.0.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/SKILL_AGENT_MAP.md",
       "kind": "generated-map",
       "owner": "repository",
@@ -2871,6 +2896,13 @@
     },
     {
       "path": "docs/UPSTREAM_README.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "docs/UPSTREAM_SECURITY_SYNC_v1.0.0.json",
       "kind": "documentation",
       "owner": "documentation",
       "incoming": [],
@@ -4650,6 +4682,10 @@
         {
           "path": "tests/test_audit_instructions.py",
           "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_capture_screenshot_paths.py",
+          "relation": "test-source-mentions-script"
         }
       ],
       "outgoing": [
@@ -5097,6 +5133,14 @@
           "relation": "test-source-mentions-script"
         },
         {
+          "path": "tests/test_fetch_page_size_cap.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_redirect_body_cap.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_url_safety.py",
           "relation": "test-source-mentions-script"
         }
@@ -5296,6 +5340,10 @@
           "relation": "test-source-mentions-script"
         },
         {
+          "path": "tests/test_google_oauth_flow.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_indexing_publish_guard.py",
           "relation": "test-source-mentions-script"
         },
@@ -5470,6 +5518,10 @@
         },
         {
           "path": "tests/test_codex_installer.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_v1_readiness.py",
           "relation": "test-source-mentions-script"
         }
       ],
@@ -6376,6 +6428,10 @@
           "relation": "test-source-mentions-script"
         },
         {
+          "path": "tests/test_redirect_body_cap.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_render_page.py",
           "relation": "test-source-mentions-script"
         },
@@ -6430,6 +6486,10 @@
         },
         {
           "path": "tests/test_schema_hook_detection.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_v1_readiness.py",
           "relation": "test-source-mentions-script"
         }
       ],
@@ -7175,6 +7235,14 @@
           "relation": "test-source-mentions-script"
         },
         {
+          "path": "tests/test_fetch_page_size_cap.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_hostile_inputs.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_keywordseverywhere_api.py",
           "relation": "test-source-mentions-script"
         },
@@ -7191,6 +7259,10 @@
           "relation": "test-source-mentions-script"
         },
         {
+          "path": "tests/test_redirect_body_cap.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
           "path": "tests/test_render_page.py",
           "relation": "test-source-mentions-script"
         },
@@ -7200,6 +7272,10 @@
         },
         {
           "path": "tests/test_url_safety.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "tests/test_v1_readiness.py",
           "relation": "test-source-mentions-script"
         }
       ],
@@ -12100,6 +12176,18 @@
       "outgoing": []
     },
     {
+      "path": "tests/test_capture_screenshot_paths.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/capture_screenshot.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_codex_installer.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -12356,6 +12444,22 @@
       ]
     },
     {
+      "path": "tests/test_fetch_page_size_cap.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/fetch_page.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/url_safety.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_file_size_limits.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -12411,6 +12515,18 @@
     },
     {
       "path": "tests/test_google_gcloud_adc.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/google_auth.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_google_oauth_flow.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
       "incoming": [],
@@ -12505,6 +12621,10 @@
         },
         {
           "path": "scripts/ucp_check.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/url_safety.py",
           "relation": "test-source-mentions-script"
         }
       ]
@@ -12803,6 +12923,26 @@
       ]
     },
     {
+      "path": "tests/test_redirect_body_cap.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/fetch_page.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/render_page.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/url_safety.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_render_page.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -13040,6 +13180,26 @@
         },
         {
           "path": "scripts/google_auth.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/url_safety.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_v1_readiness.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/install_codex.py",
+          "relation": "test-source-mentions-script"
+        },
+        {
+          "path": "scripts/runtime.py",
           "relation": "test-source-mentions-script"
         },
         {
@@ -16812,6 +16972,11 @@
       "relation": "test-source-mentions-script"
     },
     {
+      "from": "tests/test_capture_screenshot_paths.py",
+      "to": "scripts/capture_screenshot.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
       "from": "tests/test_codex_installer.py",
       "to": "scripts/install_codex.py",
       "relation": "test-source-mentions-script"
@@ -16967,6 +17132,16 @@
       "relation": "test-source-mentions-script"
     },
     {
+      "from": "tests/test_fetch_page_size_cap.py",
+      "to": "scripts/fetch_page.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_fetch_page_size_cap.py",
+      "to": "scripts/url_safety.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
       "from": "tests/test_gbp_lint_and_polish.py",
       "to": "scripts/gbp_deprecation_lint.py",
       "relation": "test-source-mentions-script"
@@ -16998,6 +17173,11 @@
     },
     {
       "from": "tests/test_google_gcloud_adc.py",
+      "to": "scripts/google_auth.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_google_oauth_flow.py",
       "to": "scripts/google_auth.py",
       "relation": "test-source-mentions-script"
     },
@@ -17049,6 +17229,11 @@
     {
       "from": "tests/test_hostile_inputs.py",
       "to": "scripts/ucp_check.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_hostile_inputs.py",
+      "to": "scripts/url_safety.py",
       "relation": "test-source-mentions-script"
     },
     {
@@ -17212,6 +17397,21 @@
       "relation": "test-source-mentions-script"
     },
     {
+      "from": "tests/test_redirect_body_cap.py",
+      "to": "scripts/fetch_page.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_redirect_body_cap.py",
+      "to": "scripts/render_page.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_redirect_body_cap.py",
+      "to": "scripts/url_safety.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
       "from": "tests/test_render_page.py",
       "to": "scripts/render_page.py",
       "relation": "test-source-mentions-script"
@@ -17348,6 +17548,21 @@
     },
     {
       "from": "tests/test_url_safety.py",
+      "to": "scripts/url_safety.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_v1_readiness.py",
+      "to": "scripts/install_codex.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_v1_readiness.py",
+      "to": "scripts/runtime.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_v1_readiness.py",
       "to": "scripts/url_safety.py",
       "relation": "test-source-mentions-script"
     },

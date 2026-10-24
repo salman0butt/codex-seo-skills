@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 0.9.0 release notes](docs/RELEASE_NOTES_v0.9.0.md)
+- [Version 1.0.0 release notes](docs/RELEASE_NOTES_v1.0.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -60,7 +60,7 @@ The SEO scripts have a managed Python environment. Setup and Chromium are **not 
 
 ## License and attribution
 
-Derived from **[AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo)** (upstream commit `23a2a811f874361d228fc2681acfc0ad66272736`, version 2.4.2). The original MIT license and individual license notices remain in this repository. See `docs/UPSTREAM_README.md` for upstream documentation. Changes for Codex compatibility maintained by [salman0butt](https://github.com/salman0butt).
+Derived from **[AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo)** (original baseline `23a2a811f874361d228fc2681acfc0ad66272736`, version 2.4.2; selected MIT-licensed security updates synchronized from upstream `6be93f45064ffbadced572b5d5c95f55fd263af0`, version 2.5.0). The original MIT license and individual license notices remain in this repository. See `docs/UPSTREAM_README.md` for upstream documentation. Changes for Codex compatibility maintained by [salman0butt](https://github.com/salman0butt).
 
 ## Test and readiness gates
 
@@ -168,3 +168,9 @@ The new `seo_evidence_alerts.py` reads the latest two **existing private** histo
 ```
 
 Defaults for optional **review-only** count-drop alerts: a minimum 20-count baseline, at least 10-count absolute decline and 30% relative decline, with current evidence at most 14 days old. Traffic metrics cover **GSC clicks** and **GA4 Organic Search sessions**, never CTR/position or page rankings. Page alerts cover newly observed missing title/H1 in fresh raw HTML only after the exact ordered page set was independently verified. An alert is not proof of a technical incident or resolved issue. For restrictions, stable alert IDs, explicit thresholds, and synthetic replay instructions see [offline evidence alert guide](docs/EVIDENCE_ALERTS.md).
+
+## Stable v1.0.0 readiness, upstream sync and installer rollback
+
+The first stable Codex distribution is **v1.0.0** (embedded upstream Python code version **2.5.0**). Updates include guarded page fetch/render, decompression-bomb and redirect body caps, browser context/SSRF hardening, safe screenshot paths, Google OAuth PKCE/state protection, and a rollback-safe installer. Existing skills remain available for authorized SEO audits; private API and paid integration setup is still explicit, not automatic.
+
+For the pinned upstream source and an exact feature-vs.-limitation matrix, see [production readiness](docs/PRODUCTION_READINESS_v1.0.0.md). For installation/release verification see [v1.0.0 notes](docs/RELEASE_NOTES_v1.0.0.md).

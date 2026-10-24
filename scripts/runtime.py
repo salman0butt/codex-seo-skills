@@ -24,6 +24,9 @@ from pathlib import Path
 from typing import Any
 
 RUNTIME_SCHEMA = 1
+# Pinned compatibility range of updated upstream SEO dependencies.
+MIN_PYTHON = (3, 11)
+MAX_PYTHON = (3, 14)
 LOCK_STALE_SECONDS = 30 * 60
 SCRIPT_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*\.py$")
 EXTENSION_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
@@ -70,6 +73,14 @@ def _root() -> Path:
 
 
 def _plugin_version(root: Path) -> str:
+    # The Codex fork has its own independent semver. The upstream pyproject
+    # version describes embedded Claude SEO code, not this distribution.
+    try:
+        codex = json.loads((root / "plugin.json").read_text(encoding="utf-8"))
+        if codex.get("name") == "codex-seo-skills" and isinstance(codex.get("version"), str):
+            return codex["version"]
+    except (OSError, ValueError):
+        pass
     for manifest in (root / ".claude-plugin" / "plugin.json", root / "runtime-plugin.json"):
         try:
             value = json.loads(manifest.read_text(encoding="utf-8")).get("version")
@@ -157,6 +168,19 @@ def _expected(root: Path) -> dict[str, Any]:
     }
 
 
+def _python_supported() -> bool:
+    return MIN_PYTHON <= (sys.version_info.major,sys.version_info.minor) <= MAX_PYTHON
+
+
+def _python_range_message() -> str:
+    return (
+        f"Codex SEO needs Python {MIN_PYTHON[0]}.{MIN_PYTHON[1]} to "
+        f"{MAX_PYTHON[0]}.{MAX_PYTHON[1]}. "
+        f"Found {sys.version_info.major}.{sys.version_info.minor}. "
+        "Install a supported Python or set CLAUDE_SEO_PYTHON."
+    )
+
+
 def _status(root: Path) -> dict[str, Any]:
     data_dir, mode = _data_dir(root)
     venv = data_dir / ".venv"
@@ -164,6 +188,8 @@ def _status(root: Path) -> dict[str, Any]:
     state = _load_state(data_dir)
     expected = _expected(root)
     reasons: list[str] = []
+    if not _python_supported():
+        reasons.append('current Python is outside supported range')
     if not python.is_file():
         reasons.append("managed environment is missing")
     for key in ("runtime_schema", "requirements_sha256", "python"):
@@ -271,6 +297,9 @@ class SetupLock:
 
 
 def command_setup(args: argparse.Namespace) -> int:
+    if not _python_supported():
+        print(_python_range_message(), file=sys.stderr)
+        return 2
     root = _root()
     status = _status(root)
     data_dir: Path = status["data_dir"]

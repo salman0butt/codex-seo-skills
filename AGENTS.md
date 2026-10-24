@@ -67,3 +67,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - `site_audit.py` may run **only** after confirmation that the target site is owned/administered or independently authorized, plus explicit CLI `--live --allow-public-crawl`. Default dry mode must make zero network calls.
 - Always check robots.txt before HTML, respect disallow/Crawl-delay, keep each hop on the exact origin, and never crawl private/mapped staging networks (even if single-page local-target allowances exist). Enforce 12-page, 2MiB/body, 37-request and redirect budgets.
 - A bounded sample is not a complete crawl or indexing/ranking/traffic claim. Do not auto-submit forms, modify pages, connect paid tools or acquire Google OAuth to perform it. See `docs/BOUNDED_SITE_AUDIT.md`.
+
+## Private multi-page evidence handoff (v1.2.0)
+- Prefer `site_audit_report.py` on already saved v1.1 site audit JSON to review duplicate page metadata and known findings **without contacting a site**. Only the separate `site_audit.py --live --allow-public-crawl` can make owner-authorized public requests.
+- Never copy paths, page titles/descriptions, token-bearing links or raw evidence text into the exported handoff. Use page-N source ordering to refer back privately. Treat repeated metadata as advisory and partial/unevaluated pages as unknown, not clean.
+- Source files are untrusted even after schema validation; human sign-off is needed before implementing any suggested change. See `docs/OFFLINE_SITE_HANDOFF.md`.

@@ -29,6 +29,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_codex_launcher.py -v
       - name: Verify bounded public-page audit contracts
         run: python -m unittest discover -s tests -p test_quick_audit.py -v
+      - name: Verify privacy-preserving offline site handoff and source contracts
+        run: python -m unittest discover -s tests -p test_site_audit_report.py -v
       - name: Ensure multi-page crawler remains offline without two consent flags
         run: |
           if python scripts/site_audit.py 'https://example.com/?token=redacted' --live > "$RUNNER_TEMP/site-blocked.json"; then
@@ -118,6 +120,10 @@ jobs:
             test "$?" -eq 2
           fi
           python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-blocked.json").read_text()); assert r["network_requests"]==0; assert not r["live_verified"]'
+          ./scripts/codex-seo run site_audit_report.py \
+            --site-audit examples/synthetic/site-audit-three-pages.json \
+            --format json > "$RUNNER_TEMP/site-handoff.json"
+          python -c 'import json,os,pathlib; d=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"site-handoff.json").read_text()); assert d["network_requests"]==0 and d["pages_evaluated"]==3 and len(d["handoff_tasks"])==5; assert d["finding_counts"]["shared-title-review"]==1 and d["finding_counts"]["shared-description-review"]==1; assert not d["page_paths_included"] and not d["titles_or_descriptions_included"] and "Example Studio" not in json.dumps(d)'
           ./scripts/codex-seo run seo_history.py record \
             --history-dir "$RUNNER_TEMP/offline-seo-history" \
             --gsc-current examples/synthetic/gsc-current.json \

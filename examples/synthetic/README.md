@@ -21,3 +21,7 @@ For real inputs, export reports with `private_seo_report.py` and `quick_audit.py
 ### v0.9.0 offline alert fixture
 
 `gsc-current-drop-example.json` is another **fabricated** source report (10 clicks rather than 20 during an adjacent synthetic reporting window). Use it only to test the alert's operator-attested baseline, absolute and relative gates. These values are not collected Google Search Console results.
+
+### v1.2.0 fabricated bounded site handoff
+
+`site-audit-three-pages.json` is **entirely synthetic**. It describes three fictitious pages with two repeated metadata pairs and one missing title/H1/description. Running the offline `site_audit_report.py` on it produces exactly five advisory tasks, including two cross-page review items. No real website or private property was queried, and the output intentionally omits even these fictional page paths/content.

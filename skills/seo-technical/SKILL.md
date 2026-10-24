@@ -282,3 +282,7 @@ What it does and does not cover:
 ## Opt-in bounded public-site sample (Codex v1.1.0)
 
 For an **owner-authorized public site**, `codex-seo run site_audit.py <public-origin-url> --live --allow-public-crawl --max-pages 5 --format markdown` can inspect a small same-origin sample. Consent and robots rules are mandatory; default mode is entirely offline. The 12-page hard limit and no site-wide coverage guarantee are explained in `docs/BOUNDED_SITE_AUDIT.md`. Use `quick_audit.py` for a single page. Never treat findings as a ranking/indexing verdict.
+
+## Offline sample-to-developer handoff (Codex v1.2.0)
+
+Use `codex-seo run site_audit_report.py --site-audit <saved-bounded-crawl.json> --format markdown` to identify repeated metadata and produce page-reference-only advisory tasks **without fetching the site**. Do not expose page URLs, titles or raw content; consult the owner's original source file privately when mapping page-N references. The source is operator-supplied and unauthenticated; repeated metadata does not automatically prove an SEO issue. See `docs/OFFLINE_SITE_HANDOFF.md`.

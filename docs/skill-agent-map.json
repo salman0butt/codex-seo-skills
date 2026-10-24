@@ -3,15 +3,15 @@
   "generator": "scripts/generate_skill_map.py",
   "scope": "source-derived inventory, not proof of runtime execution",
   "counts": {
-    "total_repo_files": 572,
+    "total_repo_files": 577,
     "core_skills": 30,
     "specialist_guides": 19,
     "agent_only_guides": 0,
     "extension_bundles": 9,
     "unique_extension_skills": 7,
-    "python_scripts": 71,
-    "test_python_files": 89,
-    "graph_edges": 877
+    "python_scripts": 72,
+    "test_python_files": 90,
+    "graph_edges": 882
   },
   "agent_only": [],
   "skills": [
@@ -159,7 +159,8 @@
         "seo_report_builder.py",
         "seo_schedule_template.py",
         "seo_updates.py",
-        "site_audit.py"
+        "site_audit.py",
+        "site_audit_report.py"
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [
@@ -499,7 +500,8 @@
         "seo_evidence_alerts.py",
         "seo_history.py",
         "seo_report_builder.py",
-        "seo_schedule_template.py"
+        "seo_schedule_template.py",
+        "site_audit_report.py"
       ],
       "mentioned_scripts_agent": [],
       "related_skill_mentions": [],
@@ -747,6 +749,7 @@
         "quick_audit.py",
         "render_page.py",
         "site_audit.py",
+        "site_audit_report.py",
         "sitemap_discovery.py"
       ],
       "mentioned_scripts_agent": [
@@ -1656,6 +1659,18 @@
       ],
       "test_sources_mentioning": [
         "tests/test_site_audit.py"
+      ]
+    },
+    {
+      "script": "site_audit_report.py",
+      "path": "scripts/site_audit_report.py",
+      "mentioned_by": [
+        "skills/seo-audit/SKILL.md",
+        "skills/seo-handoff/SKILL.md",
+        "skills/seo-technical/SKILL.md"
+      ],
+      "test_sources_mentioning": [
+        "tests/test_site_audit_report.py"
       ]
     },
     {
@@ -2815,6 +2830,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/OFFLINE_SITE_HANDOFF.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/PRODUCTION_READINESS_v1.0.0.md",
       "kind": "documentation",
       "owner": "documentation",
@@ -2913,6 +2935,13 @@
       "outgoing": []
     },
     {
+      "path": "docs/RELEASE_NOTES_v1.2.0.md",
+      "kind": "documentation",
+      "owner": "documentation",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
       "path": "docs/SKILL_AGENT_MAP.md",
       "kind": "generated-map",
       "owner": "repository",
@@ -2998,6 +3027,13 @@
     },
     {
       "path": "examples/synthetic/quick-audit.json",
+      "kind": "top-level-project-file",
+      "owner": "repository",
+      "incoming": [],
+      "outgoing": []
+    },
+    {
+      "path": "examples/synthetic/site-audit-three-pages.json",
       "kind": "top-level-project-file",
       "owner": "repository",
       "incoming": [],
@@ -6771,6 +6807,10 @@
           "relation": "runtime-allowlisted-script"
         },
         {
+          "path": "scripts/site_audit_report.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
           "path": "scripts/sitemap_discovery.py",
           "relation": "runtime-allowlisted-script"
         },
@@ -7050,6 +7090,34 @@
           "relation": "static-python-import"
         }
       ]
+    },
+    {
+      "path": "scripts/site_audit_report.py",
+      "kind": "execution-script-or-launcher",
+      "owner": "runtime",
+      "incoming": [
+        {
+          "path": "scripts/runtime.py",
+          "relation": "runtime-allowlisted-script"
+        },
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-handoff/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "skills/seo-technical/SKILL.md",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "tests/test_site_audit_report.py",
+          "relation": "test-source-mentions-script"
+        }
+      ],
+      "outgoing": []
     },
     {
       "path": "scripts/sitemap_discovery.py",
@@ -7914,6 +7982,10 @@
         },
         {
           "path": "scripts/site_audit.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/site_audit_report.py",
           "relation": "mentions-script"
         },
         {
@@ -9929,6 +10001,10 @@
           "relation": "mentions-script"
         },
         {
+          "path": "scripts/site_audit_report.py",
+          "relation": "mentions-script"
+        },
+        {
           "path": "skills/seo-handoff/agents/openai.yaml",
           "relation": "owns-support-file"
         }
@@ -11071,6 +11147,10 @@
         },
         {
           "path": "scripts/site_audit.py",
+          "relation": "mentions-script"
+        },
+        {
+          "path": "scripts/site_audit_report.py",
           "relation": "mentions-script"
         },
         {
@@ -13222,6 +13302,18 @@
       ]
     },
     {
+      "path": "tests/test_site_audit_report.py",
+      "kind": "automated-test-or-fixture",
+      "owner": "testing",
+      "incoming": [],
+      "outgoing": [
+        {
+          "path": "scripts/site_audit_report.py",
+          "relation": "test-source-mentions-script"
+        }
+      ]
+    },
+    {
       "path": "tests/test_sitemap_discovery.py",
       "kind": "automated-test-or-fixture",
       "owner": "testing",
@@ -14817,6 +14909,11 @@
     },
     {
       "from": "scripts/runtime.py",
+      "to": "scripts/site_audit_report.py",
+      "relation": "runtime-allowlisted-script"
+    },
+    {
+      "from": "scripts/runtime.py",
       "to": "scripts/sitemap_discovery.py",
       "relation": "runtime-allowlisted-script"
     },
@@ -15273,6 +15370,11 @@
     {
       "from": "skills/seo-audit/SKILL.md",
       "to": "scripts/site_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-audit/SKILL.md",
+      "to": "scripts/site_audit_report.py",
       "relation": "mentions-script"
     },
     {
@@ -16187,6 +16289,11 @@
     },
     {
       "from": "skills/seo-handoff/SKILL.md",
+      "to": "scripts/site_audit_report.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-handoff/SKILL.md",
       "to": "skills/seo-handoff/agents/openai.yaml",
       "relation": "owns-support-file"
     },
@@ -16638,6 +16745,11 @@
     {
       "from": "skills/seo-technical/SKILL.md",
       "to": "scripts/site_audit.py",
+      "relation": "mentions-script"
+    },
+    {
+      "from": "skills/seo-technical/SKILL.md",
+      "to": "scripts/site_audit_report.py",
       "relation": "mentions-script"
     },
     {
@@ -17668,6 +17780,11 @@
     {
       "from": "tests/test_site_audit.py",
       "to": "scripts/url_safety.py",
+      "relation": "test-source-mentions-script"
+    },
+    {
+      "from": "tests/test_site_audit_report.py",
+      "to": "scripts/site_audit_report.py",
       "relation": "test-source-mentions-script"
     },
     {

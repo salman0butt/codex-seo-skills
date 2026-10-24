@@ -42,3 +42,7 @@ For user-provided saved exports, run the offline `seo_history.py record --gsc-cu
 ## Offline quality checks and alerts (Codex v0.9)
 
 For user-authorized saved history, run `seo_evidence_alerts.py --history-dir <private-dir> --format markdown` to review source freshness/unavailability without making provider calls. Only after the user/operator independently confirms same GSC/GA4 property and/or exact page identity may `--confirm-history-same-property` or `--confirm-same-page-set` enable bounded comparative alerts. These are **advisory** and are never automatically sent, deployed or scheduled. Missing or resolved issue claims require manual validation. See `docs/EVIDENCE_ALERTS.md`.
+
+## Offline sample-to-developer handoff (Codex v1.2.0)
+
+Use `codex-seo run site_audit_report.py --site-audit <saved-bounded-crawl.json> --format markdown` to identify repeated metadata and produce page-reference-only advisory tasks **without fetching the site**. Do not expose page URLs, titles or raw content; consult the owner's original source file privately when mapping page-N references. The source is operator-supplied and unauthenticated; repeated metadata does not automatically prove an SEO issue. See `docs/OFFLINE_SITE_HANDOFF.md`.

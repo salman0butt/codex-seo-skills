@@ -26,10 +26,10 @@ flowchart TD
 
 ## Coverage and meanings
 
-- **560** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
+- **568** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
 - **30** core skill manifests; **19** specialist agent guides; **0** guide-only specialties.
 - **9** optional extension bundles, **7** unique additional skill names that can be registered.
-- **70** Python scripts and **83** Python test/fixture sources; **856** explicit graph relationships.
+- **70** Python scripts and **88** Python test/fixture sources; **867** explicit graph relationships.
 - **Launcher-dispatches-to** and **runtime-allowlisted-script** represent source-verified CLI plumbing; they do not assert dependencies are installed. **Static-python-import** means an actual import of a local Python module. **Owns-support-file** means packaged under that skill folder. **Mentions-script** means a literal script filename appears in instructions (not a verified invocation). **Test-source-mentions-script** does not establish test coverage.
 - Claude agent guides are reference checklists unless the running Codex harness supports delegation; agent-only guides do not represent installable skills.
 
@@ -97,7 +97,7 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/analyze_visual.py`](../scripts/analyze_visual.py) | — (utility/internal/unreferenced) | — |
 | [`scripts/backlinks_auth.py`](../scripts/backlinks_auth.py) | `seo-backlinks`, `seo-audit`, `seo-backlinks`, `seo` | `test_backlinks_auth_hardening.py`, `test_dataforseo_tool_names.py`, `test_moz_api.py` |
 | [`scripts/bing_webmaster.py`](../scripts/bing_webmaster.py) | `seo-backlinks`, `seo-backlinks` | `test_bing_webmaster.py` |
-| [`scripts/capture_screenshot.py`](../scripts/capture_screenshot.py) | `seo-visual` | `test_audit_instructions.py` |
+| [`scripts/capture_screenshot.py`](../scripts/capture_screenshot.py) | `seo-visual` | `test_audit_instructions.py`, `test_capture_screenshot_paths.py` |
 | [`scripts/commoncrawl_graph.py`](../scripts/commoncrawl_graph.py) | `seo-backlinks`, `seo-backlinks` | `test_commoncrawl_graph.py` |
 | [`scripts/consistency_check.py`](../scripts/consistency_check.py) | — (utility/internal/unreferenced) | `test_consistency_check.py` |
 | [`scripts/content_humanize.py`](../scripts/content_humanize.py) | `seo-content` | `test_content_humanize.py`, `test_content_quality.py` |
@@ -112,17 +112,17 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/drift_compare.py`](../scripts/drift_compare.py) | `seo-drift`, `seo-drift` | — |
 | [`scripts/drift_history.py`](../scripts/drift_history.py) | `seo-drift`, `seo-audit`, `seo-drift`, `seo` | — |
 | [`scripts/drift_report.py`](../scripts/drift_report.py) | `seo-drift`, `seo-drift` | — |
-| [`scripts/fetch_page.py`](../scripts/fetch_page.py) | `seo-drift`, `seo-drift`, `seo-technical` | `test_agent_untrusted_content.py`, `test_audit_instructions.py`, `test_drift_portability.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_url_safety.py` |
+| [`scripts/fetch_page.py`](../scripts/fetch_page.py) | `seo-drift`, `seo-drift`, `seo-technical` | `test_agent_untrusted_content.py`, `test_audit_instructions.py`, `test_drift_portability.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_fetch_page_size_cap.py`, `test_redirect_body_cap.py`, `test_url_safety.py` |
 | [`scripts/ga4_report.py`](../scripts/ga4_report.py) | `seo-google`, `seo-google` | — |
 | [`scripts/gbp_deprecation_lint.py`](../scripts/gbp_deprecation_lint.py) | — (utility/internal/unreferenced) | `test_fetch_page_decoding.py`, `test_gbp_lint_and_polish.py` |
 | [`scripts/generate_skill_map.py`](../scripts/generate_skill_map.py) | — (utility/internal/unreferenced) | `test_skill_map.py` |
-| [`scripts/google_auth.py`](../scripts/google_auth.py) | `seo-google`, `seo-audit`, `seo-google`, `seo` | `test_backlinks_auth_hardening.py`, `test_google_api_key_safety.py`, `test_google_gcloud_adc.py`, `test_indexing_publish_guard.py`, `test_live_integration_verify.py`, `test_url_safety.py` |
+| [`scripts/google_auth.py`](../scripts/google_auth.py) | `seo-google`, `seo-audit`, `seo-google`, `seo` | `test_backlinks_auth_hardening.py`, `test_google_api_key_safety.py`, `test_google_gcloud_adc.py`, `test_google_oauth_flow.py`, `test_indexing_publish_guard.py`, `test_live_integration_verify.py`, `test_url_safety.py` |
 | [`scripts/google_report.py`](../scripts/google_report.py) | `seo-google`, `seo-audit`, `seo-google`, `seo` | `test_google_report_full_audit.py` |
 | [`scripts/gsc_inspect.py`](../scripts/gsc_inspect.py) | `seo-google`, `seo-google`, `seo-technical` | — |
 | [`scripts/gsc_query.py`](../scripts/gsc_query.py) | `seo-google`, `seo-google` | `test_gsc_pagination.py`, `test_gsc_query.py`, `test_gsc_totals_aggregate.py` |
 | [`scripts/indexing_notify.py`](../scripts/indexing_notify.py) | `seo-google` | `test_indexing_publish_guard.py` |
 | [`scripts/indexnow_submit.py`](../scripts/indexnow_submit.py) | — (utility/internal/unreferenced) | `test_technical_depth.py` |
-| [`scripts/install_codex.py`](../scripts/install_codex.py) | `seo` | `test_codex_installer.py` |
+| [`scripts/install_codex.py`](../scripts/install_codex.py) | `seo` | `test_codex_installer.py`, `test_v1_readiness.py` |
 | [`scripts/integration_doctor.py`](../scripts/integration_doctor.py) | `seo-dataforseo`, `seo-google`, `seo-performance` | `test_integration_doctor.py` |
 | [`scripts/iptc_ai_label.py`](../scripts/iptc_ai_label.py) | `seo-images` | `test_phase_j_executable.py` |
 | [`scripts/keyword_planner.py`](../scripts/keyword_planner.py) | `seo-google` | — |
@@ -143,8 +143,8 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/private_seo_report.py`](../scripts/private_seo_report.py) | `seo-audit`, `seo-google`, `seo-handoff` | `test_private_seo_report.py` |
 | [`scripts/quick_audit.py`](../scripts/quick_audit.py) | `get-started`, `seo-audit`, `seo-handoff`, `seo-page` | `test_quick_audit.py` |
 | [`scripts/release_sign.py`](../scripts/release_sign.py) | — (utility/internal/unreferenced) | — |
-| [`scripts/render_page.py`](../scripts/render_page.py) | `seo-agentic`, `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-performance`, `seo-schema`, `seo-sxo`, `seo-technical`, `seo-visual`, `seo-audit`, `seo-cluster`, `seo-ecommerce`, `seo-sxo`, `seo-technical` | `test_agent_untrusted_content.py`, `test_agentic.py`, `test_audit_instructions.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_phase_j_executable.py`, `test_render_page.py`, `test_runtime.py` |
-| [`scripts/runtime.py`](../scripts/runtime.py) | — (utility/internal/unreferenced) | `test_agentic.py`, `test_codex_launcher.py`, `test_codex_runtime_contract.py`, `test_hosted_plugin_layout.py`, `test_manual_install_layout.py`, `test_runtime.py`, `test_runtime_installers.py`, `test_schema_hook_detection.py` |
+| [`scripts/render_page.py`](../scripts/render_page.py) | `seo-agentic`, `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-performance`, `seo-schema`, `seo-sxo`, `seo-technical`, `seo-visual`, `seo-audit`, `seo-cluster`, `seo-ecommerce`, `seo-sxo`, `seo-technical` | `test_agent_untrusted_content.py`, `test_agentic.py`, `test_audit_instructions.py`, `test_fetch_page_cli.py`, `test_fetch_page_decoding.py`, `test_phase_j_executable.py`, `test_redirect_body_cap.py`, `test_render_page.py`, `test_runtime.py` |
+| [`scripts/runtime.py`](../scripts/runtime.py) | — (utility/internal/unreferenced) | `test_agentic.py`, `test_codex_launcher.py`, `test_codex_runtime_contract.py`, `test_hosted_plugin_layout.py`, `test_manual_install_layout.py`, `test_runtime.py`, `test_runtime_installers.py`, `test_schema_hook_detection.py`, `test_v1_readiness.py` |
 | [`scripts/schema_ecommerce_validate.py`](../scripts/schema_ecommerce_validate.py) | — (utility/internal/unreferenced) | `test_schema_v2.py` |
 | [`scripts/schema_generate.py`](../scripts/schema_generate.py) | — (utility/internal/unreferenced) | `test_codex_runtime_contract.py`, `test_schema_v2.py` |
 | [`scripts/seo_evidence_alerts.py`](../scripts/seo_evidence_alerts.py) | `seo-audit`, `seo-handoff` | `test_seo_evidence_alerts.py` |
@@ -156,7 +156,7 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/sync_flow.py`](../scripts/sync_flow.py) | `seo-flow` | `test_no_em_dash.py`, `test_sync_flow.py` |
 | [`scripts/ucp_check.py`](../scripts/ucp_check.py) | `seo-agentic`, `seo-ecommerce` | `test_fetch_page_decoding.py`, `test_hostile_inputs.py`, `test_phase_j_executable.py` |
 | [`scripts/unlighthouse_run.py`](../scripts/unlighthouse_run.py) | — (utility/internal/unreferenced) | `test_technical_depth.py`, `test_unlighthouse_run.py` |
-| [`scripts/url_safety.py`](../scripts/url_safety.py) | `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-schema`, `seo-sxo`, `seo-technical` | `test_agentic.py`, `test_backlinks_auth_hardening.py`, `test_domain_history.py`, `test_fetch_page_decoding.py`, `test_keywordseverywhere_api.py`, `test_lazy_detection.py`, `test_live_integration_verify.py`, `test_matomo_report.py`, `test_render_page.py`, `test_technical_depth.py`, `test_url_safety.py` |
+| [`scripts/url_safety.py`](../scripts/url_safety.py) | `seo-backlinks`, `seo-content`, `seo-ecommerce`, `seo-geo`, `seo-local`, `seo-schema`, `seo-sxo`, `seo-technical` | `test_agentic.py`, `test_backlinks_auth_hardening.py`, `test_domain_history.py`, `test_fetch_page_decoding.py`, `test_fetch_page_size_cap.py`, `test_hostile_inputs.py`, `test_keywordseverywhere_api.py`, `test_lazy_detection.py`, `test_live_integration_verify.py`, `test_matomo_report.py`, `test_redirect_body_cap.py`, `test_render_page.py`, `test_technical_depth.py`, `test_url_safety.py`, `test_v1_readiness.py` |
 | [`scripts/validate_backlink_report.py`](../scripts/validate_backlink_report.py) | `seo-backlinks`, `seo-backlinks` | `test_backlink_score_gate.py`, `test_validate_backlink_report.py` |
 | [`scripts/verify_backlinks.py`](../scripts/verify_backlinks.py) | `seo-backlinks`, `seo-backlinks` | — |
 | [`scripts/verify_release.py`](../scripts/verify_release.py) | — (utility/internal/unreferenced) | — |

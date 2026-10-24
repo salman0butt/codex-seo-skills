@@ -73,7 +73,13 @@ def install(with_extensions: bool, dry_run: bool) -> int:
     root.parent.mkdir(parents=True, exist_ok=True)
     tmp = Path(tempfile.mkdtemp(prefix='.codex-seo-install-', dir=root.parent))
     backup: Path | None = None
+    link_backups: Path | None = None
+    touched: list[Path] = []
+    installed_root = False
+    committed = False
     try:
+        # Stage and validate the complete new package before moving any
+        # existing installation or registered skill into a new location.
         for dirname in COMPONENT_DIRS:
             source = REPO / dirname
             if source.exists():
@@ -85,29 +91,31 @@ def install(with_extensions: bool, dry_run: bool) -> int:
         (tmp / PACKAGE_MARKER).write_text(json.dumps({
             'package': 'codex-seo-skills', 'source': 'https://github.com/AgriciDaniel/claude-seo'
         }) + '\n', encoding='utf-8')
+        target_skills.mkdir(parents=True, exist_ok=True)
+        link_backups = Path(tempfile.mkdtemp(prefix='.codex-seo-links-backup-', dir=target_skills))
         if root.exists():
             backup = Path(tempfile.mkdtemp(prefix='.codex-seo-backup-', dir=root.parent))
             backup.rmdir()
             root.rename(backup)
         tmp.rename(root)
-        tmp = root  # new package is now on disk
-        target_skills.mkdir(parents=True, exist_ok=True)
+        installed_root = True
         copied: list[str] = []
         for name, original in requested:
             relative = original.relative_to(REPO)
             source = root / relative
             dest = target_skills / name
-            if dest.is_symlink() or dest.is_file():
-                dest.unlink()
-            elif dest.exists():
-                # Previous marked fallback copy, already conflict-checked.
-                shutil.rmtree(dest)
+            # Preserve previous registered entries (including fallback copies)
+            # so failure to create even one new skill can restore them all.
+            if dest.is_symlink() or dest.exists():
+                dest.rename(link_backups / name)
+            touched.append(dest)
             try:
                 dest.symlink_to(source, target_is_directory=True)
             except (NotImplementedError, OSError):
                 shutil.copytree(source, dest)
                 (dest / PACKAGE_MARKER).write_text('codex-seo-skills fallback copy\n')
                 copied.append(name)
+        committed = True
         print(json.dumps({
             'installed': True,
             'package_root': str(root),
@@ -120,10 +128,34 @@ def install(with_extensions: bool, dry_run: bool) -> int:
         }, indent=2))
         return 0
     finally:
+        if not committed:
+            # Recovery must run before removing either backup. In the event
+            # that recovery itself fails, preserve both backup directories
+            # rather than silently destroying the previous working install.
+            try:
+                for dest in reversed(touched):
+                    if dest.is_symlink() or dest.is_file():
+                        dest.unlink()
+                    elif dest.exists():
+                        shutil.rmtree(dest)
+                    previous = link_backups / dest.name if link_backups else None
+                    if previous is not None and (previous.is_symlink() or previous.exists()):
+                        previous.rename(dest)
+                if installed_root and root.exists():
+                    shutil.rmtree(root)
+                if backup is not None and backup.exists():
+                    backup.rename(root)
+                    backup = None
+            except BaseException:
+                # Leave recoverable backup directories in place.
+                raise
         if tmp != root and tmp.exists():
             shutil.rmtree(tmp)
-        if backup is not None and backup.exists():
-            shutil.rmtree(backup)
+        if committed:
+            if backup is not None and backup.exists():
+                shutil.rmtree(backup)
+        if link_backups is not None and link_backups.exists():
+            shutil.rmtree(link_backups)
 
 
 def main() -> int:

@@ -20,6 +20,29 @@ SPEC.loader.exec_module(runtime)
 
 
 class RuntimeContracts(unittest.TestCase):
+    def test_codex_release_version_distinct_from_upstream_package_version(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            (root/'plugin.json').write_text(json.dumps({'name':'codex-seo-skills','version':'1.0.0'}))
+            (root/'pyproject.toml').write_text('[project]\nversion = "2.5.0"\n')
+            self.assertEqual(runtime._plugin_version(root),'1.0.0')
+            (root/'plugin.json').write_text('{malformed')
+            self.assertEqual(runtime._plugin_version(root),'2.5.0')
+
+    def test_upstream_python_support_range_is_enforced_without_side_effects(self):
+        self.assertEqual(runtime.MIN_PYTHON,(3,11))
+        self.assertEqual(runtime.MAX_PYTHON,(3,14))
+        from types import SimpleNamespace
+        for major,minor in ((3,10),(3,15)):
+            with self.subTest(python=(major,minor)), \
+                 patch.object(runtime.sys,'version_info',SimpleNamespace(major=major,minor=minor)), \
+                 patch.object(runtime,'_root',side_effect=AssertionError('Unsupported interpreter may not proceed')):
+                self.assertEqual(runtime.command_setup(SimpleNamespace(skip_browser=True)),2)
+        for major,minor in ((3,11),(3,12),(3,13),(3,14)):
+            with self.subTest(python=(major,minor)), \
+                 patch.object(runtime.sys,'version_info',SimpleNamespace(major=major,minor=minor)):
+                self.assertTrue(runtime._python_supported())
+
     def test_setup_dependency_failure_is_atomic(self):
         with tempfile.TemporaryDirectory() as folder:
             base=Path(folder)

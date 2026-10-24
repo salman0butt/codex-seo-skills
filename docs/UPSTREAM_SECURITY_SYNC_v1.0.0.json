@@ -1,0 +1,21 @@
+{
+  "adaptation_note": "Select security and dependency updates mirrored unchanged from this upstream commit; all other local Codex components are independently maintained.",
+  "license": "MIT",
+  "mirrored_paths": {
+    "pyproject.toml": "2533463940d95cc8d1582f61bc0837a5fa05a4adc89a8ea8b3c3ad4ec860b237",
+    "requirements.txt": "0d36b4a6c9268290d63ab7d0834d4c9e5a865d9acad6a74c95749e72fdacb829",
+    "scripts/agentic_check.py": "b770f949dd8d00c56b2a72c3233f0663a2c37944afed3d48b3c5207450ad6cbd",
+    "scripts/analyze_visual.py": "03e930f7813775abb5992da85db3d8eb23577bbce00e1bb33c38255db98e9757",
+    "scripts/capture_screenshot.py": "6888c89afceb3102e885da0b47bd83ea86bed73c4029b02c53dd10c96b5cd926",
+    "scripts/claude-seo": "ff87975206a143084486c9e381be29b78cf28af4deab6c510abb611d230deb30",
+    "scripts/fetch_page.py": "57404eb918e31fb11676a5d698d94c5ae5086aacdb978514eea2eec76bb7d9a7",
+    "scripts/google_auth.py": "2a0548cc66869902b40922c3f26e8182299e17302850d6a283068d429ed9d9d8",
+    "scripts/render_page.py": "ff72e8d38130502391702cd1e5cabd35814c5ad70ecf538711bba4f8c7a0a1c2",
+    "scripts/sitemap_discovery.py": "923395d470ab05098678f2f7337b7f9c76fe9b5942265f1b226733bed21feb72",
+    "scripts/url_safety.py": "d6813572ed75cdbf9bb3c7879a6243c323ffe56b4893a858e42c83a8bd86302a"
+  },
+  "schema_version": 1,
+  "upstream_commit": "6be93f45064ffbadced572b5d5c95f55fd263af0",
+  "upstream_package_version": "2.5.0",
+  "upstream_repo": "https://github.com/AgriciDaniel/claude-seo"
+}

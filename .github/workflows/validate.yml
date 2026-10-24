@@ -43,6 +43,8 @@ jobs:
         run: python -W error::ResourceWarning -m unittest discover -s tests -p test_seo_history.py -v
       - name: Verify scheduler templates cannot silently install or access networks
         run: python -m unittest discover -s tests -p test_seo_schedule_template.py -v
+      - name: Verify stable v1 source, security and capability matrix
+        run: python -m unittest discover -s tests -p test_v1_readiness.py -v
       - name: Verify stale evidence suppression and advisory alert policies
         run: python -W error::ResourceWarning -m unittest discover -s tests -p test_seo_evidence_alerts.py -v
   upstream-contracts:
@@ -62,7 +64,14 @@ jobs:
             tests/test_metadata_template.py \
             tests/test_schema_v2.py \
             tests/test_sitemap_discovery.py \
-            tests/test_gsc_query.py
+            tests/test_gsc_query.py \
+            tests/test_url_safety.py \
+            tests/test_capture_screenshot_paths.py \
+            tests/test_fetch_page_size_cap.py \
+            tests/test_redirect_body_cap.py \
+            tests/test_google_oauth_flow.py \
+            tests/test_render_page.py \
+            tests/test_hostile_inputs.py
   managed-runtime-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 20

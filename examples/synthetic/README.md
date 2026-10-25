@@ -25,3 +25,7 @@ For real inputs, export reports with `private_seo_report.py` and `quick_audit.py
 ### v1.2.0 fabricated bounded site handoff
 
 `site-audit-three-pages.json` is **entirely synthetic**. It describes three fictitious pages with two repeated metadata pairs and one missing title/H1/description. Running the offline `site_audit_report.py` on it produces exactly five advisory tasks, including two cross-page review items. No real website or private property was queried, and the output intentionally omits even these fictional page paths/content.
+
+### v1.3.0 — Fabricated before/after sampled-site comparison
+
+`site-audit-before.json` and `site-audit-after.json` represent **fictional** same-origin scans on different dates. Their page order changes and one page is different in the two samples. A metadata field changes, one finding appears, and one finding is no longer observed; none of these proves site modifications or fixes. The default no-attestation comparison is suppressed, while `--confirm-same-site` demonstrates an **operator assertion only for this known synthetic fixture**. No real website was scanned.

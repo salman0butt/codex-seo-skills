@@ -286,3 +286,7 @@ For an **owner-authorized public site**, `codex-seo run site_audit.py <public-or
 ## Offline sample-to-developer handoff (Codex v1.2.0)
 
 Use `codex-seo run site_audit_report.py --site-audit <saved-bounded-crawl.json> --format markdown` to identify repeated metadata and produce page-reference-only advisory tasks **without fetching the site**. Do not expose page URLs, titles or raw content; consult the owner's original source file privately when mapping page-N references. The source is operator-supplied and unauthenticated; repeated metadata does not automatically prove an SEO issue. See `docs/OFFLINE_SITE_HANDOFF.md`.
+
+## Before/after bounded crawl review (Codex v1.3.0)
+
+`codex-seo run site_audit_compare.py --before <saved-earlier.json> --after <saved-later.json> --confirm-same-site --format markdown` compares valid owner-authorized historical sample crawls **without any network call**. Require manual same-site/source-provenance attestation, a newer scan and matched evaluated pages. The output maps pages to source indices without exposing page paths or private metadata values. A finding that disappears is "no longer observed", never automatically "fixed". See `docs/OFFLINE_SITE_COMPARISON.md`.

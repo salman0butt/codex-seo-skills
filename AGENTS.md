@@ -72,3 +72,8 @@ This repository is a Codex adaptation of [AgriciDaniel/claude-seo](https://githu
 - Prefer `site_audit_report.py` on already saved v1.1 site audit JSON to review duplicate page metadata and known findings **without contacting a site**. Only the separate `site_audit.py --live --allow-public-crawl` can make owner-authorized public requests.
 - Never copy paths, page titles/descriptions, token-bearing links or raw evidence text into the exported handoff. Use page-N source ordering to refer back privately. Treat repeated metadata as advisory and partial/unevaluated pages as unknown, not clean.
 - Source files are untrusted even after schema validation; human sign-off is needed before implementing any suggested change. See `docs/OFFLINE_SITE_HANDOFF.md`.
+
+## Safe site before/after review (v1.3.0)
+- `site_audit_compare.py` reads two saved and schema-checked bounded-site audits **offline**, not a live website. Same-site identity requires manual operator attestation with `--confirm-same-site`; without it comparisons and private URL associations stay suppressed.
+- Match only exact page URLs internally, both successfully evaluated as HTML with a strictly newer after observation. Respect partially sampled results, unknown/error pages and nonoverlap; never claim a finding disappearance equals a deployed fix.
+- Output page references and known finding identifiers only. No raw paths, titles, descriptions, tokens or arbitrary HTML should appear in output. See `docs/OFFLINE_SITE_COMPARISON.md`.

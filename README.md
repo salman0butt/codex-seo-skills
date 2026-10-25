@@ -9,7 +9,7 @@ Technical SEO, local SEO, AI search visibility (GEO/AEO), structured data, sitem
 - [System flow and every skill → specialist agent → script → test association](docs/SKILL_AGENT_MAP.md)
 - [File-by-file repository inventory](docs/FILE_INVENTORY.md)
 - [Machine-readable directed graph](docs/skill-agent-map.json)
-- [Version 1.2.0 release notes](docs/RELEASE_NOTES_v1.2.0.md)
+- [Version 1.3.0 release notes](docs/RELEASE_NOTES_v1.3.0.md)
 
 Update maps after code edits: `python3 scripts/generate_skill_map.py`. CI rejects stale maps with `python3 scripts/generate_skill_map.py --check`. The map distinguishes references from verified execution. `seo-performance` and `seo-visual` now have dedicated Codex skills, as do `$get-started` and `$seo-handoff`.
 
@@ -200,3 +200,17 @@ See the [bounded small-site audit guide](docs/BOUNDED_SITE_AUDIT.md) for securit
 ```
 
 The command makes **zero network requests** and only prints its output. To acquire a new site crawl, use the v1.1 explicit authorization gates on a site you own or are permitted to audit. See [offline site handoff](docs/OFFLINE_SITE_HANDOFF.md).
+
+## Offline before/after site audit comparisons (v1.3.0)
+
+Compare **two previously saved** v1.1 bounded site audits while keeping site paths, titles and descriptions private. The comparator only matches **exact URLs in memory** and emits page references, findings newly/no longer observed, and title/description change flags. It requires `--confirm-same-site` **only after independently verifying identical website ownership and source provenance**. Older/non-HTML pages, different origins and non-newer observations are not compared. Missing findings do **not** establish a fix; no SEO ranking, traffic or indexing outcome is inferred. No network, Google API access, new crawl, schedule, notification or website change occurs.
+
+```bash
+# Safe fictional demonstration
+"$HOME/.agents/skills/seo/scripts/codex-seo" run site_audit_compare.py \
+  --before examples/synthetic/site-audit-before.json \
+  --after examples/synthetic/site-audit-after.json \
+  --confirm-same-site --format markdown
+```
+
+See [comparison rules](docs/OFFLINE_SITE_COMPARISON.md). For real sites, both input files must come from separately owner-authorized, robots-respecting crawls.

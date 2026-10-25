@@ -26,10 +26,10 @@ flowchart TD
 
 ## Coverage and meanings
 
-- **577** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
+- **583** repository files catalogued in [`docs/FILE_INVENTORY.md`](../docs/FILE_INVENTORY.md) and machine-readable [`docs/skill-agent-map.json`](../docs/skill-agent-map.json).
 - **30** core skill manifests; **19** specialist agent guides; **0** guide-only specialties.
 - **9** optional extension bundles, **7** unique additional skill names that can be registered.
-- **72** Python scripts and **90** Python test/fixture sources; **882** explicit graph relationships.
+- **73** Python scripts and **91** Python test/fixture sources; **889** explicit graph relationships.
 - **Launcher-dispatches-to** and **runtime-allowlisted-script** represent source-verified CLI plumbing; they do not assert dependencies are installed. **Static-python-import** means an actual import of a local Python module. **Owns-support-file** means packaged under that skill folder. **Mentions-script** means a literal script filename appears in instructions (not a verified invocation). **Test-source-mentions-script** does not establish test coverage.
 - Claude agent guides are reference checklists unless the running Codex harness supports delegation; agent-only guides do not represent installable skills.
 
@@ -40,7 +40,7 @@ flowchart TD
 | [`skills/get-started/SKILL.md`](../skills/get-started/SKILL.md) | — (skill-only) | `quick_audit.py`, `site_audit.py` | 1 |
 | [`skills/seo/SKILL.md`](../skills/seo/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `install_codex.py`, `matomo_auth.py`, `seo_updates.py` | 39 |
 | [`skills/seo-agentic/SKILL.md`](../skills/seo-agentic/SKILL.md) | [`agents/seo-agentic.md`](../agents/seo-agentic.md) | `agent_ux_check.py`, `agentic_check.py`, `agentic_fix.py`, `lighthouse_agentic.py`, `render_page.py`, `ucp_check.py` | 8 |
-| [`skills/seo-audit/SKILL.md`](../skills/seo-audit/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `matomo_auth.py`, `private_seo_report.py`, `quick_audit.py`, `render_page.py`, `seo_evidence_alerts.py`, `seo_history.py`, `seo_report_builder.py`, `seo_schedule_template.py`, `seo_updates.py`, `site_audit.py`, `site_audit_report.py` | 2 |
+| [`skills/seo-audit/SKILL.md`](../skills/seo-audit/SKILL.md) | — (skill-only) | `backlinks_auth.py`, `drift_history.py`, `google_auth.py`, `google_report.py`, `matomo_auth.py`, `private_seo_report.py`, `quick_audit.py`, `render_page.py`, `seo_evidence_alerts.py`, `seo_history.py`, `seo_report_builder.py`, `seo_schedule_template.py`, `seo_updates.py`, `site_audit.py`, `site_audit_compare.py`, `site_audit_report.py` | 2 |
 | [`skills/seo-backlinks/SKILL.md`](../skills/seo-backlinks/SKILL.md) | [`agents/seo-backlinks.md`](../agents/seo-backlinks.md) | `backlinks_auth.py`, `bing_webmaster.py`, `commoncrawl_graph.py`, `keywordseverywhere_api.py`, `moz_api.py`, `render_page.py`, `url_safety.py`, `validate_backlink_report.py`, `verify_backlinks.py` | 2 |
 | [`skills/seo-cluster/SKILL.md`](../skills/seo-cluster/SKILL.md) | [`agents/seo-cluster.md`](../agents/seo-cluster.md) | `dataforseo_costs.py`, `render_page.py` | 5 |
 | [`skills/seo-competitor-pages/SKILL.md`](../skills/seo-competitor-pages/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 2 |
@@ -52,7 +52,7 @@ flowchart TD
 | [`skills/seo-flow/SKILL.md`](../skills/seo-flow/SKILL.md) | [`agents/seo-flow.md`](../agents/seo-flow.md) | `sync_flow.py` | 46 |
 | [`skills/seo-geo/SKILL.md`](../skills/seo-geo/SKILL.md) | [`agents/seo-geo.md`](../agents/seo-geo.md) | `render_page.py`, `seo_updates.py`, `url_safety.py` | 4 |
 | [`skills/seo-google/SKILL.md`](../skills/seo-google/SKILL.md) | [`agents/seo-google.md`](../agents/seo-google.md) | `crux_history.py`, `ga4_report.py`, `google_auth.py`, `google_report.py`, `gsc_inspect.py`, `gsc_query.py`, `indexing_notify.py`, `integration_doctor.py`, `keyword_planner.py`, `live_integration_verify.py`, `nlp_analyze.py`, `pagespeed_check.py`, `private_seo_report.py`, `youtube_search.py` | 16 |
-| [`skills/seo-handoff/SKILL.md`](../skills/seo-handoff/SKILL.md) | — (skill-only) | `private_seo_report.py`, `quick_audit.py`, `seo_evidence_alerts.py`, `seo_history.py`, `seo_report_builder.py`, `seo_schedule_template.py`, `site_audit_report.py` | 1 |
+| [`skills/seo-handoff/SKILL.md`](../skills/seo-handoff/SKILL.md) | — (skill-only) | `private_seo_report.py`, `quick_audit.py`, `seo_evidence_alerts.py`, `seo_history.py`, `seo_report_builder.py`, `seo_schedule_template.py`, `site_audit_compare.py`, `site_audit_report.py` | 1 |
 | [`skills/seo-hreflang/SKILL.md`](../skills/seo-hreflang/SKILL.md) | — (skill-only) | — (content/API/tool-based) | 6 |
 | [`skills/seo-image-gen/SKILL.md`](../skills/seo-image-gen/SKILL.md) | [`agents/seo-image-gen.md`](../agents/seo-image-gen.md) | — (content/API/tool-based) | 11 |
 | [`skills/seo-images/SKILL.md`](../skills/seo-images/SKILL.md) | — (skill-only) | `iptc_ai_label.py`, `parse_html.py` | 2 |
@@ -65,7 +65,7 @@ flowchart TD
 | [`skills/seo-schema/SKILL.md`](../skills/seo-schema/SKILL.md) | [`agents/seo-schema.md`](../agents/seo-schema.md) | `parse_html.py`, `render_page.py`, `url_safety.py` | 3 |
 | [`skills/seo-sitemap/SKILL.md`](../skills/seo-sitemap/SKILL.md) | [`agents/seo-sitemap.md`](../agents/seo-sitemap.md) | `sitemap_discovery.py` | 2 |
 | [`skills/seo-sxo/SKILL.md`](../skills/seo-sxo/SKILL.md) | [`agents/seo-sxo.md`](../agents/seo-sxo.md) | `parse_html.py`, `render_page.py`, `url_safety.py` | 5 |
-| [`skills/seo-technical/SKILL.md`](../skills/seo-technical/SKILL.md) | [`agents/seo-technical.md`](../agents/seo-technical.md) | `agent_ux_check.py`, `agentic_check.py`, `crux_history.py`, `fetch_page.py`, `gsc_inspect.py`, `pagespeed_check.py`, `quick_audit.py`, `render_page.py`, `site_audit.py`, `site_audit_report.py`, `sitemap_discovery.py`, `url_safety.py` | 3 |
+| [`skills/seo-technical/SKILL.md`](../skills/seo-technical/SKILL.md) | [`agents/seo-technical.md`](../agents/seo-technical.md) | `agent_ux_check.py`, `agentic_check.py`, `crux_history.py`, `fetch_page.py`, `gsc_inspect.py`, `pagespeed_check.py`, `quick_audit.py`, `render_page.py`, `site_audit.py`, `site_audit_compare.py`, `site_audit_report.py`, `sitemap_discovery.py`, `url_safety.py` | 3 |
 | [`skills/seo-visual/SKILL.md`](../skills/seo-visual/SKILL.md) | [`agents/seo-visual.md`](../agents/seo-visual.md) | `capture_screenshot.py`, `render_page.py` | 1 |
 
 ## Agent-only guides (not separate `$...` skills)
@@ -153,7 +153,8 @@ Each test association below is a textual match in test source, **not an assertio
 | [`scripts/seo_schedule_template.py`](../scripts/seo_schedule_template.py) | `seo-audit`, `seo-handoff` | `test_seo_schedule_template.py` |
 | [`scripts/seo_updates.py`](../scripts/seo_updates.py) | `seo-audit`, `seo-content`, `seo-geo`, `seo` | `test_content_quality.py`, `test_manual_install_layout.py` |
 | [`scripts/site_audit.py`](../scripts/site_audit.py) | `get-started`, `seo-audit`, `seo-technical` | `test_site_audit.py` |
-| [`scripts/site_audit_report.py`](../scripts/site_audit_report.py) | `seo-audit`, `seo-handoff`, `seo-technical` | `test_site_audit_report.py` |
+| [`scripts/site_audit_compare.py`](../scripts/site_audit_compare.py) | `seo-audit`, `seo-handoff`, `seo-technical` | `test_site_audit_compare.py` |
+| [`scripts/site_audit_report.py`](../scripts/site_audit_report.py) | `seo-audit`, `seo-handoff`, `seo-technical` | `test_site_audit_compare.py`, `test_site_audit_report.py` |
 | [`scripts/sitemap_discovery.py`](../scripts/sitemap_discovery.py) | `seo-sitemap`, `seo-technical`, `seo-sitemap`, `seo-technical` | `test_sitemap_discovery.py` |
 | [`scripts/sync_flow.py`](../scripts/sync_flow.py) | `seo-flow` | `test_no_em_dash.py`, `test_sync_flow.py` |
 | [`scripts/ucp_check.py`](../scripts/ucp_check.py) | `seo-agentic`, `seo-ecommerce` | `test_fetch_page_decoding.py`, `test_hostile_inputs.py`, `test_phase_j_executable.py` |

@@ -31,6 +31,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_quick_audit.py -v
       - name: Verify privacy-preserving offline site handoff and source contracts
         run: python -m unittest discover -s tests -p test_site_audit_report.py -v
+      - name: Verify same-site attestation and private before/after comparisons
+        run: python -m unittest discover -s tests -p test_site_audit_compare.py -v
       - name: Ensure multi-page crawler remains offline without two consent flags
         run: |
           if python scripts/site_audit.py 'https://example.com/?token=redacted' --live > "$RUNNER_TEMP/site-blocked.json"; then
@@ -120,6 +122,20 @@ jobs:
             test "$?" -eq 2
           fi
           python -c 'import json,os,pathlib; r=json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"live-blocked.json").read_text()); assert r["network_requests"]==0; assert not r["live_verified"]'
+          if ./scripts/codex-seo run site_audit_compare.py \
+            --before examples/synthetic/site-audit-before.json \
+            --after examples/synthetic/site-audit-after.json \
+            --format json > "$RUNNER_TEMP/site-comparison-suppressed.json"; then
+            echo "Site comparison succeeded without identity confirmation" >&2
+            exit 1
+          else
+            test "$?" -eq 2
+          fi
+          ./scripts/codex-seo run site_audit_compare.py \
+            --before examples/synthetic/site-audit-before.json \
+            --after examples/synthetic/site-audit-after.json \
+            --confirm-same-site --format json > "$RUNNER_TEMP/site-comparison-review.json"
+          python -c 'import json,os,pathlib; p=pathlib.Path(os.environ["RUNNER_TEMP"]); u=json.loads((p/"site-comparison-suppressed.json").read_text()); a=json.loads((p/"site-comparison-review.json").read_text()); assert u["network_requests"]==0 and not u["changes"] and u["comparison_status"]=="same_site_not_attested"; assert a["network_requests"]==0 and a["matched_pages"]==2 and a["compared_pages"]==2 and len(a["changes"])==1 and a["changes"][0]["findings_no_longer_observed"]==["missing-h1"]; assert "URL-TOKEN" not in json.dumps(a) and "Before title" not in json.dumps(a)'
           ./scripts/codex-seo run site_audit_report.py \
             --site-audit examples/synthetic/site-audit-three-pages.json \
             --format json > "$RUNNER_TEMP/site-handoff.json"
